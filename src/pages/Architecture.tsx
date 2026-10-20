@@ -1,40 +1,41 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { architectureProjects } from '../content/architecture';
-import { disciplines, education, experience, profile, skills } from '../content/profile';
+import { useI18n, Emph } from '../i18n';
 import { ProjectCard } from '../components/ProjectCard';
 import { PortfolioBridge } from '../components/PortfolioBridge';
 import { SectionHeading } from '../components/SectionHeading';
 import { Cta } from '../components/Cta';
 import { Img } from '../components/Img';
+import { architectureProjects as baseProjects } from '../content/architecture';
 
 /** Rhythm of card sizes for the asymmetric index grid. */
 const rhythm = ['large', 'small', 'small', 'wide', 'medium', 'medium'] as const;
 
 export default function Architecture() {
-  useDocumentMeta(
-    'Architecture',
-    'Architectural projects by Nicole Gofman — spatial design, technical documentation and visualization.',
-    '/architecture',
-  );
+  const { t, c } = useI18n();
+  const { architectureProjects, disciplines, education, experience, profile, skills } = c;
+  useDocumentMeta(t.meta.architectureTitle, t.meta.architecture, '/architecture');
 
   const [params, setParams] = useSearchParams();
-  const types = useMemo(() => [...new Set(architectureProjects.map((p) => p.type))], []);
+  const types = useMemo(() => [...new Set(architectureProjects.map((p) => p.type))], [architectureProjects]);
+  // The ?type= filter always holds the English type, so a filtered link keeps
+  // working in both languages and survives a language switch.
+  const enTypes = useMemo(() => new Map(architectureProjects.map((p, i) => [p.type, baseProjects[i].type])), [architectureProjects]);
   const active = params.get('type');
-  const visible = active ? architectureProjects.filter((p) => p.type === active) : architectureProjects;
+  const visible = active ? architectureProjects.filter((p) => enTypes.get(p.type) === active) : architectureProjects;
 
   const setFilter = (type: string | null) => {
     const next = new URLSearchParams(params);
-    if (type) next.set('type', type);
+    if (type) next.set('type', enTypes.get(type) ?? type);
     else next.delete('type');
     setParams(next, { replace: true });
   };
 
-  const studio = experience.find((e) => e.organisation === 'Place & Space Architecture');
-  const studies = education[0];
-  const archTools = skills.filter((g) => g.group === 'Architecture & visualization');
-  const course = education.find((e) => e.programme.startsWith('3Ds Max'));
+  const studio = experience.find((e) => e.id === 'place-space');
+  const studies = education.find((e) => e.id === 'shenkar');
+  const archTools = skills.filter((g) => g.id === 'architecture');
+  const course = education.find((e) => e.id === 'vray');
 
   return (
     <>
@@ -42,21 +43,18 @@ export default function Architecture() {
         <div className="container page-hero__grid">
           <div>
             <p className="eyebrow">
-              <span className="eyebrow__index">02</span>Architecture
+              <span className="eyebrow__index">02</span>
+              {t.architecture.eyebrow}
             </p>
             <h1 id="arch-title" className="page-hero__title">
-              Space, drawn <em>with care.</em>
+              <Emph parts={t.architecture.title} />
             </h1>
           </div>
           <div className="page-hero__lede arch-lede">
             <figure className="arch-lede__photo">
               <Img image={profile.atWork} sizes="(min-width: 1000px) 220px, 40vw" priority />
             </figure>
-            <p>
-              Architecture is where my thinking begins: how a space is entered, crossed and lived in, how light and
-              material shape it, and how it is communicated precisely — from the first sketch to the technical
-              drawing.
-            </p>
+            <p>{t.architecture.lede}</p>
           </div>
         </div>
         <div className="container arch-keywords">
@@ -71,13 +69,9 @@ export default function Architecture() {
       <section className="section section--stone" aria-labelledby="arch-index-title">
         <div className="container">
           <SectionHeading
-            eyebrow="Project index"
+            eyebrow={t.architecture.indexEyebrow}
             id="arch-index-title"
-            title={
-              <>
-                Selected <em>projects</em>
-              </>
-            }
+            title={<Emph parts={t.architecture.indexTitle} />}
           />
 
           {architectureProjects.length === 0 ? (
@@ -85,33 +79,33 @@ export default function Architecture() {
           ) : (
             <>
               {types.length > 1 && (
-                <div className="filters" role="group" aria-label="Filter projects by type">
+                <div className="filters" role="group" aria-label={t.architecture.filterLabel}>
                   <button
                     type="button"
                     className="filter"
                     aria-pressed={!active}
                     onClick={() => setFilter(null)}
                   >
-                    All <span className="filter__count">{architectureProjects.length}</span>
+                    {t.architecture.all} <span className="filter__count">{architectureProjects.length}</span>
                   </button>
-                  {types.map((t) => (
+                  {types.map((type) => (
                     <button
-                      key={t}
+                      key={type}
                       type="button"
                       className="filter"
-                      aria-pressed={active === t}
-                      onClick={() => setFilter(t)}
+                      aria-pressed={active === enTypes.get(type)}
+                      onClick={() => setFilter(type)}
                     >
-                      {t}{' '}
+                      {type}{' '}
                       <span className="filter__count">
-                        {architectureProjects.filter((p) => p.type === t).length}
+                        {architectureProjects.filter((p) => p.type === type).length}
                       </span>
                     </button>
                   ))}
                 </div>
               )}
               <p className="visually-hidden" aria-live="polite">
-                Showing {visible.length} project{visible.length === 1 ? '' : 's'}
+                {t.architecture.showing(visible.length)}
               </p>
               <div className="project-grid">
                 {visible.map((p, i) => (
@@ -126,7 +120,7 @@ export default function Architecture() {
               </div>
               <p className="arch-more">
                 <Cta to={profile.architecturePortfolio} external variant="text">
-                  View the complete portfolio
+                  {t.architecture.completePortfolio}
                 </Cta>
               </p>
             </>
@@ -137,13 +131,9 @@ export default function Architecture() {
       <section className="section" aria-labelledby="arch-practice-title">
         <div className="container practice">
           <SectionHeading
-            eyebrow="Practice & studies"
+            eyebrow={t.architecture.practiceEyebrow}
             id="arch-practice-title"
-            title={
-              <>
-                Learning in the studio, <em>working</em> in practice.
-              </>
-            }
+            title={<Emph parts={t.architecture.practiceTitle} />}
           />
           <div className="practice__grid">
             {studies && (
@@ -158,7 +148,9 @@ export default function Architecture() {
             {studio && (
               <article className="practice__item">
                 <p className="practice__period">{studio.period}</p>
-                <h3>{studio.organisation}</h3>
+                <h3>
+                  <bdi>{studio.organisation}</bdi>
+                </h3>
                 <p>{studio.role}</p>
                 {studio.bullets && (
                   <ul className="practice__bullets">
@@ -170,11 +162,11 @@ export default function Architecture() {
               </article>
             )}
             <article className="practice__item">
-              <p className="practice__period">Tools</p>
-              <h3>Design, BIM &amp; visualization</h3>
+              <p className="practice__period">{t.architecture.tools}</p>
+              <h3>{t.architecture.toolsTitle}</h3>
               <ul className="tool-list">
                 {archTools.flatMap((g) => g.items).map((s) => (
-                  <li key={s}>{s}</li>
+                  <li key={s} dir="auto">{s}</li>
                 ))}
               </ul>
               {course && (

@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { navigation } from '../content/site';
-import { profile } from '../content/profile';
+import { useI18n } from '../i18n';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { Close, LinkedIn } from './Icons';
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { t, c } = useI18n();
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -56,24 +58,26 @@ export function Header() {
   return (
     <header className={`site-header${scrolled ? ' is-scrolled' : ''}${open ? ' is-open' : ''}`}>
       <div className="site-header__inner">
-        <Link to="/" className="brand" aria-label={`${profile.name} — home`}>
-          <span className="brand__name">Nicole Gofman</span>
-          <span className="brand__role">Architecture &amp; Technology</span>
+        <Link to="/" className="brand" aria-label={t.nav.brandHome(c.profile.name)}>
+          <span className="brand__name">{c.profile.name}</span>
+          <span className="brand__role">{t.nav.brandRole}</span>
         </Link>
 
-        <nav className="site-nav" aria-label="Primary">
+        <nav className="site-nav" aria-label={t.nav.primary}>
           <ul>
             {navigation.map((item) => (
               <li key={item.to}>
                 <NavLink to={item.to} end={item.to === '/'} className="site-nav__link">
-                  {item.label}
+                  {t.nav[item.key]}
                 </NavLink>
               </li>
             ))}
           </ul>
         </nav>
 
-        <button
+        <div className="site-header__tools">
+          <LanguageSwitcher />
+          <button
           ref={toggleRef}
           type="button"
           className="menu-toggle"
@@ -81,7 +85,7 @@ export function Header() {
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="visually-hidden">{open ? 'Close menu' : 'Open menu'}</span>
+          <span className="visually-hidden">{open ? t.nav.closeMenu : t.nav.openMenu}</span>
           {open ? (
             <Close size={22} />
           ) : (
@@ -90,7 +94,8 @@ export function Header() {
               <span />
             </span>
           )}
-        </button>
+          </button>
+        </div>
       </div>
 
       <div
@@ -100,24 +105,27 @@ export function Header() {
         hidden={!open}
         role="dialog"
         aria-modal="true"
-        aria-label="Site menu"
+        aria-label={t.nav.menu}
       >
-        <nav aria-label="Mobile">
+        <nav aria-label={t.nav.mobile}>
           <ul>
             {navigation.map((item) => (
               <li key={item.to}>
                 <NavLink to={item.to} end={item.to === '/'} className="mobile-menu__link">
                   <span className="mobile-menu__index">{item.index}</span>
-                  {item.label}
+                  {t.nav[item.key]}
                 </NavLink>
               </li>
             ))}
           </ul>
         </nav>
         <div className="mobile-menu__foot">
-          <a href={`mailto:${profile.email}`}>{profile.email}</a>
-          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
-            <LinkedIn size={16} /> LinkedIn
+          <a href={`mailto:${c.profile.email}`} className="ltr">
+            {c.profile.email}
+          </a>
+          <a href={c.profile.linkedin} target="_blank" rel="noopener noreferrer">
+            <LinkedIn size={16} /> {t.common.linkedin}
+            <span className="visually-hidden">{t.common.newTab}</span>
           </a>
         </div>
       </div>

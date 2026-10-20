@@ -1,0 +1,101 @@
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { dictionaries, type Dictionary } from './ui';
+import { content, type Content } from './content';
+
+export type Lang = 'en' | 'he';
+
+const STORAGE_KEY = 'ng-lang';
+const isLang = (v: unknown): v is Lang => v === 'en' || v === 'he';
+
+function storedLang(): Lang | null {
+  try {
+    const v = window.localStorage.getItem(STORAGE_KEY);
+    return isLang(v) ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+interface I18n {
+  lang: Lang;
+  dir: 'ltr' | 'rtl';
+  /** Interface strings for the current language. */
+  t: Dictionary;
+  /** Long-form content (profile, CV, products, projects) for the current language. */
+  c: Content;
+  setLang: (lang: Lang) => void;
+}
+
+const I18nContext = createContext<I18n | null>(null);
+
+/**
+ * Language state for the whole site.
+ * Priority: `?lang=` in the URL, then the visitor's saved choice, then English.
+ * Hebrew pages carry `?lang=he` so every Hebrew page has its own shareable,
+ * indexable URL; English (the default) carries no parameter.
+ */
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const urlLang = new URLSearchParams(location.search).get('lang');
+
+  const [lang, setLangState] = useState<Lang>(() => (isLang(urlLang) ? urlLang : storedLang() ?? 'en'));
+
+  // Follow an explicit ?lang= in the URL (e.g. a shared Hebrew link).
+  useEffect(() => {
+    if (isLang(urlLang) && urlLang !== lang) setLangState(urlLang);
+    // Only URL changes should trigger this; the current language is read fresh.
+  }, [urlLang]);
+
+  // Keep the URL in step with the language without changing the page, its
+  // other query parameters (such as filters) or its #anchor.
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const wanted = lang === 'he' ? 'he' : null;
+    if (params.get('lang') === wanted) return;
+    if (wanted) params.set('lang', wanted);
+    else params.delete('lang');
+    const search = params.toString();
+    navigate({ pathname: location.pathname, search: search ? `?${search}` : '', hash: location.hash }, { replace: true });
+  }, [lang, location.pathname, location.search, location.hash, navigate]);
+
+  // Document language and direction, before paint.
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    root.lang = lang;
+    root.dir = lang === 'he' ? 'rtl' : 'ltr';
+    try {
+      window.localStorage.setItem(STORAGE_KEY, lang);
+    } catch {
+      /* storage unavailable — the URL still carries the language */
+    }
+  }, [lang]);
+
+  const setLang = useCallback((next: Lang) => setLangState(next), []);
+
+  const value = useMemo<I18n>(
+    () => ({ lang, dir: lang === 'he' ? 'rtl' : 'ltr', t: dictionaries[lang], c: content[lang], setLang }),
+    [lang, setLang],
+  );
+
+  return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
+}
+
+export function useI18n(): I18n {
+  const ctx = useContext(I18nContext);
+  if (!ctx) throw new Error('useI18n must be used inside <LanguageProvider>');
+  return ctx;
+}
+
+/** Renders a [before, emphasised, after] title triple from the dictionary. */
+export function Emph({ parts }: { parts: string[] }) {
+  const [before, em, after] = parts;
+  return (
+    <>
+      {before}
+      {em && <em>{em}</em>}
+      {after}
+    </>
+  );
+}

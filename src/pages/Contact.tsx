@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { profile } from '../content/profile';
+import { useI18n, Emph } from '../i18n';
 import { ArrowUpRight, Copy, LinkedIn, Mail } from '../components/Icons';
 
 interface FormState {
@@ -11,11 +11,19 @@ interface FormState {
 
 const empty: FormState = { name: '', email: '', message: '' };
 
+type FieldKey = keyof FormState;
+/** Status messages are stored as keys and rendered in the current language. */
+type StatusKey = '' | 'sent' | 'copied' | 'copyFailed';
+
 export default function Contact() {
-  useDocumentMeta('Contact', profile.contactInvitation, '/contact');
+  const { t, c } = useI18n();
+  const { profile } = c;
+  useDocumentMeta(t.meta.contactTitle, profile.contactInvitation, '/contact');
   const [form, setForm] = useState<FormState>(empty);
-  const [errors, setErrors] = useState<Partial<FormState>>({});
-  const [status, setStatus] = useState('');
+  const [errors, setErrors] = useState<FieldKey[]>([]);
+  const [status, setStatus] = useState<StatusKey>('');
+  const statusText =
+    status === 'copyFailed' ? t.contact.status.copyFailed(profile.email) : status ? t.contact.status[status] : '';
 
   useEffect(() => {
     if (!status) return;
@@ -30,28 +38,27 @@ export default function Contact() {
   // service or backend is needed, and nothing is stored.
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const next: Partial<FormState> = {};
-    if (!form.name.trim()) next.name = 'Please enter your name.';
-    if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) next.email = 'Please enter a valid email address.';
-    if (form.message.trim().length < 10) next.message = 'Please write a short message (at least 10 characters).';
+    const next: FieldKey[] = [];
+    if (!form.name.trim()) next.push('name');
+    if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) next.push('email');
+    if (form.message.trim().length < 10) next.push('message');
     setErrors(next);
-    if (Object.keys(next).length) {
-      const firstKey = Object.keys(next)[0];
-      document.getElementById(`contact-${firstKey}`)?.focus();
+    if (next.length) {
+      document.getElementById(`contact-${next[0]}`)?.focus();
       return;
     }
-    const subject = `Portfolio enquiry from ${form.name.trim()}`;
+    const subject = t.contact.subject(form.name.trim());
     const body = `${form.message.trim()}\n\n— ${form.name.trim()}\n${form.email.trim()}`;
     window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus('Your email app should now open with the message ready to send.');
+    setStatus('sent');
   };
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(profile.email);
-      setStatus('Email address copied to the clipboard.');
+      setStatus('copied');
     } catch {
-      setStatus(`Copy unavailable — the address is ${profile.email}.`);
+      setStatus('copyFailed');
     }
   };
 
@@ -60,35 +67,36 @@ export default function Contact() {
       <div className="container contact__grid">
         <div className="contact__intro">
           <p className="eyebrow">
-            <span className="eyebrow__index">03</span>Contact
+            <span className="eyebrow__index">03</span>
+            {t.contact.eyebrow}
           </p>
           <h1 id="contact-title" className="contact__title">
-            Let’s <em>connect.</em>
+            <Emph parts={t.contact.title} />
           </h1>
           <p className="contact__lede">{profile.contactInvitation}</p>
 
           <ul className="contact__channels">
             <li>
-              <span className="contact__label">Email</span>
+              <span className="contact__label">{t.contact.email}</span>
               <a className="contact__channel" href={`mailto:${profile.email}`}>
                 <Mail size={20} />
-                <span>{profile.email}</span>
+                <span className="ltr">{profile.email}</span>
               </a>
               <button type="button" className="contact__copy" onClick={copyEmail}>
-                <Copy size={15} /> Copy address
+                <Copy size={15} /> {t.contact.copy}
               </button>
             </li>
             <li>
-              <span className="contact__label">Based in</span>
+              <span className="contact__label">{t.contact.basedIn}</span>
               <span className="contact__place">{profile.location}</span>
             </li>
             <li>
-              <span className="contact__label">LinkedIn</span>
+              <span className="contact__label">{t.contact.linkedinLabel}</span>
               <a className="contact__channel" href={profile.linkedin} target="_blank" rel="noopener noreferrer">
                 <LinkedIn size={20} />
-                <span>Nicole Gofman on LinkedIn</span>
+                <span>{t.contact.linkedinText}</span>
                 <ArrowUpRight size={16} />
-                <span className="visually-hidden">(opens in a new tab)</span>
+                <span className="visually-hidden">{t.common.newTab}</span>
               </a>
             </li>
           </ul>
@@ -96,12 +104,12 @@ export default function Contact() {
 
         <form className="contact-form" onSubmit={onSubmit} noValidate aria-labelledby="form-title">
           <h2 id="form-title" className="contact-form__title">
-            Write a message
+            {t.contact.formTitle}
           </h2>
-          <p className="contact-form__note">Sending opens your email app with the message ready to go.</p>
+          <p className="contact-form__note">{t.contact.formNote}</p>
           {(['name', 'email', 'message'] as const).map((key) => {
-            const label = key === 'name' ? 'Name' : key === 'email' ? 'Email' : 'Message';
-            const err = errors[key];
+            const label = key === 'name' ? t.contact.name : key === 'email' ? t.contact.emailField : t.contact.message;
+            const err = errors.includes(key) ? t.contact.errors[key] : '';
             const common = {
               id: `contact-${key}`,
               name: key,
@@ -119,6 +127,7 @@ export default function Contact() {
                 ) : (
                   <input
                     type={key === 'email' ? 'email' : 'text'}
+                    dir={key === 'email' ? 'ltr' : undefined}
                     autoComplete={key === 'email' ? 'email' : 'name'}
                     {...common}
                   />
@@ -132,17 +141,17 @@ export default function Contact() {
             );
           })}
           <button type="submit" className="cta cta--solid contact-form__submit">
-            <span>Send message</span>
+            <span>{t.contact.send}</span>
             <Mail size={16} />
           </button>
         </form>
       </div>
       <p className="visually-hidden" role="status" aria-live="polite">
-        {status}
+        {statusText}
       </p>
       {status && (
         <p className="toast" aria-hidden>
-          {status}
+          {statusText}
         </p>
       )}
     </section>

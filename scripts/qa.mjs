@@ -233,6 +233,133 @@ for (const vp of viewports) {
   await ctx.close();
 }
 
+// ——— Hebrew / RTL ———
+// Latin words allowed inside Hebrew pages: brand, product, company and
+// software names, plus the EN option of the language switcher.
+const LATIN_OK = new Set(
+  `Flash Luz FlashLuz Flashluz FlashTravel Worldly Apps by BY Nicole NICOLE Base44 Revit AutoCAD SketchUp DS MAX 3DS
+  Enscape Twinmotion SAP Canva Microsoft Office Word Excel PowerPoint Outlook Place Space Architecture Abre Israeli
+  Building Center Group Gil Hirschman Co LinkedIn Gof nicole gmail com UX UI No Code AI Uber InDrive Ray V-Ray Trip
+  Builder FlashLive Smart Pins FlashSplit Social Matching Sharing EN PDF BIM No-Code Ds Max`.split(/\s+/),
+);
+
+{
+  for (const vp of [viewports[0], viewports[2]]) {
+    const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+    const page = await ctx.newPage();
+    const errors = [];
+    page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+    page.on('pageerror', (e) => errors.push(e.message));
+
+    for (const route of ['/', '/technology', '/architecture', '/contact', '/does-not-exist']) {
+      errors.length = 0;
+      console.log(`[he ${vp.name}] ${route}`);
+      await page.goto(`${BASE}${route}?lang=he`, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(400);
+      const attrs = await page.evaluate(() => [document.documentElement.lang, document.documentElement.dir]);
+      if (attrs.join() !== 'he,rtl') fail(`he ${route}: html lang/dir is ${attrs}`);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      if (overflow > 0) fail(`he ${vp.name} ${route}: horizontal overflow of ${overflow}px`);
+      if (!page.url().includes('lang=he')) fail(`he ${route}: ?lang=he dropped from URL`);
+      const title = await page.title();
+      if (!/[֐-׿]/.test(title)) fail(`he ${route}: document title not Hebrew (${title})`);
+
+      // Every visible text run must be Hebrew, apart from allowed names.
+      const leftovers = await page.evaluate((allowed) => {
+        const ok = new Set(allowed);
+        const out = [];
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        while (walker.nextNode()) {
+          const node = walker.currentNode;
+          const el = node.parentElement;
+          if (!el || el.closest('[lang="en"], script, style, noscript, .ltr, svg, [aria-hidden="true"]')) continue;
+          const words = node.textContent.match(/[A-Za-z][A-Za-z0-9-]*/g) || [];
+          const bad = words.filter((w) => !ok.has(w));
+          if (bad.length) out.push(`${bad.join(' ')} ← “${node.textContent.trim().slice(0, 60)}”`);
+        }
+        // Accessible names and image alt text too.
+        for (const e of document.querySelectorAll('[aria-label], img[alt]')) {
+          if (e.closest('[lang="en"]')) continue;
+          const v = e.getAttribute('aria-label') ?? e.getAttribute('alt') ?? '';
+          const bad = (v.match(/[A-Za-z][A-Za-z0-9-]*/g) || []).filter((w) => !ok.has(w));
+          if (bad.length) out.push(`${bad.join(' ')} ← [${e.tagName.toLowerCase()} label] “${v.slice(0, 60)}”`);
+        }
+        return out;
+      }, [...LATIN_OK]);
+      leftovers.forEach((l) => fail(`he ${route}: untranslated text: ${l}`));
+
+      await page.screenshot({ path: `${OUT}/he-${vp.name}${route === '/' ? '_home' : route.replace(/\//g, '_')}.png`, fullPage: true });
+      if (vp.name === 'desktop') {
+        const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+        axe.violations.forEach((v) => fail(`he ${route}: axe ${v.id} (${v.impact}) — ${v.nodes[0]?.target.join(' ')}`));
+      }
+      errors.forEach((e) => fail(`he ${vp.name} ${route}: console — ${e}`));
+    }
+
+    // Switcher: keeps the route (and anchor), toggles direction both ways.
+    await page.goto(`${BASE}/technology?lang=en#worldly`, { waitUntil: 'networkidle' });
+    const switcher = page.getByRole('group', { name: /Language|שפה/ });
+    if (!(await switcher.isVisible())) fail(`${vp.name}: language switcher not visible`);
+    await switcher.getByRole('button', { name: /עב/ }).click();
+    await page.waitForFunction(() => document.documentElement.dir === 'rtl');
+    if (!page.url().endsWith('/technology?lang=he#worldly')) fail(`${vp.name}: switch to Hebrew changed the URL to ${page.url()}`);
+    if (!(await page.locator('h1').textContent())?.includes('מרעיון')) fail(`${vp.name}: Technology h1 not translated`);
+    await switcher.getByRole('button', { name: /EN/ }).click();
+    await page.waitForFunction(() => document.documentElement.dir === 'ltr');
+    if (!page.url().endsWith('/technology#worldly')) fail(`${vp.name}: switch to English left ${page.url()}`);
+    if ((await page.locator('h1').textContent()) !== 'From idea to working system.') fail(`${vp.name}: English not restored`);
+    const hebrewInEnglish = await page.evaluate(() =>
+      [...document.querySelectorAll('body *')]
+        .filter((e) => e.children.length === 0 && !e.closest('[lang="he"]') && /[֐-׿]/.test(e.textContent))
+        .map((e) => e.textContent.trim().slice(0, 40)),
+    );
+    hebrewInEnglish.forEach((tx) => fail(`${vp.name}: Hebrew left in English mode: ${tx}`));
+
+    // Persistence: choose Hebrew, then load a page with no parameter.
+    await switcher.getByRole('button', { name: /עב/ }).click();
+    await page.waitForFunction(() => document.documentElement.dir === 'rtl');
+    await page.goto(`${BASE}/contact`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(300);
+    const persisted = await page.evaluate(() => document.documentElement.lang);
+    if (persisted !== 'he' || !page.url().includes('lang=he')) fail(`${vp.name}: Hebrew not kept after reload (${persisted}, ${page.url()})`);
+
+    // Hebrew navigation through the menu keeps Hebrew.
+    if (vp.width <= 820) {
+      await page.getByRole('button', { name: 'פתיחת תפריט' }).click();
+      await page.locator('#mobile-menu').getByRole('link', { name: 'אדריכלות' }).click();
+    } else {
+      await page.getByRole('navigation', { name: 'ניווט ראשי' }).getByRole('link', { name: 'אדריכלות' }).click();
+    }
+    await page.waitForURL(/\/architecture\?lang=he/);
+    if ((await page.evaluate(() => document.documentElement.dir)) !== 'rtl') fail(`${vp.name}: navigation lost Hebrew`);
+
+    // Hebrew validation messages.
+    await page.goto(`${BASE}/contact?lang=he`, { waitUntil: 'networkidle' });
+    await page.getByRole('button', { name: 'שליחת הודעה' }).click();
+    const errs = await page.locator('.field__error').allTextContents();
+    if (errs.length !== 3 || errs.some((e) => !/[֐-׿]/.test(e))) fail(`${vp.name}: Hebrew form errors wrong: ${errs}`);
+    // Switching language re-translates the visible errors.
+    await page.getByRole('group', { name: 'שפה' }).getByRole('button', { name: /EN/ }).click();
+    await page.waitForFunction(() => document.documentElement.dir === 'ltr');
+    const errsEn = await page.locator('.field__error').allTextContents();
+    if (errsEn[0] !== 'Please enter your name.') fail(`${vp.name}: errors not re-translated: ${errsEn}`);
+
+    await ctx.close();
+  }
+
+  // Hebrew screen viewer: ← advances in RTL.
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/technology?lang=he`, { waitUntil: 'networkidle' });
+  await page.locator('.screen-row__btn').first().click();
+  const dlg = page.getByRole('dialog');
+  if (!(await dlg.getAttribute('aria-label'))?.includes('מציג')) fail('he: viewer label not translated');
+  await page.keyboard.press('ArrowLeft');
+  if ((await page.locator('.lightbox__count').textContent())?.trim() !== '2 / 5') fail('he: ArrowLeft did not advance in RTL');
+  await page.keyboard.press('Escape');
+  await ctx.close();
+}
+
 await browser.close();
 console.log(failures.length ? `\n${failures.length} problem(s) found` : '\nAll checks passed');
 process.exit(failures.length ? 1 : 0);

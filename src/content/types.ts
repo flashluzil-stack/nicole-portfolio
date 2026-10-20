@@ -110,6 +110,8 @@ export interface Product {
 }
 
 export interface ExperienceItem {
+  /** Stable key, identical in every language. */
+  id: string;
   role: string;
   organisation: string;
   period?: string;
@@ -119,6 +121,8 @@ export interface ExperienceItem {
 }
 
 export interface EducationItem {
+  /** Stable key, identical in every language. */
+  id: string;
   programme: string;
   institution?: string;
   period: string;

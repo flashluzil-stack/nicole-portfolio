@@ -254,7 +254,7 @@
 
 .keyword-list--inline li:not(:last-child)::after {
   content: '/';
-  margin-left: 2rem;
+  margin-inline-start: 2rem;
   color: var(--camel);
 }
 
@@ -605,11 +605,11 @@
 }
 
 .lightbox__nav--prev {
-  left: clamp(0.5rem, 1.5vw, 1.5rem);
+  inset-inline-start: clamp(0.5rem, 1.5vw, 1.5rem);
 }
 
 .lightbox__nav--next {
-  right: clamp(0.5rem, 1.5vw, 1.5rem);
+  inset-inline-end: clamp(0.5rem, 1.5vw, 1.5rem);
 }
 
 @media (max-width: 640px) {
@@ -697,4 +697,85 @@
 .screen-row__btn,
 .board-grid__btn {
   position: relative;
+}
+
+/* ——— Language switcher ——— */
+
+.site-header__tools {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.lang-switch__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-switch__sep {
+  color: var(--line-strong);
+  padding-inline: 0.15rem;
+}
+
+.lang-switch__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  min-height: 2.75rem;
+  padding-inline: 0.35rem;
+  color: var(--ink-mute);
+  transition: color var(--dur) var(--ease);
+}
+
+.lang-switch__btn:lang(he) {
+  font-family: 'Assistant Variable', 'Assistant', var(--font-sans);
+  font-size: 0.92rem;
+  letter-spacing: 0;
+}
+
+.lang-switch__btn::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0.45rem;
+  bottom: 0.55rem;
+  height: 1px;
+  background: var(--camel-deep);
+  transform: scaleX(0);
+  transition: transform var(--dur) var(--ease);
+}
+
+.lang-switch__btn:hover {
+  color: var(--ink);
+}
+
+.lang-switch__btn[aria-pressed='true'] {
+  color: var(--ink);
+}
+
+.lang-switch__btn[aria-pressed='true']::after {
+  transform: scaleX(1);
+}
+
+@media (min-width: 821px) {
+  .site-header__tools {
+    margin-inline-start: clamp(0.5rem, 1.5vw, 1.5rem);
+    padding-inline-start: clamp(0.75rem, 1.5vw, 1.5rem);
+    border-inline-start: 1px solid var(--line);
+  }
+}
+
+@media (min-width: 821px) {
+  .site-nav {
+    margin-inline-start: auto;
+  }
 }

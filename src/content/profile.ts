@@ -10,7 +10,7 @@ export const profile = {
   name: 'Nicole Gofman',
   /** Title line as written at the top of the CV. */
   identity: 'Architect | Product Builder | Founder of Flash Luz',
-  headline: ['Designing spaces.', 'Building ideas.'] as const,
+  headline: ['Designing spaces.', 'Building ideas.'] as [string, string],
   intro:
     'I’m Nicole Gofman — an architectural designer and digital product builder exploring the intersection of space, technology, and human experience.',
   about: [
@@ -43,6 +43,7 @@ export const profile = {
 
 export const experience: ExperienceItem[] = [
   {
+    id: 'place-space',
     role: 'Architect',
     organisation: 'Place & Space Architecture',
     period: '2025 – Present',
@@ -55,6 +56,7 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
+    id: 'flash-luz',
     role: 'Product Builder',
     organisation: 'Founder – Flash Luz',
     period: '2026 – Present',
@@ -65,6 +67,7 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
+    id: 'abre',
     role: 'CEO’s Personal Assistant',
     organisation: 'Abre',
     period: '2024–2025',
@@ -74,18 +77,21 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
+    id: 'ibc',
     role: 'Finance Assistant',
     organisation: 'Israeli Building Center Group',
     period: '2024',
     bullets: ['Managed SAP processes, payments, and supplier coordination'],
   },
   {
+    id: 'hirschman',
     role: 'Administrative Assistant',
     organisation: 'Gil Hirschman & Co.',
     period: '2023–2024',
     bullets: ['Managed client relations and legal documentation'],
   },
   {
+    id: 'mod',
     role: 'Security Office Soldier – Personal Assistant',
     organisation: 'Ministry of Defense, Israel',
     period: '2022–2023',
@@ -95,25 +101,27 @@ export const experience: ExperienceItem[] = [
 
 export const education: EducationItem[] = [
   {
+    id: 'shenkar',
     programme: 'Architecture & Interior Design',
     institution: 'Shenkar College of Engineering',
     period: '2023 – 2027',
     note: 'Studies in progress · Dean’s List',
   },
-  { programme: '3Ds Max & V-Ray Course', period: '2024' },
-  { programme: 'Real Estate Agent License', period: '2023' },
-  { programme: 'High School Diploma', institution: 'Metro West High School, Ra’anana', period: '2019 – 2022' },
+  { id: 'vray', programme: '3Ds Max & V-Ray Course', period: '2024' },
+  { id: 'realtor', programme: 'Real Estate Agent License', period: '2023' },
+  { id: 'school', programme: 'High School Diploma', institution: 'Metro West High School, Ra’anana', period: '2019 – 2022' },
 ];
 
 /** Skills as listed in the CV. */
-export const skills: { group: string; items: string[] }[] = [
-  { group: 'Architecture & visualization', items: ['Revit', 'AutoCAD', 'SketchUp', '3DS MAX', 'Enscape', 'Twinmotion'] },
-  { group: 'Digital products', items: ['Base44'] },
+export const skills: { id: string; group: string; items: string[] }[] = [
+  { id: 'architecture', group: 'Architecture & visualization', items: ['Revit', 'AutoCAD', 'SketchUp', '3DS MAX', 'Enscape', 'Twinmotion'] },
+  { id: 'digital', group: 'Digital products', items: ['Base44'] },
   {
+    id: 'office',
     group: 'Office & business',
     items: ['Advanced Microsoft Office (Word, Excel, PowerPoint, Outlook)', 'SAP'],
   },
-  { group: 'Design', items: ['Graphic Design', 'Canva'] },
+  { id: 'design', group: 'Design', items: ['Graphic Design', 'Canva'] },
 ];
 
 export const languages = ['Hebrew', 'English', 'Russian'];

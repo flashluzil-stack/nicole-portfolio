@@ -42,7 +42,7 @@ export const studio = {
     height: 351,
     alt: 'App icons for Worldly, FlashTravel and FlashLuz',
     kind: 'photo',
-  } satisfies MediaImage,
+  } as MediaImage,
 };
 
 export const products: Product[] = [

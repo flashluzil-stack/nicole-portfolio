@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { disciplines, education, experience, languages, profile, skills } from '../content/profile';
-import { products } from '../content/products';
-import { architectureProjects } from '../content/architecture';
+import { useI18n, Emph } from '../i18n';
 import { ArchDrawing } from '../components/ArchDrawing';
 import { DeviceMockup } from '../components/DeviceMockup';
 import { Cta } from '../components/Cta';
@@ -14,7 +12,9 @@ import { StatusBadge } from '../components/StatusBadge';
 import { ArrowRight } from '../components/Icons';
 
 export default function Home() {
-  useDocumentMeta('', profile.intro, '/');
+  const { t, c } = useI18n();
+  const { profile, products, architectureProjects, disciplines, experience, education, skills, languages } = c;
+  useDocumentMeta('', t.meta.home, '/');
   const heroProject = architectureProjects[0];
   const [lead, ...others] = products;
   const cardSizes = ['large', 'small', 'wide'] as const;
@@ -47,10 +47,10 @@ export default function Home() {
             </div>
             <div className="panel__caption">
               <span className="panel__index">01</span>
-              <span className="panel__label">Architecture</span>
-              <span className="panel__keywords">Spatial design · Documentation · Visualization</span>
+              <span className="panel__label">{t.nav.architecture}</span>
+              <span className="panel__keywords">{t.home.archKeywords}</span>
               <span className="panel__cta">
-                Explore Architecture <ArrowRight size={16} />
+                {t.home.exploreArchitecture} <ArrowRight size={16} />
               </span>
             </div>
           </Link>
@@ -70,10 +70,10 @@ export default function Home() {
             </div>
             <div className="panel__caption">
               <span className="panel__index">02</span>
-              <span className="panel__label">Technology</span>
-              <span className="panel__keywords">Digital products · UX · Product strategy</span>
+              <span className="panel__label">{t.nav.technology}</span>
+              <span className="panel__keywords">{t.home.techKeywords}</span>
               <span className="panel__cta">
-                Explore Technology <ArrowRight size={16} />
+                {t.home.exploreTechnology} <ArrowRight size={16} />
               </span>
             </div>
           </Link>
@@ -85,13 +85,9 @@ export default function Home() {
         <div className="container intro__grid">
           <SectionHeading
             index="00"
-            eyebrow="Introduction"
+            eyebrow={t.home.introEyebrow}
             id="intro-title"
-            title={
-              <>
-                Two disciplines, <em>one</em> way of thinking.
-              </>
-            }
+            title={<Emph parts={t.home.introTitle} />}
           />
           <div className="intro__body">
             {profile.about.map((p) => (
@@ -124,16 +120,12 @@ export default function Home() {
         <div className="container">
           <SectionHeading
             index="01"
-            eyebrow="Architecture"
+            eyebrow={t.home.archEyebrow}
             id="home-arch-title"
-            title={
-              <>
-                Selected <em>architectural</em> work
-              </>
-            }
+            title={<Emph parts={t.home.archTitle} />}
           >
             <Cta to="/architecture" variant="text">
-              All architecture
+              {t.home.allArchitecture}
             </Cta>
           </SectionHeading>
           {architectureProjects.length > 0 ? (
@@ -153,16 +145,12 @@ export default function Home() {
         <div className="container">
           <SectionHeading
             index="02"
-            eyebrow="Technology"
+            eyebrow={t.home.techEyebrow}
             id="home-tech-title"
-            title={
-              <>
-                Selected <em>digital</em> products
-              </>
-            }
+            title={<Emph parts={t.home.techTitle} />}
           >
             <Cta to="/technology" variant="text">
-              All products
+              {t.home.allProducts}
             </Cta>
           </SectionHeading>
 
@@ -180,7 +168,7 @@ export default function Home() {
                   {lead.role} · {lead.period}
                 </p>
               )}
-              <Cta to={`/technology#${lead.slug}`}>Read the case study</Cta>
+              <Cta to={`/technology#${lead.slug}`}>{t.home.readCase}</Cta>
             </div>
           </article>
 
@@ -196,7 +184,7 @@ export default function Home() {
                     <h3 className="product-tile__name">{p.name}</h3>
                     <p>{p.tagline}</p>
                     <span className="product-tile__more">
-                      {p.status === 'Concept' ? 'View concept' : 'View project'} <ArrowRight size={14} />
+                      {p.status === 'Concept' ? t.home.viewConcept : t.home.viewProject} <ArrowRight size={14} />
                     </span>
                   </div>
                 </Link>
@@ -211,49 +199,51 @@ export default function Home() {
         <div className="container background">
           <SectionHeading
             index="03"
-            eyebrow="Background"
+            eyebrow={t.home.bgEyebrow}
             id="home-bg-title"
-            title={
-              <>
-                Architecture, product <em>and</em> entrepreneurship.
-              </>
-            }
+            title={<Emph parts={t.home.bgTitle} />}
           />
           <div className="background__cols">
             <div>
-              <h3 className="background__label">Experience</h3>
+              <h3 className="background__label">{t.home.experience}</h3>
               <ol className="timeline">
                 {experience.map((e) => (
-                  <li key={e.organisation + e.role}>
-                    <span className="timeline__period">{e.period ?? 'Earlier'}</span>
-                    <span className="timeline__role">{e.role}</span>
-                    <span className="timeline__org">{e.organisation}</span>
+                  <li key={e.id}>
+                    <span className="timeline__period">{e.period ?? t.home.earlier}</span>
+                    <span className="timeline__role">
+                      <bdi>{e.role}</bdi>
+                    </span>
+                    <span className="timeline__org">
+                      <bdi>{e.organisation}</bdi>
+                    </span>
                   </li>
                 ))}
               </ol>
             </div>
             <div>
-              <h3 className="background__label">Education</h3>
+              <h3 className="background__label">{t.home.education}</h3>
               <ol className="timeline">
                 {education.map((e) => (
-                  <li key={e.programme}>
+                  <li key={e.id}>
                     <span className="timeline__period">{e.period}</span>
-                    <span className="timeline__role">{e.programme}</span>
+                    <span className="timeline__role">
+                      <bdi>{e.programme}</bdi>
+                    </span>
                     {(e.institution || e.note) && (
                       <span className="timeline__org">
-                        {[e.institution, e.note].filter(Boolean).join(' · ')}
+                        <bdi>{[e.institution, e.note].filter(Boolean).join(' · ')}</bdi>
                       </span>
                     )}
                   </li>
                 ))}
               </ol>
-              <h3 className="background__label background__label--spaced">Tools</h3>
+              <h3 className="background__label background__label--spaced">{t.home.tools}</h3>
               <ul className="tool-list">
                 {skills.flatMap((g) => g.items).map((s) => (
-                  <li key={s}>{s}</li>
+                  <li key={s} dir="auto">{s}</li>
                 ))}
               </ul>
-              <h3 className="background__label background__label--spaced">Languages</h3>
+              <h3 className="background__label background__label--spaced">{t.home.languages}</h3>
               <p className="background__languages">{languages.join(' · ')}</p>
             </div>
           </div>
@@ -263,16 +253,16 @@ export default function Home() {
       {/* ——— Contact CTA ——— */}
       <section className="closing" aria-labelledby="closing-title">
         <div className="container closing__inner">
-          <p className="eyebrow">Contact</p>
+          <p className="eyebrow">{t.home.contactEyebrow}</p>
           <h2 id="closing-title" className="closing__title">
-            Have a project, an idea, or an opportunity <em>to discuss?</em>
+            <Emph parts={t.home.closingTitle} />
           </h2>
           <div className="closing__actions">
             <Cta to="/contact" variant="solid">
-              Let’s connect
+              {t.home.connect}
             </Cta>
             <a className="cta cta--text cta--email" href={`mailto:${profile.email}`}>
-              <span>{profile.email}</span>
+              <span className="ltr">{profile.email}</span>
             </a>
           </div>
         </div>

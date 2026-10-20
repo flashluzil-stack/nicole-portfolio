@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { products, studio } from '../content/products';
+import { useI18n, Emph } from '../i18n';
 import type { MediaImage, Product } from '../content/types';
 import { DeviceMockup } from '../components/DeviceMockup';
 import { Cta } from '../components/Cta';
@@ -9,26 +9,8 @@ import { Lightbox } from '../components/Lightbox';
 import { SectionHeading } from '../components/SectionHeading';
 import { StatusBadge } from '../components/StatusBadge';
 
-const approach = [
-  {
-    title: 'Business logic',
-    text: 'Understanding how a business actually operates — its services, schedules, people and money — and organising it into a clear structure.',
-  },
-  {
-    title: 'User journeys',
-    text: 'Mapping the path of each user, from the professional running the business to the customer booking a service.',
-  },
-  {
-    title: 'Interface',
-    text: 'Designing calm, legible screens with the same attention to hierarchy and proportion used in architectural drawings.',
-  },
-  {
-    title: 'Working system',
-    text: 'Turning the concept into a functional product that people can use.',
-  },
-];
-
 function CaseStudy({ product, index }: { product: Product; index: number }) {
+  const { t } = useI18n();
   const [viewer, setViewer] = useState<number | null>(null);
   const gallery: MediaImage[] = [...product.screens, ...product.boards];
   const titleId = `${product.slug}-title`;
@@ -49,27 +31,29 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
           <dl className="case__facts">
             {product.role && (
               <div>
-                <dt>Role</dt>
-                <dd>{product.role}</dd>
+                <dt>{t.technology.role}</dt>
+                <dd>
+                  <bdi>{product.role}</bdi>
+                </dd>
               </div>
             )}
             {product.period && (
               <div>
-                <dt>Period</dt>
+                <dt>{t.technology.period}</dt>
                 <dd>{product.period}</dd>
               </div>
             )}
             <div>
-              <dt>Status</dt>
-              <dd>{product.status}</dd>
+              <dt>{t.technology.status}</dt>
+              <dd>{t.status[product.status]}</dd>
             </div>
             {product.url && (
               <div>
-                <dt>Website</dt>
+                <dt>{t.technology.website}</dt>
                 <dd>
                   <a href={product.url.href} target="_blank" rel="noopener noreferrer" className="inline-link">
-                    {product.url.label}
-                    <span className="visually-hidden"> (opens in a new tab)</span>
+                    <span className="ltr">{product.url.label}</span>
+                    <span className="visually-hidden"> {t.common.newTab}</span>
                   </a>
                 </dd>
               </div>
@@ -83,7 +67,7 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
           </div>
           <div className="case__text">
             <div className="case__block">
-              <h3>Overview</h3>
+              <h3>{t.technology.overview}</h3>
               <p>{product.overview}</p>
             </div>
             {product.caseStudy.map((b) => (
@@ -112,7 +96,7 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
 
         <div className="case__features">
           <h3 className="case__features-title">
-            {product.status === 'Concept' ? 'Concept scope' : 'Key features'}
+            {product.status === 'Concept' ? t.technology.conceptScope : t.technology.keyFeatures}
           </h3>
           <ul className="feature-list">
             {product.features.map((f, i) => (
@@ -125,7 +109,7 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
           </ul>
           {product.proposed && product.proposed.length > 0 && (
             <>
-              <h3 className="case__features-title case__features-title--proposed">Proposed — not yet built</h3>
+              <h3 className="case__features-title case__features-title--proposed">{t.technology.proposed}</h3>
               <ul className="feature-list feature-list--proposed">
                 {product.proposed.map((f, i) => (
                   <li key={f.title}>
@@ -141,14 +125,14 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
 
         {gallery.length > 0 && (product.boards.length > 0 || product.screens.length > 1) && (
           <div className="case__gallery">
-            <h3 className="case__features-title">Screens &amp; flows</h3>
+            <h3 className="case__features-title">{t.technology.screens}</h3>
             {product.screens.length > 0 && (
             <ul className="screen-row">
               {product.screens.map((s, i) => (
                 <li key={s.src}>
                   <button type="button" className="screen-row__btn" onClick={() => setViewer(i)}>
                     <DeviceMockup product={product} screen={s} className="device--small" />
-                    <span className="visually-hidden">Open {s.alt} in fullscreen</span>
+                    <span className="visually-hidden">{t.technology.openFullscreen(s.alt)}</span>
                   </button>
                 </li>
               ))}
@@ -164,7 +148,7 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
                       onClick={() => setViewer(product.screens.length + i)}
                     >
                       <Img image={b} sizes="(min-width: 900px) 50vw, 100vw" />
-                      <span className="visually-hidden">Open {b.alt} in fullscreen</span>
+                      <span className="visually-hidden">{t.technology.openFullscreen(b.alt)}</span>
                     </button>
                     {b.caption && <p className="board-grid__caption">{b.caption}</p>}
                   </li>
@@ -177,7 +161,7 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
         {product.url && (
           <div className="case__cta">
             <Cta to={product.url.href} external variant="solid">
-              Visit {product.name}
+              {t.technology.visit(product.name)}
             </Cta>
           </div>
         )}
@@ -188,11 +172,9 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
 }
 
 export default function Technology() {
-  useDocumentMeta(
-    'Technology',
-    'Digital products by Nicole Gofman — Flash Luz, FlashTravel and Worldly: product strategy, user journeys and interface design.',
-    '/technology',
-  );
+  const { t, c } = useI18n();
+  const { products, studio } = c;
+  useDocumentMeta(t.meta.technologyTitle, t.meta.technology, '/technology');
 
   return (
     <>
@@ -200,16 +182,14 @@ export default function Technology() {
         <div className="container page-hero__grid">
           <div>
             <p className="eyebrow">
-              <span className="eyebrow__index">01</span>Technology
+              <span className="eyebrow__index">01</span>
+              {t.technology.eyebrow}
             </p>
             <h1 id="tech-title" className="page-hero__title">
-              From idea to <em>working system.</em>
+              <Emph parts={t.technology.title} />
             </h1>
           </div>
-          <p className="page-hero__lede">
-            Digital products designed with an architect’s eye — clear structure, considered journeys and calm
-            interfaces that help people get things done.
-          </p>
+          <p className="page-hero__lede">{t.technology.lede}</p>
         </div>
 
         <div className="container studio">
@@ -217,13 +197,13 @@ export default function Technology() {
           <div className="studio__text">
             <p className="eyebrow">{studio.by}</p>
             <p className="studio__name">
-              {studio.name} <em>— {studio.tagline.toLowerCase()}</em>
+              {studio.name} <em>— {studio.tagline.toLocaleLowerCase()}</em>
             </p>
           </div>
           <Img image={studio.icons} sizes="(min-width: 900px) 360px, 80vw" className="studio__icons" />
         </div>
 
-        <nav className="container product-index" aria-label="Products on this page">
+        <nav className="container product-index" aria-label={t.technology.productsNav}>
           <ol>
             {products.map((p, i) => (
               <li key={p.slug}>
@@ -247,16 +227,12 @@ export default function Technology() {
         <div className="container">
           <SectionHeading
             index="04"
-            eyebrow="Approach"
+            eyebrow={t.technology.approachEyebrow}
             id="approach-title"
-            title={
-              <>
-                How an architect <em>builds</em> products.
-              </>
-            }
+            title={<Emph parts={t.technology.approachTitle} />}
           />
           <ol className="approach__list">
-            {approach.map((a, i) => (
+            {t.technology.approach.map((a, i) => (
               <li key={a.title}>
                 <span className="approach__num">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{a.title}</h3>
@@ -266,9 +242,9 @@ export default function Technology() {
           </ol>
           <div className="approach__cta">
             <Cta to="/contact" variant="solid">
-              Discuss a product idea
+              {t.technology.discussIdea}
             </Cta>
-            <Cta to="/architecture">See the architecture work</Cta>
+            <Cta to="/architecture">{t.technology.seeArchitecture}</Cta>
           </div>
         </div>
       </section>

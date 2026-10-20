@@ -31,8 +31,9 @@ npm run preview    # http://localhost:4173
 QA (needs `npm run preview` running in another terminal):
 
 ```bash
-npm run test:e2e   # every route at 3 widths: console errors, overflow, broken
-                   # images, nav state, CTAs, LinkedIn URL, form, axe a11y scan
+npm run test:e2e   # every route at 3 widths, in English and Hebrew: console errors,
+                   # overflow, images, nav state, CTAs, LinkedIn URL, form,
+                   # language switcher, RTL, untranslated text, axe a11y scan
 ```
 
 ## Content status
@@ -44,6 +45,24 @@ npm run test:e2e   # every route at 3 widths: console errors, overflow, broken
 | Canva architecture portfolio | **Not imported yet.** The site couldn't be reached from the build environment. Until projects are added, the Architecture page links to the Canva portfolio |
 
 Product status labels: Flash Luz is labelled **Launched** because the CV says it was "built … from concept to launch". FlashTravel is labelled **Prototype** because it is shown through working app screens. Worldly is labelled **Concept** because only its idea and icon are documented.
+
+## Languages (English / Hebrew)
+
+The header has an **EN | עב** switcher. English is the default.
+
+- **Interface strings** (navigation, buttons, headings, form messages, accessibility labels, metadata) live in `src/i18n/ui.ts`. The Hebrew dictionary must match the English shape, and TypeScript enforces this.
+- **Long-form content** has a Hebrew counterpart in `src/content/he/` (`profile.ts`, `products.ts`, `architecture.ts`). The Hebrew files reuse the English images, links and statuses and replace only the text, including alt text and captions.
+- **Choosing a language:**
+  - Hebrew pages use `?lang=he`, so every page has a shareable, indexable Hebrew URL. English pages carry no parameter.
+  - The choice is also saved in the browser and survives navigation and refreshes.
+  - Each page sets `hreflang` alternates, `og:locale` and a translated title and description.
+- **Direction:**
+  - `<html lang dir>` switches between `en`/`ltr` and `he`/`rtl`.
+  - The CSS uses logical properties, so layouts mirror automatically.
+  - Only the directional arrow icons mirror. Images, drawings, logos and screenshots are never flipped.
+- **Fonts:** Hebrew uses Frank Ruhl Libre for display text and Assistant for body text.
+
+When you add content, add its Hebrew text next to the English. For architecture projects, use the `text` map in `src/content/he/architecture.ts`, keyed by slug.
 
 ## Content
 

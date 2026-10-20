@@ -1,34 +1,23 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { architectureProjects, getArchitectureProject } from '../content/architecture';
-import type { ArchitectureSectionKind, MediaImage } from '../content/types';
+import type { MediaImage } from '../content/types';
+import { useI18n } from '../i18n';
 import { Img } from '../components/Img';
 import { Lightbox } from '../components/Lightbox';
 import { ArrowLeft, ArrowRight, Download } from '../components/Icons';
 import NotFound from './NotFound';
 
-const sectionTitles: Record<ArchitectureSectionKind, string> = {
-  concept: 'Concept & design intent',
-  site: 'Site & context',
-  plans: 'Plans',
-  sections: 'Sections & elevations',
-  diagrams: 'Diagrams',
-  renderings: 'Renderings',
-  interior: 'Interior views',
-  exterior: 'Exterior views',
-  materials: 'Material & spatial studies',
-  technical: 'Technical documentation',
-};
-
 export default function ArchitectureProject() {
   const { slug = '' } = useParams();
-  const project = getArchitectureProject(slug);
+  const { t, c } = useI18n();
+  const { architectureProjects } = c;
+  const project = architectureProjects.find((p) => p.slug === slug);
   const [viewer, setViewer] = useState<number | null>(null);
 
   useDocumentMeta(
-    project?.title ?? 'Project not found',
-    project?.summary ?? 'This project could not be found.',
+    project?.title ?? t.meta.notFoundTitle,
+    project?.summary ?? t.meta.projectNotFound,
     `/architecture/${slug}`,
   );
 
@@ -49,9 +38,9 @@ export default function ArchitectureProject() {
   return (
     <article className="project" aria-labelledby="project-title">
       <div className="container">
-        <nav className="project__crumbs" aria-label="Breadcrumb">
+        <nav className="project__crumbs" aria-label={t.project.breadcrumb}>
           <Link to="/architecture" className="back-link">
-            <ArrowLeft size={16} /> Project index
+            <ArrowLeft size={16} /> {t.project.index}
           </Link>
         </nav>
 
@@ -66,17 +55,17 @@ export default function ArchitectureProject() {
           <dl className="project__facts">
             {project.year && (
               <div>
-                <dt>Year</dt>
+                <dt>{t.project.year}</dt>
                 <dd>{project.year}</dd>
               </div>
             )}
             <div>
-              <dt>Type</dt>
+              <dt>{t.project.type}</dt>
               <dd>{project.type}</dd>
             </div>
             {project.context && (
               <div>
-                <dt>Context</dt>
+                <dt>{t.project.context}</dt>
                 <dd>{project.context}</dd>
               </div>
             )}
@@ -87,7 +76,7 @@ export default function ArchitectureProject() {
       <div className={`project__cover project__cover--${project.cover.kind}`}>
         <button type="button" className="zoomable" onClick={() => setViewer(0)}>
           <Img image={project.cover} priority sizes="100vw" />
-          <span className="visually-hidden">Open cover image in fullscreen</span>
+          <span className="visually-hidden">{t.project.openCover}</span>
         </button>
       </div>
 
@@ -98,9 +87,9 @@ export default function ArchitectureProject() {
           const start = offset;
           offset += section.images.length;
           return (
-            <section key={section.kind + start} className="project-section" aria-label={section.title ?? sectionTitles[section.kind]}>
+            <section key={section.kind + start} className="project-section" aria-label={section.title ?? t.project.sections[section.kind]}>
               <div className="project-section__head">
-                <h2>{section.title ?? sectionTitles[section.kind]}</h2>
+                <h2>{section.title ?? t.project.sections[section.kind]}</h2>
                 {section.text && <p>{section.text}</p>}
               </div>
               {section.images.length > 0 && (
@@ -109,7 +98,7 @@ export default function ArchitectureProject() {
                     <li key={img.src} className={`plate plate--${img.kind}`}>
                       <button type="button" className="zoomable" onClick={() => setViewer(start + k)}>
                         <Img image={img} sizes={img.kind === 'drawing' ? '100vw' : '(min-width: 900px) 50vw, 100vw'} />
-                        <span className="visually-hidden">Open “{img.alt}” in fullscreen</span>
+                        <span className="visually-hidden">{t.project.openImage(img.alt)}</span>
                       </button>
                       {img.caption && <p className="plate__caption">{img.caption}</p>}
                     </li>
@@ -125,33 +114,33 @@ export default function ArchitectureProject() {
             <a href={project.pdf.href} className="cta cta--line" target="_blank" rel="noopener noreferrer">
               <span>{project.pdf.label}</span>
               <Download size={16} />
-              <span className="visually-hidden">(PDF, opens in a new tab)</span>
+              <span className="visually-hidden">{t.common.pdfNewTab}</span>
             </a>
           </p>
         )}
 
-        <nav className="project-pager" aria-label="More projects">
+        <nav className="project-pager" aria-label={t.project.more}>
           {hasNeighbours ? (
             <>
               <Link to={`/architecture/${prev.slug}`} className="project-pager__link">
                 <span className="project-pager__dir">
-                  <ArrowLeft size={16} /> Previous project
+                  <ArrowLeft size={16} /> {t.project.previous}
                 </span>
                 <span className="project-pager__title">{prev.title}</span>
               </Link>
               <Link to="/architecture" className="project-pager__index">
-                All projects
+                {t.project.all}
               </Link>
               <Link to={`/architecture/${next.slug}`} className="project-pager__link project-pager__link--next">
                 <span className="project-pager__dir">
-                  Next project <ArrowRight size={16} />
+                  {t.project.next} <ArrowRight size={16} />
                 </span>
                 <span className="project-pager__title">{next.title}</span>
               </Link>
             </>
           ) : (
             <Link to="/architecture" className="project-pager__index">
-              All projects
+              {t.project.all}
             </Link>
           )}
         </nav>

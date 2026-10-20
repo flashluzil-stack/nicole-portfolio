@@ -1,22 +1,24 @@
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { Cta } from '../components/Cta';
+import { useI18n, Emph } from '../i18n';
 
 export default function NotFound() {
-  useDocumentMeta('Page not found', 'The page you were looking for could not be found.', '/404');
+  const { t } = useI18n();
+  useDocumentMeta(t.meta.notFoundTitle, t.meta.notFound, '/404');
   return (
     <section className="not-found" aria-labelledby="nf-title">
       <div className="container">
         <p className="eyebrow">404</p>
         <h1 id="nf-title" className="page-hero__title">
-          This room <em>doesn’t exist.</em>
+          <Emph parts={t.notFound.title} />
         </h1>
-        <p className="page-hero__lede">The page may have moved. Here are the ways back in.</p>
+        <p className="page-hero__lede">{t.notFound.lede}</p>
         <div className="closing__actions">
           <Cta to="/" variant="solid">
-            Home
+            {t.nav.home}
           </Cta>
-          <Cta to="/architecture">Architecture</Cta>
-          <Cta to="/technology">Technology</Cta>
+          <Cta to="/architecture">{t.nav.architecture}</Cta>
+          <Cta to="/technology">{t.nav.technology}</Cta>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { profile } from '../content/profile';
+import { useI18n, Emph } from '../i18n';
 import { ArchDrawing } from './ArchDrawing';
 import { Cta } from './Cta';
 
@@ -8,6 +8,7 @@ import { Cta } from './Cta';
  * than displaying placeholder work.
  */
 export function PortfolioBridge({ compact = false }: { compact?: boolean }) {
+  const { t, c } = useI18n();
   return (
     <div className={`bridge${compact ? ' bridge--compact' : ''}`}>
       {!compact && (
@@ -16,16 +17,13 @@ export function PortfolioBridge({ compact = false }: { compact?: boolean }) {
         </div>
       )}
       <div className="bridge__body">
-        <p className="eyebrow">Architecture portfolio</p>
+        <p className="eyebrow">{t.architecture.bridgeEyebrow}</p>
         <p className="bridge__title">
-          Projects, drawings <em>and</em> visualizations.
+          <Emph parts={t.architecture.bridgeTitle} />
         </p>
-        <p className="bridge__text">
-          Nicole’s complete architecture portfolio — her projects with their drawings and visualizations — is
-          published as an interactive portfolio.
-        </p>
-        <Cta to={profile.architecturePortfolio} external variant="solid">
-          Open the architecture portfolio
+        <p className="bridge__text">{t.architecture.bridgeText}</p>
+        <Cta to={c.profile.architecturePortfolio} external variant="solid">
+          {t.architecture.bridgeCta}
         </Cta>
       </div>
     </div>

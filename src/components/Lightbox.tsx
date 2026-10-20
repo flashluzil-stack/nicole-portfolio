@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { MediaImage } from '../content/types';
 import { ArrowLeft, ArrowRight, Close } from './Icons';
+import { useI18n } from '../i18n';
 
 interface LightboxProps {
   images: MediaImage[];
@@ -17,6 +18,7 @@ interface LightboxProps {
  * Keyboard: ← / → to move, Esc to close. Focus is trapped and restored.
  */
 export function Lightbox({ images, index, onChange, label }: LightboxProps) {
+  const { t, dir } = useI18n();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
@@ -46,8 +48,9 @@ export function Lightbox({ images, index, onChange, label }: LightboxProps) {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onChange(null);
-      else if (e.key === 'ArrowRight') go(1);
-      else if (e.key === 'ArrowLeft') go(-1);
+      // Arrow keys follow reading direction: in Hebrew, ← moves forward.
+      else if (e.key === 'ArrowRight') go(dir === 'rtl' ? -1 : 1);
+      else if (e.key === 'ArrowLeft') go(dir === 'rtl' ? 1 : -1);
       else if (e.key === 'Tab' && dialogRef.current) {
         const items = [...dialogRef.current.querySelectorAll<HTMLElement>('button')];
         const i = items.indexOf(document.activeElement as HTMLElement);
@@ -62,7 +65,7 @@ export function Lightbox({ images, index, onChange, label }: LightboxProps) {
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [open, go, onChange]);
+  }, [open, go, onChange, dir]);
 
   // Basic swipe support on touch screens.
   const touchX = useRef<number | null>(null);
@@ -76,22 +79,22 @@ export function Lightbox({ images, index, onChange, label }: LightboxProps) {
       className="lightbox"
       role="dialog"
       aria-modal="true"
-      aria-label={`${label} — image viewer`}
+      aria-label={t.viewer.label(label)}
       onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
       onTouchEnd={(e) => {
         if (touchX.current === null) return;
         const dx = e.changedTouches[0].clientX - touchX.current;
-        if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+        if (Math.abs(dx) > 50) go((dx < 0 ? 1 : -1) * (dir === 'rtl' ? -1 : 1));
         touchX.current = null;
       }}
     >
       <div className="lightbox__bar">
-        <p className="lightbox__count" aria-live="polite">
+        <p className="lightbox__count ltr" aria-live="polite">
           {index + 1} / {count}
         </p>
         <button ref={closeRef} type="button" className="lightbox__btn" onClick={() => onChange(null)}>
           <Close size={22} />
-          <span className="visually-hidden">Close viewer</span>
+          <span className="visually-hidden">{t.viewer.close}</span>
         </button>
       </div>
 
@@ -110,11 +113,11 @@ export function Lightbox({ images, index, onChange, label }: LightboxProps) {
         <>
           <button type="button" className="lightbox__btn lightbox__nav lightbox__nav--prev" onClick={() => go(-1)}>
             <ArrowLeft size={24} />
-            <span className="visually-hidden">Previous image</span>
+            <span className="visually-hidden">{t.viewer.previous}</span>
           </button>
           <button type="button" className="lightbox__btn lightbox__nav lightbox__nav--next" onClick={() => go(1)}>
             <ArrowRight size={24} />
-            <span className="visually-hidden">Next image</span>
+            <span className="visually-hidden">{t.viewer.next}</span>
           </button>
         </>
       )}

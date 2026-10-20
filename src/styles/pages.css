@@ -46,7 +46,7 @@
 .hero__line--italic {
   font-style: italic;
   color: var(--camel-deep);
-  padding-left: clamp(0rem, 6vw, 6rem);
+  padding-inline-start: clamp(0rem, 6vw, 6rem);
 }
 
 .hero__lede {
@@ -153,7 +153,7 @@
 .panel__device--1 {
   --device-w: clamp(135px, 13vw, 200px);
   transform: rotate(5deg) translate(-12%, -6%);
-  margin-left: -6%;
+  margin-inline-start: -6%;
 }
 
 .panel:hover .panel__device--0 {
@@ -597,7 +597,7 @@
 }
 
 .product-index__link:hover {
-  padding-left: 0.75rem;
+  padding-inline-start: 0.75rem;
 }
 
 .product-index__link:hover .product-index__name {
@@ -705,8 +705,8 @@
 @media (min-width: 1000px) {
   .case__facts {
     grid-template-columns: 1fr;
-    padding-left: var(--space-l);
-    border-left: 1px solid var(--line);
+    padding-inline-start: var(--space-l);
+    border-inline-start: 1px solid var(--line);
   }
 }
 
@@ -1149,7 +1149,7 @@
 }
 
 .project-pager__link--next {
-  text-align: right;
+  text-align: end;
   justify-items: end;
 }
 
@@ -1402,7 +1402,8 @@
 
 .case__list li {
   position: relative;
-  padding: 0.85rem 0 0.85rem 1.5rem;
+  padding-block: 0.85rem;
+  padding-inline-start: 1.5rem;
   border-bottom: 1px solid var(--line);
   color: var(--ink-soft);
 }
@@ -1410,7 +1411,7 @@
 .case__list li::before {
   content: '';
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   top: 1.45rem;
   width: 0.6rem;
   height: 1px;

@@ -2,9 +2,11 @@ import { Suspense, useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { useI18n } from '../i18n';
 
 export function Layout() {
   const { pathname, hash } = useLocation();
+  const { t } = useI18n();
   const mainRef = useRef<HTMLElement>(null);
   const first = useRef(true);
 
@@ -60,11 +62,11 @@ export function Layout() {
   return (
     <>
       <a className="skip-link" href="#main">
-        Skip to content
+        {t.nav.skip}
       </a>
       <Header />
       <main id="main" ref={mainRef} tabIndex={-1} className="page-enter" key={pathname}>
-        <Suspense fallback={<div className="route-loading" aria-hidden />}>
+        <Suspense fallback={<div className="route-loading" role="status" aria-label={t.common.loading} />}>
           <Outlet />
         </Suspense>
       </main>

@@ -1,5 +1,8 @@
 import type { SVGProps } from 'react';
 
+// Directional icons carry the `icon-dir` class, which mirrors them in
+// right-to-left layouts (see base.css). Logos and symmetric icons never flip.
+
 type IconProps = SVGProps<SVGSVGElement> & { size?: number };
 
 const base = (size = 18): SVGProps<SVGSVGElement> => ({
@@ -15,20 +18,20 @@ const base = (size = 18): SVGProps<SVGSVGElement> => ({
   focusable: false,
 });
 
-export const ArrowRight = ({ size, ...p }: IconProps) => (
-  <svg {...base(size)} {...p}>
+export const ArrowRight = ({ size, className = '', ...p }: IconProps) => (
+  <svg {...base(size)} {...p} className={`icon-dir ${className}`}>
     <path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5" />
   </svg>
 );
 
-export const ArrowLeft = ({ size, ...p }: IconProps) => (
-  <svg {...base(size)} {...p}>
+export const ArrowLeft = ({ size, className = '', ...p }: IconProps) => (
+  <svg {...base(size)} {...p} className={`icon-dir ${className}`}>
     <path d="M20 12H5M10.5 6.5 5 12l5.5 5.5" />
   </svg>
 );
 
-export const ArrowUpRight = ({ size, ...p }: IconProps) => (
-  <svg {...base(size)} {...p}>
+export const ArrowUpRight = ({ size, className = '', ...p }: IconProps) => (
+  <svg {...base(size)} {...p} className={`icon-dir ${className}`}>
     <path d="M7 17 17 7M8.5 7H17v8.5" />
   </svg>
 );

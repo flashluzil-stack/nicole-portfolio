@@ -113,7 +113,7 @@ main:focus {
 .skip-link {
   position: fixed;
   top: 0.75rem;
-  left: 0.75rem;
+  inset-inline-start: 0.75rem;
   z-index: 100;
   padding: 0.7rem 1.1rem;
   background: var(--ink);
@@ -174,7 +174,7 @@ main:focus {
   display: inline-block;
   width: 2rem;
   height: 1px;
-  margin-left: 0.75rem;
+  margin-inline-start: 0.75rem;
   vertical-align: middle;
   background: currentColor;
 }
@@ -362,8 +362,7 @@ main:focus {
 .site-nav__link::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  inset-inline: 0;
   bottom: 0.15rem;
   height: 1px;
   background: currentColor;
@@ -392,7 +391,7 @@ main:focus {
   height: 2.75rem;
   align-items: center;
   justify-content: center;
-  margin-right: -0.5rem;
+  margin-inline-end: -0.5rem;
 }
 
 .menu-toggle__bars {
@@ -581,4 +580,95 @@ main:focus {
 
 .route-loading {
   min-height: 100vh;
+}
+
+/* ——— Right-to-left (Hebrew) ——— */
+
+[dir='rtl'] .icon-dir {
+  transform: scaleX(-1);
+}
+
+[dir='rtl'] .cta:hover .icon-dir {
+  transform: scaleX(-1) translateX(4px);
+}
+
+[dir='rtl'] .site-nav__link::after {
+  transform-origin: right;
+}
+
+/* Hebrew faces: Frank Ruhl Libre for display, Assistant for text. Latin
+   names inside Hebrew text keep the Latin faces through the font stack. */
+:root:lang(he) {
+  --font-display: 'Frank Ruhl Libre', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Assistant Variable', 'Assistant', 'Manrope Variable', system-ui, sans-serif;
+}
+
+/* Hebrew has no italics or capitals: emphasis is carried by colour and weight,
+   and tracking for uppercase labels is removed. */
+:lang(he) :is(em, .hero__line--italic, .feature-product__tagline, .case__tagline, .mobile-menu__link) {
+  font-style: normal;
+}
+
+:lang(he) .eyebrow,
+:lang(he) .cta,
+:lang(he) .site-nav__link,
+:lang(he) .brand__role,
+:lang(he) .status,
+:lang(he) .filter,
+:lang(he) .meta-line,
+:lang(he) .field label,
+:lang(he) .timeline__period,
+:lang(he) .panel__cta,
+:lang(he) .product-tile__more,
+:lang(he) .back-link,
+:lang(he) .project-pager__dir,
+:lang(he) .project-pager__index,
+:lang(he) .contact__label,
+:lang(he) .contact__copy,
+:lang(he) .practice__period,
+:lang(he) .intro__column-title,
+:lang(he) .background__label,
+:lang(he) .case__block h3,
+:lang(he) .case__features-title,
+:lang(he) .case__facts dt,
+:lang(he) .project__facts dt,
+:lang(he) .site-footer__nav a,
+:lang(he) .icon-link,
+:lang(he) .intro__portrait figcaption,
+:lang(he) .skip-link {
+  letter-spacing: 0.02em;
+}
+
+:lang(he) body {
+  line-height: 1.75;
+}
+
+/* Frank Ruhl Libre sets larger than Cormorant; tighten the biggest display
+   sizes so headlines keep their proportions. */
+:lang(he) .hero__title,
+:lang(he) .page-hero__title,
+:lang(he) .case__name,
+:lang(he) .project__title,
+:lang(he) .contact__title {
+  font-size: calc(var(--step-5) * 0.84);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+:lang(he) .section-heading__title,
+:lang(he) .closing__title,
+:lang(he) .feature-product__name {
+  font-size: calc(var(--step-4) * 0.86);
+  line-height: 1.15;
+}
+
+/* Values that are always left-to-right (email, URLs, years) stay intact. */
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* The hero's two phones are an image composition; keep its arrangement. */
+.panel__visual--devices {
+  direction: ltr;
 }
