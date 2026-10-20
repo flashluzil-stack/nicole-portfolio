@@ -15,7 +15,7 @@ type ProjectText = Partial<Pick<ArchitectureProject, 'title' | 'type' | 'context
 
 const text: Record<string, ProjectText> = {
   'contemporary-villa': {
-    title: 'וילה עכשווית',
+    title: 'וילת עץ וזכוכית',
     type: 'מגורים',
     context: 'קונספט תכנוני · הדמיה',
     summary:
@@ -78,7 +78,7 @@ const text: Record<string, ProjectText> = {
     ],
   },
   'interior-architecture': {
-    title: 'אדריכלות פנים',
+    title: 'מטבחים וחללי מגורים',
     type: 'עיצוב פנים',
     context: 'קונספטים תכנוניים · הדמיה',
     summary:
@@ -107,7 +107,7 @@ const text: Record<string, ProjectText> = {
     ],
   },
   'urban-renewal-tower': {
-    title: 'מגדל בהתחדשות עירונית',
+    title: 'מגדל שדרות יעקב',
     type: 'התחדשות עירונית',
     context: 'שדרות יעקב, ראשון לציון · Place & Space Architecture',
     summary:
@@ -134,7 +134,7 @@ const text: Record<string, ProjectText> = {
     ],
   },
   'mediterranean-villa': {
-    title: 'וילה ים־תיכונית',
+    title: 'בית הגמלונים',
     type: 'מגורים',
     context: 'קונספט תכנוני · הדמיה',
     summary:
@@ -154,14 +154,18 @@ const text: Record<string, ProjectText> = {
 
 export const portfolioIndex = en.portfolioIndex;
 
-export const homeHero: typeof en.homeHero = {
-  ...en.homeHero,
-  image: {
-    ...en.homeHero.image,
-    alt: 'בית עם גגות רעפים ואטריום מזוגג ומדרגות אבן מוארות בדמדומים',
-    caption: 'וילה ים־תיכונית — חזית הגינה',
-  },
-};
+const slideAlts = [
+  'בית עם גגות רעפים ואטריום מזוגג ומדרגות אבן מוארות בדמדומים',
+  'וילה בת שתי קומות עם קירות זכוכית לצד בריכה בשקיעה',
+  'בניין מגורים מזוגג עם מדרגות חיצוניות לצד קיר ירוק',
+  'מטבח עם ארונות אלון ואי אבן באור ערב',
+  'חלל מגורים ואוכל פתוח עם פסנתר כנף וקיר אלון',
+];
+
+export const homeSlides: typeof en.homeSlides = en.homeSlides.map((s, i) => ({
+  ...s,
+  image: { ...s.image, alt: slideAlts[i] },
+}));
 
 export const architectureProjects: ArchitectureProject[] = en.architectureProjects.map((p) => {
   const t = text[p.slug];

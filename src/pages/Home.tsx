@@ -9,11 +9,12 @@ import { WorkGrid } from '../components/WorkGrid';
 import { PortfolioIndex } from '../components/PortfolioIndex';
 import { StatusBadge } from '../components/StatusBadge';
 import { CvLink } from '../components/CvLink';
+import { HeroCarousel } from '../components/HeroCarousel';
 import { ArrowRight } from '../components/Icons';
 
 export default function Home() {
   const { t, c } = useI18n();
-  const { profile, products, architectureProjects, architectureOffices, education, homeHero } = c;
+  const { profile, products, architectureProjects, architectureOffices, education, homeSlides } = c;
   useDocumentMeta('', t.meta.home, '/');
 
   const studies = education.find((e) => e.id === 'shenkar');
@@ -46,12 +47,9 @@ export default function Home() {
               ))}
             </ul>
           </div>
-          <figure className="home-hero__image">
-            <Link to={`/architecture/${homeHero.slug}`} className="home-hero__image-link">
-              <Img image={homeHero.image} priority sizes="(min-width: 1000px) 58vw, 100vw" />
-            </Link>
-            <figcaption>{homeHero.image.caption}</figcaption>
-          </figure>
+          <div className="home-hero__image">
+            <HeroCarousel slides={homeSlides} />
+          </div>
         </div>
       </section>
 

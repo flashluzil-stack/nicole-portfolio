@@ -31,14 +31,14 @@ const echoes = 'echoes-of-generations';
 /*
  * Visualizations, drawings and boards supplied by Nicole. Descriptions are
  * short project notes written from the material, at Nicole's request.
- * Only the Urban Renewal Tower is a real office project; the others are
+ * Only the Yaakov Boulevard Tower is a real office project; the others are
  * Nicole's own design concepts and studio work and must never be described
  * as built or existing buildings.
  */
 export const architectureProjects: ArchitectureProject[] = [
   {
     slug: 'contemporary-villa',
-    title: 'Contemporary Villa',
+    title: 'Timber & Glass Villa',
     type: 'Residential',
     context: 'Design concept · Visualization',
     summary:
@@ -106,7 +106,7 @@ export const architectureProjects: ArchitectureProject[] = [
   },
   {
     slug: 'interior-architecture',
-    title: 'Interior Architecture',
+    title: 'Kitchens & Living Spaces',
     type: 'Interior design',
     context: 'Design concepts · Visualization',
     summary:
@@ -135,7 +135,7 @@ export const architectureProjects: ArchitectureProject[] = [
   },
   {
     slug: 'urban-renewal-tower',
-    title: 'Urban Renewal Tower',
+    title: 'Yaakov Boulevard Tower',
     type: 'Urban renewal',
     context: 'Yaakov Boulevard, Rishon LeZion · Place & Space Architecture',
     summary:
@@ -167,7 +167,7 @@ export const architectureProjects: ArchitectureProject[] = [
   },
   {
     slug: 'mediterranean-villa',
-    title: 'Mediterranean Villa',
+    title: 'Gabled House',
     type: 'Residential',
     context: 'Design concept · Visualization',
     summary:
@@ -186,18 +186,14 @@ export const architectureProjects: ArchitectureProject[] = [
   },
 ];
 
-/** The Home page's lead image (a second view of the Mediterranean Villa). */
-export const homeHero = {
-  slug: 'mediterranean-villa',
-  image: img(
-    'mediterranean-villa',
-    'garden-facade',
-    1600,
-    900,
-    'Tiled gable house with a glazed atrium and lit stone steps at dusk',
-    'Mediterranean Villa — garden façade',
-  ),
-};
+/** Home page carousel: one strong image per project, each linking to it. */
+export const homeSlides: { slug: string; image: MediaImage }[] = [
+  { slug: 'mediterranean-villa', image: img('mediterranean-villa', 'garden-facade', 1600, 900, 'Tiled gable house with a glazed atrium and lit stone steps at dusk', '') },
+  { slug: 'contemporary-villa', image: img('contemporary-villa', 'pool-facade', 1600, 929, 'Two-storey villa with full-height glazing beside a pool at sunset', '') },
+  { slug: 'echoes-of-generations', image: img('echoes-of-generations', 'stair-garden', 1550, 1015, 'Glazed residential building with an external stair beside a green wall', '') },
+  { slug: 'interior-architecture', image: img('interior-architecture', 'kitchen', 1600, 900, 'Kitchen with oak cabinets and a stone island in evening light', '') },
+  { slug: 'contemporary-villa', image: img('contemporary-villa', 'living-dining', 1600, 900, 'Open living and dining space with a grand piano and oak wall', '') },
+];
 
 /**
  * The projects Nicole named for the "Selected Architectural Work" section.
@@ -205,8 +201,8 @@ export const homeHero = {
  * link to the full portfolio. Titles are project names and stay in English.
  */
 export const portfolioIndex: { title: string }[] = [
-  { title: 'Contemporary Villa' },
-  { title: 'Interior Architecture' },
+  { title: 'Timber & Glass Villa' },
+  { title: 'Kitchens & Living Spaces' },
   { title: 'Echoes of Generations' },
 ];
 

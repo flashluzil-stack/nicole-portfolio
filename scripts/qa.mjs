@@ -140,6 +140,18 @@ for (const vp of viewports) {
   const cvRes = await page.request.get(BASE + cvHref);
   if (cvRes.status() !== 200 || !(cvRes.headers()['content-type'] ?? '').includes('pdf')) fail(`CV download broken (${cvHref} → ${cvRes.status()})`);
 
+  // Home carousel: advances on its own, dots switch slides, slides link to projects.
+  {
+    const active = () => page.locator('.carousel__slide.is-active').getAttribute('href');
+    const first = await active();
+    await page.mouse.move(5, 5);
+    await page.waitForTimeout(5800);
+    if ((await active()) === first) fail('carousel did not advance');
+    await page.locator('.carousel__dot').nth(2).click();
+    if (!(await page.locator('.carousel__dot').nth(2).getAttribute('aria-pressed'))?.includes('true')) fail('carousel dot did not select');
+    if (!(await active())?.startsWith('/architecture/')) fail('carousel slide is not a project link');
+  }
+
   // Technology cards on Home land on the right case study.
   await page.locator('.tech-card').first().click();
   await page.waitForURL(BASE + '/technology#flash-luz');

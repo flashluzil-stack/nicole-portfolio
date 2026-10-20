@@ -842,3 +842,83 @@
     display: none;
   }
 }
+
+/* ——— Home hero carousel ——— */
+
+.carousel {
+  position: relative;
+}
+
+.carousel__track {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10.5;
+  background: var(--linen);
+}
+
+.carousel__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s var(--ease);
+}
+
+.carousel__slide.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.carousel .carousel__slide img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  transform: scale(1.04);
+  transition: transform 6s linear;
+}
+
+.carousel .carousel__slide.is-active img {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel .carousel__slide,
+  .carousel .carousel__slide img {
+    transition: none;
+    transform: none;
+  }
+}
+
+.carousel__slide:focus-visible {
+  outline-offset: -4px;
+}
+
+.carousel__dots {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+.carousel__dot {
+  position: relative;
+  width: 2.25rem;
+  height: 1.75rem;
+}
+
+.carousel__dot::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0.25rem;
+  top: 50%;
+  height: 2px;
+  background: var(--line-strong);
+  transition: background-color var(--dur) var(--ease);
+}
+
+.carousel__dot[aria-pressed='true']::after {
+  background: var(--ink);
+}
+
+.carousel__dot:hover::after {
+  background: var(--camel-deep);
+}

@@ -2169,9 +2169,8 @@
   }
 }
 
-.home-hero__image img {
-  height: clamp(340px, 62vh, 620px);
-  object-position: 50% 55%;
+.home-hero__image .carousel__track {
+  max-height: 62vh;
 }
 
 .home-hero__image-link {

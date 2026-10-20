@@ -21,7 +21,7 @@ const build = (
   studio: products.studio,
   architectureProjects: architecture.architectureProjects,
   portfolioIndex: architecture.portfolioIndex,
-  homeHero: architecture.homeHero,
+  homeSlides: architecture.homeSlides,
 });
 
 /** All long-form content, per language, with identical structure. */
