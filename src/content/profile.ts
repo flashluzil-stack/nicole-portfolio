@@ -1,4 +1,5 @@
 import type { EducationItem, ExperienceItem, MediaImage } from './types';
+import { asset } from '../lib/asset';
 
 /**
  * Personal and professional information.
@@ -25,14 +26,14 @@ export const profile = {
   contactInvitation:
     'Have a project, an idea, or an opportunity to discuss? I’d love to connect.',
   portrait: {
-    src: '/images/about/nicole-portrait-1600.webp',
+    src: asset('/images/about/nicole-portrait-1600.webp'),
     width: 1210,
     height: 1613,
     alt: 'Portrait of Nicole Gofman',
     kind: 'photo',
   } satisfies MediaImage,
   atWork: {
-    src: '/images/about/nicole-at-work-1600.webp',
+    src: asset('/images/about/nicole-at-work-1600.webp'),
     width: 642,
     height: 930,
     alt: 'Nicole Gofman sketching on a pinned-up presentation board',

@@ -1,4 +1,5 @@
 import type { MediaImage, Product } from './types';
+import { asset } from '../lib/asset';
 
 /**
  * Digital products.
@@ -10,7 +11,7 @@ import type { MediaImage, Product } from './types';
  * described only as an idea, with its app icon.
  */
 
-const dir = '/images/technology';
+const dir = asset('/images/technology');
 
 const screen = (path: string, width: number, height: number, alt: string, caption: string): MediaImage => ({
   src: `${dir}/${path}-1600.webp`,
