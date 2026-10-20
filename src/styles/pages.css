@@ -537,12 +537,6 @@
     var(--bg);
 }
 
-/* A faint 12-column structural grid, like a drawing's setting-out lines. */
-.page-hero--arch > .container {
-  background: repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px calc(100% / 12));
-  background-origin: content-box;
-  background-clip: content-box;
-}
 
 .arch-keywords {
   margin-top: var(--space-xl);
@@ -1421,24 +1415,29 @@
 /* ——— Architecture: hero photo and practice details ——— */
 
 .arch-lede {
-  display: grid;
+  /* Photo beside the text when there is room; the text wraps below the photo
+     rather than shrinking into a narrow column. */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
   gap: var(--space-m);
-  align-items: end;
+}
+
+.arch-lede__photo {
+  flex: 0 0 auto;
 }
 
 .arch-lede__photo img {
-  width: clamp(140px, 18vw, 220px);
+  width: clamp(140px, 14vw, 190px);
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: 50% 35%;
 }
 
-@media (min-width: 640px) {
-  .arch-lede {
-    grid-template-columns: auto 1fr;
-  }
+.arch-lede p {
+  flex: 1 1 30ch;
+  min-width: 0;
 }
-
 
 .practice__bullets {
   margin-top: 0.5rem;

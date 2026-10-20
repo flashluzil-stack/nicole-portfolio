@@ -779,3 +779,19 @@
     margin-inline-start: auto;
   }
 }
+
+@media (max-width: 440px) {
+  .brand__role {
+    display: none;
+  }
+}
+
+/* On narrow screens the inline keywords stack, so separators would dangle. */
+@media (max-width: 640px) {
+  .keyword-list--inline {
+    flex-direction: column;
+  }
+  .keyword-list--inline li:not(:last-child)::after {
+    content: none;
+  }
+}
