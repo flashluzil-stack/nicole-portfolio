@@ -2205,3 +2205,23 @@
     column-gap: 1rem;
   }
 }
+
+/* Drawings fit on screen whole; full detail is one click away in the viewer. */
+.plate--drawing img {
+  width: auto;
+  max-width: 100%;
+  max-height: 78vh;
+  margin-inline: auto;
+}
+
+/* Floor plans of the same building sit two per row on wide screens. */
+@media (min-width: 1100px) {
+  .project-section[aria-label='Plans'] .plate--drawing:not(:first-child),
+  .project-section[aria-label='תוכניות'] .plate--drawing:not(:first-child) {
+    grid-column: auto;
+  }
+}
+
+.project-section__images > li:only-child {
+  grid-column: 1 / -1;
+}

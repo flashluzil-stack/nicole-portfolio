@@ -42,7 +42,7 @@ npm run test:e2e   # every route at 3 widths, in English and Hebrew: console err
 | --- | --- |
 | CV (PDF) | Titles, dates, responsibilities, education, skills and languages, worded as in the CV (`profile.ts`) |
 | Flash.pdf | Flash by Nicole logo, app icons, Flash Luz / FlashTravel / Worldly logos, 10 app screenshots, two photos of Nicole, and all product copy (translated from Hebrew) |
-| Architecture projects | Contemporary Villa, Echoes of Generations and Interior Architecture, from six visualizations Nicole supplied (`src/content/architecture.ts`, Hebrew in `src/content/he/architecture.ts`). The project descriptions are short notes written from the renderings, at Nicole's request. The Canva portfolio could not be reached from the build environment |
+| Architecture projects | Contemporary Villa, Echoes of Generations, Interior Architecture and Mediterranean Villa (`src/content/architecture.ts`, Hebrew in `src/content/he/architecture.ts`). Echoes of Generations (co-living on Washington Boulevard, Tel Aviv; Shenkar studio) includes drawings cropped from Nicole's A3 presentation board, with the board itself available as a PDF. The project notes are written from the material at Nicole's request, and the title "Mediterranean Villa" was chosen for the gabled house |
 | FIKS Architecture | 2025 – 2026, with zoning plans, project management and permit applications (supplied by Nicole). No job title was given |
 | CV download | `public/docs/Nicole-Gofman-CV.pdf` (the supplied CV, which includes a phone number) |
 

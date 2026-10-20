@@ -12,7 +12,8 @@ import { Img } from '../components/Img';
 import { architectureProjects as baseProjects } from '../content/architecture';
 
 /** Rhythm of card sizes for the asymmetric index grid. */
-const rhythm = ['large', 'small', 'small', 'wide', 'medium', 'medium'] as const;
+// Rows of 12 columns: large + small, then small + large, then two mediums.
+const rhythm = ['large', 'small', 'small', 'large', 'medium', 'medium'] as const;
 
 export default function Architecture() {
   const { t, c } = useI18n();

@@ -247,7 +247,7 @@ const LATIN_OK = new Set(
   `Flash Luz FlashLuz Flashluz FlashTravel Worldly Apps by BY Nicole NICOLE Base44 Revit AutoCAD SketchUp DS MAX 3DS
   Enscape Twinmotion SAP Canva Microsoft Office Word Excel PowerPoint Outlook Place Space Architecture Abre Israeli
   Building Center Group Gil Hirschman Co LinkedIn Gof nicole gmail com UX UI No Code AI Uber InDrive Ray V-Ray Trip
-  Builder FlashLive Smart Pins FlashSplit Social Matching Sharing EN PDF BIM No-Code Ds Max FIKS`.split(/\s+/),
+  Builder FlashLive Smart Pins FlashSplit Social Matching Sharing EN PDF BIM No-Code Ds Max FIKS A3`.split(/\s+/),
 );
 
 {

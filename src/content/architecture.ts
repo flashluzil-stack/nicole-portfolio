@@ -14,18 +14,23 @@ const img = (
   height: number,
   alt: string,
   caption: string,
+  kind: MediaImage['kind'] = 'photo',
+  widthLarge?: number,
 ): MediaImage => ({
   src: asset(`/images/architecture/${slug}/${file}-1600.webp`),
+  ...(widthLarge && { srcLarge: asset(`/images/architecture/${slug}/${file}-2800.webp`), widthLarge }),
   width,
   height,
   alt,
   caption,
-  kind: 'photo',
+  kind,
 });
 
+const echoes = 'echoes-of-generations';
+
 /*
- * Visualizations supplied by Nicole. Descriptions are short project notes
- * written from the renderings, at Nicole's request.
+ * Visualizations, drawings and boards supplied by Nicole. Descriptions are
+ * short project notes written from the material, at Nicole's request.
  */
 export const architectureProjects: ArchitectureProject[] = [
   {
@@ -45,24 +50,51 @@ export const architectureProjects: ArchitectureProject[] = [
     ],
   },
   {
-    slug: 'echoes-of-generations',
+    slug: echoes,
     title: 'Echoes of Generations',
-    type: 'Residential',
-    context: 'Private house',
+    type: 'Co-living housing',
+    context: 'Washington Boulevard, Tel Aviv · Shenkar studio, lecturer Sharon Eshet',
     summary:
-      'Two traditional gabled volumes with clay-tile roofs are joined by a glazed atrium, so the familiar form of a village house meets an open, light-filled centre. Stone terraces, olive trees and a sunken fire-pit lounge beside the pool extend the house into the landscape.',
-    cover: img('echoes-of-generations', 'pool-terrace', 1600, 900, 'Tiled gable house with a glazed atrium, pool and sunken fire-pit lounge', 'Pool terrace and sunken lounge'),
+      'Housing for several families on Washington Boulevard in Tel Aviv, built around the idea that neighbours can share more than a staircase. Private apartments sit beside rooms that belong to the whole building, so ordinary routines become moments of meeting — and every household still has a home it can close the door on.',
+    cover: img(echoes, 'stair-garden', 1550, 1015, 'Glazed residential building with an external stair rising beside a green wall', 'The stair and green wall along the long façade'),
+    pdf: { href: asset('/docs/architecture/echoes-of-generations-board.pdf'), label: 'Download presentation board (PDF)' },
     sections: [
       {
         kind: 'concept',
-        text: 'The project takes the archetypal pitched-roof house as an inheritance and opens it up: the two gables keep the intimate rooms, while the glass atrium between them becomes the shared heart of the home, filled with daylight and views of the garden.',
-        images: [],
+        text: 'The building is organised in three bands — private homes, a band of movement, and spaces open to the whole community. Stepped balconies and an open stair turn circulation into shared outdoor space, and the façade shifts from wide glazing on the common floors to screened windows where the rooms are private.',
+        images: [img(echoes, 'diagrams', 1600, 867, 'Concept diagrams: private, movement and public bands; balcony scheme; façade window rhythm; movement system', 'Concept diagrams — building scheme, balconies, façade and movement', 'drawing', 2800)],
       },
       {
-        kind: 'exterior',
+        kind: 'site',
+        text: 'The plot sits mid-block between neighbouring residential buildings, alongside the green strip of the boulevard. A planted garden runs the length of the site and connects the street to the shared spaces at the back.',
+        images: [img(echoes, 'roof-plan', 1600, 1184, 'Roof and site plan at 1:250 showing the building between neighbouring blocks', 'Roof plan 1:250', 'drawing')],
+      },
+      {
+        kind: 'plans',
+        text: 'The ground floor opens with an entrance lobby and the garden; above it, apartments of different sizes are arranged around rooms that the residents share.',
         images: [
-          img('echoes-of-generations', 'garden-facade', 1600, 900, 'Garden façade with stone steps leading up to the glazed atrium', 'Garden façade and stone steps at dusk'),
+          img(echoes, 'plan-ground', 1600, 1035, 'Ground floor plan at 1:100 with entrance lobby, garden and apartment', 'Ground floor plan 1:100', 'drawing'),
+          img(echoes, 'plan-level-1', 1600, 754, 'Level 1 floor plan at 1:100', 'Level 1 plan 1:100', 'drawing'),
+          img(echoes, 'plan-level-2', 1600, 886, 'Level 2 floor plan at 1:100', 'Level 2 plan 1:100', 'drawing'),
+          img(echoes, 'plan-level-3', 1600, 710, 'Level 3 floor plan at 1:100', 'Level 3 plan 1:100', 'drawing'),
+          img(echoes, 'plan-level-4', 1600, 921, 'Level 4 floor plan at 1:100', 'Level 4 plan 1:100', 'drawing'),
         ],
+      },
+      {
+        kind: 'sections',
+        images: [
+          img(echoes, 'sections', 1600, 1604, 'Sections A-A and B-B at 1:100', 'Sections A-A and B-B, 1:100', 'drawing'),
+          img(echoes, 'elevations', 1600, 857, 'Elevation at 1:100 with the diagonal stair and green wall', 'Elevation 1:100', 'drawing'),
+        ],
+      },
+      {
+        kind: 'renderings',
+        images: [img(echoes, 'courtyard', 1532, 1026, 'The building seen from the shared garden courtyard at sunset', 'From the shared courtyard')],
+      },
+      {
+        kind: 'technical',
+        title: 'Presentation board',
+        images: [img(echoes, 'board', 1600, 2261, 'Full presentation board for Echoes of Generations', 'Presentation board (A3)', 'drawing', 2800)],
       },
     ],
   },
@@ -89,18 +121,38 @@ export const architectureProjects: ArchitectureProject[] = [
       },
     ],
   },
+  {
+    slug: 'mediterranean-villa',
+    title: 'Mediterranean Villa',
+    type: 'Residential',
+    context: 'Private house',
+    summary:
+      'Two traditional gabled volumes with clay-tile roofs are joined by a glazed atrium, so the familiar form of a village house meets an open, light-filled centre. Stone terraces, olive trees and a sunken fire-pit lounge beside the pool extend the house into the landscape.',
+    cover: img('mediterranean-villa', 'pool-terrace', 1600, 900, 'Tiled gable house with a glazed atrium, pool and sunken fire-pit lounge', 'Pool terrace and sunken lounge'),
+    sections: [
+      {
+        kind: 'concept',
+        text: 'The project takes the archetypal pitched-roof house as a starting point and opens it up: the two gables keep the intimate rooms, while the glass atrium between them becomes the shared heart of the home, filled with daylight and views of the garden.',
+        images: [],
+      },
+      {
+        kind: 'exterior',
+        images: [img('mediterranean-villa', 'garden-facade', 1600, 900, 'Garden façade with stone steps leading up to the glazed atrium', 'Garden façade and stone steps at dusk')],
+      },
+    ],
+  },
 ];
 
-/** The Home page's lead image (a second view of Echoes of Generations). */
+/** The Home page's lead image (a second view of the Mediterranean Villa). */
 export const homeHero = {
-  slug: 'echoes-of-generations',
+  slug: 'mediterranean-villa',
   image: img(
-    'echoes-of-generations',
+    'mediterranean-villa',
     'garden-facade',
     1600,
     900,
     'Tiled gable house with a glazed atrium and lit stone steps at dusk',
-    'Echoes of Generations — garden façade',
+    'Mediterranean Villa — garden façade',
   ),
 };
 

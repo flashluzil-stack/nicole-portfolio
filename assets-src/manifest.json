@@ -18,16 +18,80 @@
     "height": 929
   },
   {
-    "source": "architecture/echoes-of-generations/garden-facade.png",
-    "src": "/images/architecture/echoes-of-generations/garden-facade-1600.webp",
+    "source": "architecture/echoes-of-generations/board.png",
+    "src": "/images/architecture/echoes-of-generations/board-1600.webp",
     "width": 1600,
-    "height": 900
+    "height": 2261,
+    "srcLarge": "/images/architecture/echoes-of-generations/board-2800.webp",
+    "widthLarge": 2800
   },
   {
-    "source": "architecture/echoes-of-generations/pool-terrace.png",
-    "src": "/images/architecture/echoes-of-generations/pool-terrace-1600.webp",
+    "source": "architecture/echoes-of-generations/courtyard.png",
+    "src": "/images/architecture/echoes-of-generations/courtyard-1600.webp",
+    "width": 1532,
+    "height": 1026
+  },
+  {
+    "source": "architecture/echoes-of-generations/diagrams.png",
+    "src": "/images/architecture/echoes-of-generations/diagrams-1600.webp",
     "width": 1600,
-    "height": 900
+    "height": 867,
+    "srcLarge": "/images/architecture/echoes-of-generations/diagrams-2800.webp",
+    "widthLarge": 2800
+  },
+  {
+    "source": "architecture/echoes-of-generations/elevations.png",
+    "src": "/images/architecture/echoes-of-generations/elevations-1600.webp",
+    "width": 1600,
+    "height": 857
+  },
+  {
+    "source": "architecture/echoes-of-generations/plan-ground.png",
+    "src": "/images/architecture/echoes-of-generations/plan-ground-1600.webp",
+    "width": 1600,
+    "height": 1035
+  },
+  {
+    "source": "architecture/echoes-of-generations/plan-level-1.png",
+    "src": "/images/architecture/echoes-of-generations/plan-level-1-1600.webp",
+    "width": 1600,
+    "height": 754
+  },
+  {
+    "source": "architecture/echoes-of-generations/plan-level-2.png",
+    "src": "/images/architecture/echoes-of-generations/plan-level-2-1600.webp",
+    "width": 1600,
+    "height": 886
+  },
+  {
+    "source": "architecture/echoes-of-generations/plan-level-3.png",
+    "src": "/images/architecture/echoes-of-generations/plan-level-3-1600.webp",
+    "width": 1600,
+    "height": 710
+  },
+  {
+    "source": "architecture/echoes-of-generations/plan-level-4.png",
+    "src": "/images/architecture/echoes-of-generations/plan-level-4-1600.webp",
+    "width": 1600,
+    "height": 921
+  },
+  {
+    "source": "architecture/echoes-of-generations/roof-plan.png",
+    "src": "/images/architecture/echoes-of-generations/roof-plan-1600.webp",
+    "width": 1600,
+    "height": 1184
+  },
+  {
+    "source": "architecture/echoes-of-generations/sections.png",
+    "src": "/images/architecture/echoes-of-generations/sections-1600.webp",
+    "width": 1600,
+    "height": 1604
+  },
+  {
+    "source": "architecture/echoes-of-generations/stair-garden.png",
+    "src": "/images/architecture/echoes-of-generations/stair-garden-1600.webp",
+    "width": 1550,
+    "height": 1015
   },
   {
     "source": "architecture/interior-architecture/balcony.png",
@@ -46,6 +110,18 @@
     "src": "/images/architecture/interior-architecture/living-room-1600.webp",
     "width": 823,
     "height": 941
+  },
+  {
+    "source": "architecture/mediterranean-villa/garden-facade.png",
+    "src": "/images/architecture/mediterranean-villa/garden-facade-1600.webp",
+    "width": 1600,
+    "height": 900
+  },
+  {
+    "source": "architecture/mediterranean-villa/pool-terrace.png",
+    "src": "/images/architecture/mediterranean-villa/pool-terrace-1600.webp",
+    "width": 1600,
+    "height": 900
   },
   {
     "source": "technology/brand/app-icons.png",
