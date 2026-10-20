@@ -37,6 +37,39 @@ const echoes = 'echoes-of-generations';
  */
 export const architectureProjects: ArchitectureProject[] = [
   {
+    slug: 'gymnasium',
+    title: 'The Gymnasium',
+    type: 'Public building',
+    context: 'Final project · Shenkar · Herzl Street, Florentin, Tel Aviv · Supervisor: Moshe Alfasi',
+    summary: 'A community sports centre in Florentin — a sloping concrete roof over glazed halls and a stepped public plaza.',
+    cover: img('gymnasium', 'exterior', 1236, 645, 'Community sports centre with a sloping concrete roof, glazed halls and stepped plaza', 'View from the street'),
+    sections: [
+      {
+        kind: 'concept',
+        title: 'Identity',
+        images: [img('gymnasium', 'identity', 1254, 1254, 'Project identity: line drawing of the building with the name הגמנסיון — sport, community, inspiration', 'Project identity', 'drawing')],
+      },
+      {
+        kind: 'plans',
+        images: [
+          img('gymnasium', 'site-ground-plan', 1600, 1701, 'Site plan and ground floor plan', 'Site and ground floor plan', 'drawing', 2800),
+          img('gymnasium', 'floor-plan', 1600, 2704, 'Upper floor plan', 'Upper floor plan', 'drawing', 2800),
+        ],
+      },
+      {
+        kind: 'sections',
+        images: [
+          img('gymnasium', 'sections', 1600, 977, 'Construction sections A-A and B-B', 'Sections A-A and B-B', 'drawing', 2800),
+          img('gymnasium', 'elevations', 1600, 998, 'Rendered elevations', 'Elevations', 'drawing', 2800),
+        ],
+      },
+      {
+        kind: 'technical',
+        images: [img('gymnasium', 'details', 1600, 1024, 'Construction detail section and structural plans', 'Construction detail and structural plans', 'drawing', 2800)],
+      },
+    ],
+  },
+  {
     slug: 'contemporary-villa',
     title: 'Timber & Glass Villa',
     type: 'Residential',
@@ -188,22 +221,12 @@ export const architectureProjects: ArchitectureProject[] = [
 
 /** Home page carousel: one strong image per project, each linking to it. */
 export const homeSlides: { slug: string; image: MediaImage }[] = [
+  { slug: 'gymnasium', image: img('gymnasium', 'exterior', 1236, 645, 'Community sports centre with a sloping concrete roof and stepped plaza', '') },
   { slug: 'mediterranean-villa', image: img('mediterranean-villa', 'garden-facade', 1600, 900, 'Tiled gable house with a glazed atrium and lit stone steps at dusk', '') },
   { slug: 'contemporary-villa', image: img('contemporary-villa', 'pool-facade', 1600, 929, 'Two-storey villa with full-height glazing beside a pool at sunset', '') },
   { slug: 'echoes-of-generations', image: img('echoes-of-generations', 'stair-garden', 1550, 1015, 'Glazed residential building with an external stair beside a green wall', '') },
   { slug: 'interior-architecture', image: img('interior-architecture', 'kitchen', 1600, 900, 'Kitchen with oak cabinets and a stone island in evening light', '') },
   { slug: 'contemporary-villa', image: img('contemporary-villa', 'living-dining', 1600, 900, 'Open living and dining space with a grand piano and oak wall', '') },
-];
-
-/**
- * The projects Nicole named for the "Selected Architectural Work" section.
- * Until their images are imported (see above), they are listed by name and
- * link to the full portfolio. Titles are project names and stay in English.
- */
-export const portfolioIndex: { title: string }[] = [
-  { title: 'Timber & Glass Villa' },
-  { title: 'Kitchens & Living Spaces' },
-  { title: 'Echoes of Generations' },
 ];
 
 export const getArchitectureProject = (slug: string) =>

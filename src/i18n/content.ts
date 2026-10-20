@@ -20,7 +20,6 @@ const build = (
   products: products.products,
   studio: products.studio,
   architectureProjects: architecture.architectureProjects,
-  portfolioIndex: architecture.portfolioIndex,
   homeSlides: architecture.homeSlides,
 });
 

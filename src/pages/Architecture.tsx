@@ -3,17 +3,15 @@ import { useSearchParams } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { useI18n, Emph } from '../i18n';
 import { ProjectCard } from '../components/ProjectCard';
-import { PortfolioIndex } from '../components/PortfolioIndex';
 import { CvLink } from '../components/CvLink';
 import { ArrowDown } from '../components/Icons';
 import { SectionHeading } from '../components/SectionHeading';
-import { Cta } from '../components/Cta';
 import { Img } from '../components/Img';
 import { architectureProjects as baseProjects } from '../content/architecture';
 
 /** Rhythm of card sizes for the asymmetric index grid. */
-// Rows of 12 columns: large + small, small + large, one wide, then two mediums.
-const rhythm = ['large', 'small', 'small', 'large', 'wide', 'medium', 'medium'] as const;
+// Rows of 12 columns: large + small, small + large, then two mediums.
+const rhythm = ['large', 'small', 'small', 'large', 'medium', 'medium'] as const;
 
 export default function Architecture() {
   const { t, c } = useI18n();
@@ -76,7 +74,7 @@ export default function Architecture() {
           />
 
           {architectureProjects.length === 0 ? (
-            <PortfolioIndex />
+            null
           ) : (
             <>
               {types.length > 1 && (
@@ -119,11 +117,6 @@ export default function Architecture() {
                   />
                 ))}
               </div>
-              <p className="arch-more">
-                <Cta to={profile.architecturePortfolio} external variant="text">
-                  {t.architecture.completePortfolio}
-                </Cta>
-              </p>
             </>
           )}
         </div>

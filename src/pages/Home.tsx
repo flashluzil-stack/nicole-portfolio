@@ -6,7 +6,6 @@ import { Cta } from '../components/Cta';
 import { Img } from '../components/Img';
 import { SectionHeading } from '../components/SectionHeading';
 import { WorkGrid } from '../components/WorkGrid';
-import { PortfolioIndex } from '../components/PortfolioIndex';
 import { StatusBadge } from '../components/StatusBadge';
 import { CvLink } from '../components/CvLink';
 import { HeroCarousel } from '../components/HeroCarousel';
@@ -61,7 +60,7 @@ export default function Home() {
               {t.home.allArchitecture}
             </Cta>
           </SectionHeading>
-          {architectureProjects.length > 0 ? <WorkGrid projects={architectureProjects.slice(0, 3)} /> : <PortfolioIndex />}
+          <WorkGrid projects={architectureProjects.slice(0, 3)} />
         </div>
       </section>
 

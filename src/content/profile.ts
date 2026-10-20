@@ -23,8 +23,6 @@ export const profile = {
   phone: '054-790-9722',
   phoneHref: 'tel:+972547909722',
   linkedin: 'https://il.linkedin.com/in/nicole-gofman-0b4968296',
-  /** Nicole's own architecture portfolio, hosted on Canva. */
-  architecturePortfolio: 'https://p-ng.my.canva.site/portfolio',
   /** The CV as supplied by Nicole (PDF). */
   cv: asset('/docs/Nicole-Gofman-CV.pdf'),
   contactInvitation:
