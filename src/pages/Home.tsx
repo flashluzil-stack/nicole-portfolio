@@ -13,10 +13,9 @@ import { ArrowRight } from '../components/Icons';
 
 export default function Home() {
   const { t, c } = useI18n();
-  const { profile, products, architectureProjects, architectureOffices, experience, education, homeHero } = c;
+  const { profile, products, architectureProjects, architectureOffices, education, homeHero } = c;
   useDocumentMeta('', t.meta.home, '/');
 
-  const earlier = experience.filter((e) => !['place-space', 'flash-luz'].includes(e.id));
   const studies = education.find((e) => e.id === 'shenkar');
 
   return (
@@ -64,7 +63,6 @@ export default function Home() {
               {t.home.allArchitecture}
             </Cta>
           </SectionHeading>
-          <p className="section-lede">{t.home.workLede}</p>
           {architectureProjects.length > 0 ? <WorkGrid projects={architectureProjects.slice(0, 3)} /> : <PortfolioIndex />}
         </div>
       </section>
@@ -81,7 +79,6 @@ export default function Home() {
               <CvLink variant="solid" />
               <Cta to="/contact">{t.home.contactMe}</Cta>
             </div>
-            <p className="experience__note">{t.home.recruiters}</p>
           </div>
 
           <div className="experience__body">
@@ -98,7 +95,7 @@ export default function Home() {
                   {o.role && <p className="office__role">{o.role}</p>}
                   {o.bullets && (
                     <ul className="office__bullets">
-                      {o.bullets.map((b) => (
+                      {o.bullets.slice(0, 3).map((b) => (
                         <li key={b}>{b}</li>
                       ))}
                     </ul>
@@ -108,21 +105,6 @@ export default function Home() {
             </ul>
 
             <div className="experience__more">
-              <div>
-                <h3 className="experience__label">{t.home.earlierExperience}</h3>
-                <ul className="compact-list">
-                  {earlier.map((e) => (
-                    <li key={e.id}>
-                      <span className="compact-list__main">
-                        <bdi>{e.role}</bdi>
-                      </span>
-                      <span className="compact-list__meta">
-                        <bdi>{e.organisation}</bdi> · <span className="ltr">{e.period}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
               {studies && (
                 <div>
                   <h3 className="experience__label">{t.home.education}</h3>
@@ -150,7 +132,6 @@ export default function Home() {
               {t.home.allProducts}
             </Cta>
           </SectionHeading>
-          <p className="section-lede">{t.home.techLede}</p>
           <ul className="tech-strip__list">
             {products.map((p) => (
               <li key={p.slug}>

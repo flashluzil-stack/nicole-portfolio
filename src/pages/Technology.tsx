@@ -6,7 +6,6 @@ import { DeviceMockup } from '../components/DeviceMockup';
 import { Cta } from '../components/Cta';
 import { Img } from '../components/Img';
 import { Lightbox } from '../components/Lightbox';
-import { SectionHeading } from '../components/SectionHeading';
 import { StatusBadge } from '../components/StatusBadge';
 
 function CaseStudy({ product, index }: { product: Product; index: number }) {
@@ -70,29 +69,8 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
               <h3>{t.technology.overview}</h3>
               <p>{product.overview}</p>
             </div>
-            {product.caseStudy.map((b) => (
-              <div key={b.heading} className="case__block">
-                <h3>{b.heading}</h3>
-                <p>{b.text}</p>
-              </div>
-            ))}
           </div>
         </div>
-
-        {product.lists && product.lists.length > 0 && (
-          <div className="case__lists">
-            {product.lists.map((l) => (
-              <div key={l.heading} className="case__list">
-                <h3 className="case__features-title">{l.heading}</h3>
-                <ul>
-                  {l.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        )}
 
         <div className="case__features">
           <h3 className="case__features-title">
@@ -103,7 +81,6 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
               <li key={f.title}>
                 <span className="feature-list__index">{String(i + 1).padStart(2, '0')}</span>
                 <span className="feature-list__title">{f.title}</span>
-                {f.text && <span className="feature-list__text">{f.text}</span>}
               </li>
             ))}
           </ul>
@@ -223,29 +200,12 @@ export default function Technology() {
         <CaseStudy key={p.slug} product={p} index={i} />
       ))}
 
-      <section className="section approach" aria-labelledby="approach-title">
-        <div className="container">
-          <SectionHeading
-            index="04"
-            eyebrow={t.technology.approachEyebrow}
-            id="approach-title"
-            title={<Emph parts={t.technology.approachTitle} />}
-          />
-          <ol className="approach__list">
-            {t.technology.approach.map((a, i) => (
-              <li key={a.title}>
-                <span className="approach__num">{String(i + 1).padStart(2, '0')}</span>
-                <h3>{a.title}</h3>
-                <p>{a.text}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="approach__cta">
-            <Cta to="/contact" variant="solid">
-              {t.technology.discussIdea}
-            </Cta>
-            <Cta to="/architecture">{t.technology.seeArchitecture}</Cta>
-          </div>
+      <section className="section approach" aria-label={t.technology.approachEyebrow}>
+        <div className="container approach__cta">
+          <Cta to="/contact" variant="solid">
+            {t.technology.discussIdea}
+          </Cta>
+          <Cta to="/architecture">{t.technology.seeArchitecture}</Cta>
         </div>
       </section>
     </>

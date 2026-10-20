@@ -63,7 +63,7 @@ export const products: Product[] = [
     ],
     boards: [],
     overview:
-      'Flash Luz is a smart platform that connects clients with beauty professionals — quickly, conveniently and precisely, with everything happening in one place. Instead of searching for a manicurist, a barber or any other service provider, a client can place a request and receive offers, like Uber. It was built out of a real need in the field: a system for managing a beauty business that handles booking and managing appointments, clients and payments, and helps business owners work in a more organised, smarter and more efficient way.',
+      'A platform that connects clients with beauty professionals and runs the business side — appointments, clients and payments — in one place.',
     caseStudy: [
       {
         heading: 'Who it is for',
@@ -122,7 +122,7 @@ export const products: Product[] = [
     ],
     boards: [],
     overview:
-      'FlashTravel is a smart trip-management platform that brings together planning, recommendations, people and expense management — in real time and in one place. It is a social app for travellers: build routes, discover places and meet travellers in the same area, simply and conveniently.',
+      'A social travel app: plan routes, discover places, meet travellers and split costs — in one place.',
     caseStudy: [],
     lists: [
       {
@@ -169,7 +169,7 @@ export const products: Product[] = [
     ],
     boards: [],
     overview:
-      'Worldly is a smart, AI-based quiz platform born from Nicole’s own travels around the world. Its goal is to turn learning about places into an interactive experience — so that travellers truly get to know their destination, and don’t just pass through it.',
+      'An AI-based quiz app that makes learning about travel destinations interactive.',
     caseStudy: [
       {
         heading: 'Status',

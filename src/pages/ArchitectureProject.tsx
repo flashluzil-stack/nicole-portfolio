@@ -86,6 +86,8 @@ export default function ArchitectureProject() {
         {project.sections.map((section) => {
           const start = offset;
           offset += section.images.length;
+          // A section with neither images nor text has nothing to show.
+          if (!section.text && section.images.length === 0) return null;
           return (
             <section key={section.kind + start} className="project-section" aria-label={section.title ?? t.project.sections[section.kind]}>
               <div className="project-section__head">

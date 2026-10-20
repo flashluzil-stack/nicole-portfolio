@@ -14,7 +14,7 @@ export const profile = {
   intro:
     'I’m Nicole Gofman — an architectural designer and digital product builder exploring the intersection of space, technology, and human experience.',
   about: [
-    'I’m an Architecture & Interior Design student at Shenkar College of Engineering and work as an architect at Place & Space Architecture, on residential buildings and high-rise towers — from design and detailed drawings to building permits.',
+    'I work as an architect at Place & Space Architecture on residential buildings and high-rise towers, and studied Architecture & Interior Design at Shenkar (2023 – 2026).',
     'Alongside architecture, I create and develop apps with Base44. I founded Flash Luz, a platform for beauty business management, and built it as a no-code app from concept to launch — designing its product architecture, UX/UI and user flows.',
     'Before that I worked across real estate, finance and administration. What connects it all: I love making things work better.',
   ],
@@ -135,8 +135,8 @@ export const education: EducationItem[] = [
     id: 'shenkar',
     programme: 'Architecture & Interior Design',
     institution: 'Shenkar College of Engineering',
-    period: '2023 – 2027',
-    note: 'Studies in progress · Dean’s List',
+    period: '2023 – 2026',
+    note: 'Dean’s List',
   },
   { id: 'vray', programme: '3Ds Max & V-Ray Course', period: '2024' },
   { id: 'realtor', programme: 'Real Estate Agent License', period: '2023' },

@@ -42,17 +42,15 @@ export const architectureProjects: ArchitectureProject[] = [
     type: 'Residential',
     context: 'Design concept · Visualization',
     summary:
-      'A design concept for a two-storey family villa that opens completely onto a stone terrace and pool. Floor-to-ceiling glazing turns the ground floor into one continuous space for living, dining and music, while a timber-clad upper volume holds the private rooms beneath a deep, cantilevered roof.',
+      'A two-storey villa concept that opens fully onto its terrace and pool.',
     cover: img('contemporary-villa', 'pool-facade', 1600, 929, 'Two-storey villa with full-height glazing beside a pool at sunset', 'Pool façade at sunset'),
     sections: [
       {
         kind: 'concept',
-        text: 'The house is designed as two stacked layers: an open, transparent ground floor that belongs to the garden, and a more sheltered upper floor wrapped in timber and shaded by the roof overhang. Sliding glass walls and continuous stone paving blur the line between inside and outside.',
         images: [],
       },
       {
         kind: 'interior',
-        text: 'Inside, a slender black frame marks out the music and dining area without closing it off. Oak wall panelling, timber fins around the stair and a long kitchen island with lit shelving keep the open plan warm and ordered.',
         images: [
           img('contemporary-villa', 'living-dining', 1600, 900, 'Open living room with a white sofa, glass-framed dining area with grand piano, kitchen and oak wall', 'Living and dining space facing the terrace'),
           img('contemporary-villa', 'music-room', 1600, 824, 'Music corner with grand piano and lounge chairs beside timber fins, kitchen island and dining table', 'Music corner, kitchen and dining'),
@@ -66,23 +64,20 @@ export const architectureProjects: ArchitectureProject[] = [
     type: 'Co-living housing',
     context: 'Washington Boulevard, Tel Aviv · Shenkar studio, lecturer Sharon Eshet',
     summary:
-      'A studio project for co-living housing on a site on Washington Boulevard in Tel Aviv, designed around the idea that neighbours can share more than a staircase. Private apartments sit beside rooms that belong to the whole building, so ordinary routines become moments of meeting — and every household still has a home it can close the door on.',
+      'Studio project: co-living housing on Washington Boulevard, Tel Aviv — private homes around shared spaces.',
     cover: img(echoes, 'stair-garden', 1550, 1015, 'Glazed residential building with an external stair rising beside a green wall', 'The stair and green wall along the long façade'),
     pdf: { href: asset('/docs/architecture/echoes-of-generations-board.pdf'), label: 'Download presentation board (PDF)' },
     sections: [
       {
         kind: 'concept',
-        text: 'The building is organised in three bands — private homes, a band of movement, and spaces open to the whole community. Stepped balconies and an open stair turn circulation into shared outdoor space, and the façade shifts from wide glazing on the common floors to screened windows where the rooms are private.',
         images: [img(echoes, 'diagrams', 1600, 867, 'Concept diagrams: private, movement and public bands; balcony scheme; façade window rhythm; movement system', 'Concept diagrams — building scheme, balconies, façade and movement', 'drawing', 2800)],
       },
       {
         kind: 'site',
-        text: 'The studio site sits mid-block between neighbouring residential buildings, alongside the green strip of the boulevard. The design runs a planted garden the length of the plot, connecting the street to the shared spaces at the back.',
         images: [img(echoes, 'roof-plan', 1600, 1184, 'Roof and site plan at 1:250 showing the building between neighbouring blocks', 'Roof plan 1:250', 'drawing')],
       },
       {
         kind: 'plans',
-        text: 'The ground floor opens with an entrance lobby and the garden; above it, apartments of different sizes are arranged around rooms that the residents share.',
         images: [
           img(echoes, 'plan-ground', 1600, 1035, 'Ground floor plan at 1:100 with entrance lobby, garden and apartment', 'Ground floor plan 1:100', 'drawing'),
           img(echoes, 'plan-level-1', 1600, 754, 'Level 1 floor plan at 1:100', 'Level 1 plan 1:100', 'drawing'),
@@ -115,12 +110,11 @@ export const architectureProjects: ArchitectureProject[] = [
     type: 'Interior design',
     context: 'Design concepts · Visualization',
     summary:
-      'Interior design concepts for homes and apartments: kitchens in two moods — warm oak with a stone island, and dark lacquer with a butcher-block counter — and a bright living room and balcony arranged around a view of the trees and skyline.',
+      'Interior concepts: two kitchens, a living room and a balcony.',
     cover: img('interior-architecture', 'kitchen', 1600, 900, 'Kitchen with oak cabinets, a stone waterfall island and bar stools in evening light', 'Kitchen with oak joinery and stone island'),
     sections: [
       {
         kind: 'materials',
-        text: 'Each scheme is built from a small set of materials. The light kitchen pairs oak, light stone and terrazzo with matt black details; the dark kitchen sets gloss charcoal cabinets and textured stone fronts against warm butcher-block oak. In both, concealed lighting under the cabinets makes the materials glow in the evening.',
         images: [
           img('interior-architecture', 'kitchen-black-island', 1600, 900, 'Dark kitchen with gloss charcoal cabinets, lit open shelf and an oak butcher-block breakfast bar with stools', 'Dark kitchen with oak breakfast bar'),
           img('interior-architecture', 'kitchen-black-counter', 1600, 900, 'Close view of an oak counter with black sink, lit shelf with glasses and a coffee machine', 'Oak counter and lit shelf'),
@@ -128,7 +122,6 @@ export const architectureProjects: ArchitectureProject[] = [
       },
       {
         kind: 'plans',
-        text: 'The apartment layout is planned around one open space for living, dining and cooking, with the music room, study and bedroom suite set around it and a terrace off the living room.',
         images: [img('interior-architecture', 'floor-plan-3d', 1535, 1024, 'Furnished 3D floor plan with living room, kitchen island, dining table, music room with piano, study and bedroom', '3D floor plan', 'drawing')],
       },
       {
@@ -146,17 +139,15 @@ export const architectureProjects: ArchitectureProject[] = [
     type: 'Urban renewal',
     context: 'Yaakov Boulevard, Rishon LeZion · Place & Space Architecture',
     summary:
-      'An urban renewal project on Yaakov Boulevard in Rishon LeZion: a residential tower set in a landscaped garden, above two levels of underground parking. The drawings shown are the building appendix to the zoning plan — the documents that fix the building’s footprint, height and layout for the planning authorities.',
+      'Building appendix for an urban renewal tower on Yaakov Boulevard, Rishon LeZion.',
     cover: img('urban-renewal-tower', 'plan-ground', 1600, 1683, 'Ground floor plan at 1:250 with the tower footprint, gardens, driveway and parking', 'Ground floor plan 1:250', 'drawing', 2699),
     sections: [
       {
         kind: 'site',
-        text: 'Plot 427 sits on Yaakov Boulevard, among the residential plots of the neighbourhood.',
         images: [img('urban-renewal-tower', 'location', 1200, 1040, 'Location map at 1:2500 with plot 427 outlined in red on Yaakov Boulevard', 'Location map 1:2500', 'drawing')],
       },
       {
         kind: 'plans',
-        text: 'At ground level the tower stands in a garden, with a curved driveway and parking along the boulevard edge. The typical floor and the penthouse floor show how the apartments are arranged around the central core.',
         images: [
           img('urban-renewal-tower', 'plan-typical', 1600, 1687, 'Typical floor plan at 1:250', 'Typical floor plan 1:250', 'drawing', 2693),
           img('urban-renewal-tower', 'plan-penthouse', 1600, 1687, 'Penthouse floor plan at 1:250', 'Penthouse floor plan 1:250', 'drawing', 2693),
@@ -169,7 +160,7 @@ export const architectureProjects: ArchitectureProject[] = [
       {
         kind: 'technical',
         title: 'Building appendix',
-        text: 'Building appendix to plan no. 431-1167873 (version 1, 29.04.2026), prepared by architect Ayelet Malis Cohen. The drawings were produced at Place & Space Architecture, where Nicole works on residential towers and zoning submissions.',
+        text: 'Plan no. 431-1167873 · Appendix by architect Ayelet Malis Cohen · Place & Space Architecture.',
         images: [],
       },
     ],
@@ -180,12 +171,11 @@ export const architectureProjects: ArchitectureProject[] = [
     type: 'Residential',
     context: 'Design concept · Visualization',
     summary:
-      'A design concept in which two traditional gabled volumes with clay-tile roofs are joined by a glazed atrium, so the familiar form of a village house meets an open, light-filled centre. Stone terraces, olive trees and a sunken fire-pit lounge beside the pool extend the house into the landscape.',
+      'Two gabled volumes joined by a glazed atrium — a design concept.',
     cover: img('mediterranean-villa', 'pool-terrace', 1600, 900, 'Tiled gable house with a glazed atrium, pool and sunken fire-pit lounge', 'Pool terrace and sunken lounge'),
     sections: [
       {
         kind: 'concept',
-        text: 'The project takes the archetypal pitched-roof house as a starting point and opens it up: the two gables keep the intimate rooms, while the glass atrium between them becomes the shared heart of the home, filled with daylight and views of the garden.',
         images: [],
       },
       {

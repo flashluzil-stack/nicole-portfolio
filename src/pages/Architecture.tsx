@@ -17,7 +17,7 @@ const rhythm = ['large', 'small', 'small', 'large', 'wide', 'medium', 'medium'] 
 
 export default function Architecture() {
   const { t, c } = useI18n();
-  const { architectureProjects, disciplines, education, experience, profile, skills } = c;
+  const { architectureProjects, education, experience, profile, skills } = c;
   useDocumentMeta(t.meta.architectureTitle, t.meta.architecture, '/architecture');
 
   const [params, setParams] = useSearchParams();
@@ -60,11 +60,6 @@ export default function Architecture() {
               </a>
               <CvLink />
             </div>
-            <ul className="arch-hero__keywords">
-              {disciplines.architecture.keywords.map((k) => (
-                <li key={k}>{k}</li>
-              ))}
-            </ul>
           </div>
           <figure className="arch-hero__image">
             <Img image={profile.atWork} sizes="(min-width: 1000px) 45vw, 100vw" priority />
@@ -159,13 +154,6 @@ export default function Architecture() {
                   <bdi>{studio.organisation}</bdi>
                 </h3>
                 <p>{studio.role}</p>
-                {studio.bullets && (
-                  <ul className="practice__bullets">
-                    {studio.bullets.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                )}
               </article>
             )}
             <article className="practice__item">
