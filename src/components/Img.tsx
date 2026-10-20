@@ -10,7 +10,9 @@ interface ImgProps {
 
 /** Responsive image with intrinsic size (no layout shift) and lazy loading. */
 export function Img({ image, sizes = '100vw', className, priority }: ImgProps) {
-  const srcSet = image.srcLarge ? `${image.src} 1600w, ${image.srcLarge} 2800w` : undefined;
+  const srcSet = image.srcLarge
+    ? `${image.src} ${image.width}w, ${image.srcLarge} ${image.widthLarge ?? image.width * 1.75}w`
+    : undefined;
   return (
     <img
       className={className}

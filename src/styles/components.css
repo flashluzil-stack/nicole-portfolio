@@ -59,7 +59,8 @@
 
 .device__frame {
   position: relative;
-  aspect-ratio: 9 / 19.2;
+  /* Matches the 0.462 aspect of the phone screenshots, so screens are not cropped. */
+  aspect-ratio: 9 / 18.7;
   padding: calc(var(--device-w) * 0.035);
   border-radius: calc(var(--device-w) * 0.16);
   background: linear-gradient(155deg, #3a322d, #1f1a17 60%, #2c2522);
@@ -688,4 +689,12 @@
   color: var(--paper);
   font-size: var(--step--1);
   animation: fade-in 260ms var(--ease);
+}
+
+/* Keep visually-hidden labels inside their buttons, so they never escape a
+   horizontal scroller and widen the page. */
+.zoomable,
+.screen-row__btn,
+.board-grid__btn {
+  position: relative;
 }

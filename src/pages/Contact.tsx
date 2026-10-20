@@ -79,6 +79,10 @@ export default function Contact() {
               </button>
             </li>
             <li>
+              <span className="contact__label">Based in</span>
+              <span className="contact__place">{profile.location}</span>
+            </li>
+            <li>
               <span className="contact__label">LinkedIn</span>
               <a className="contact__channel" href={profile.linkedin} target="_blank" rel="noopener noreferrer">
                 <LinkedIn size={20} />

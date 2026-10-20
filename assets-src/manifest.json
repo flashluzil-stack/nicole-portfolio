@@ -1,0 +1,116 @@
+[
+  {
+    "source": "about/nicole-at-work.png",
+    "src": "/images/about/nicole-at-work-1600.webp",
+    "width": 642,
+    "height": 930
+  },
+  {
+    "source": "about/nicole-portrait.png",
+    "src": "/images/about/nicole-portrait-1600.webp",
+    "width": 1210,
+    "height": 1613
+  },
+  {
+    "source": "technology/brand/app-icons.png",
+    "src": "/images/technology/brand/app-icons-1600.webp",
+    "width": 719,
+    "height": 351
+  },
+  {
+    "source": "technology/brand/flash-by-nicole-logo.png",
+    "src": "/images/technology/brand/flash-by-nicole-logo-1600.webp",
+    "width": 340,
+    "height": 373
+  },
+  {
+    "source": "technology/flash-luz/logo.png",
+    "src": "/images/technology/flash-luz/logo-1600.webp",
+    "width": 196,
+    "height": 250
+  },
+  {
+    "source": "technology/flash-luz/screen-booking.png",
+    "src": "/images/technology/flash-luz/screen-booking-1600.webp",
+    "width": 642,
+    "height": 1389
+  },
+  {
+    "source": "technology/flash-luz/screen-business-profile.png",
+    "src": "/images/technology/flash-luz/screen-business-profile-1600.webp",
+    "width": 514,
+    "height": 1112
+  },
+  {
+    "source": "technology/flash-luz/screen-dashboard.png",
+    "src": "/images/technology/flash-luz/screen-dashboard-1600.webp",
+    "width": 514,
+    "height": 1112
+  },
+  {
+    "source": "technology/flash-luz/screen-home.png",
+    "src": "/images/technology/flash-luz/screen-home-1600.webp",
+    "width": 1280,
+    "height": 2768
+  },
+  {
+    "source": "technology/flash-luz/screen-profile.png",
+    "src": "/images/technology/flash-luz/screen-profile-1600.webp",
+    "width": 642,
+    "height": 1389
+  },
+  {
+    "source": "technology/flash-luz/screen-splash.png",
+    "src": "/images/technology/flash-luz/screen-splash-1600.webp",
+    "width": 565,
+    "height": 1004
+  },
+  {
+    "source": "technology/flashtravel/logo.png",
+    "src": "/images/technology/flashtravel/logo-1600.webp",
+    "width": 256,
+    "height": 316
+  },
+  {
+    "source": "technology/flashtravel/screen-add.png",
+    "src": "/images/technology/flashtravel/screen-add-1600.webp",
+    "width": 642,
+    "height": 1389
+  },
+  {
+    "source": "technology/flashtravel/screen-ai-trip.png",
+    "src": "/images/technology/flashtravel/screen-ai-trip-1600.webp",
+    "width": 1280,
+    "height": 2768
+  },
+  {
+    "source": "technology/flashtravel/screen-flashsplit.png",
+    "src": "/images/technology/flashtravel/screen-flashsplit-1600.webp",
+    "width": 514,
+    "height": 1112
+  },
+  {
+    "source": "technology/flashtravel/screen-map.png",
+    "src": "/images/technology/flashtravel/screen-map-1600.webp",
+    "width": 514,
+    "height": 1112
+  },
+  {
+    "source": "technology/flashtravel/screen-splash.png",
+    "src": "/images/technology/flashtravel/screen-splash-1600.webp",
+    "width": 471,
+    "height": 836
+  },
+  {
+    "source": "technology/worldly/logo.png",
+    "src": "/images/technology/worldly/logo-1600.webp",
+    "width": 263,
+    "height": 372
+  },
+  {
+    "source": "technology/worldly/screen-splash.png",
+    "src": "/images/technology/worldly/screen-splash-1600.webp",
+    "width": 471,
+    "height": 836
+  }
+]

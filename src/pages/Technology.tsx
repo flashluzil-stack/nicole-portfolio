@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { products } from '../content/products';
+import { products, studio } from '../content/products';
 import type { MediaImage, Product } from '../content/types';
 import { DeviceMockup } from '../components/DeviceMockup';
 import { Cta } from '../components/Cta';
@@ -41,8 +41,8 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
           <div className="case__heading">
             <StatusBadge status={product.status} />
             <h2 id={titleId} className="case__name">
-              {product.logo ? <Img image={product.logo} sizes="240px" className="case__logo" /> : product.name}
-              {product.logo && <span className="visually-hidden">{product.name}</span>}
+              {product.logo && <Img image={product.logo} sizes="96px" className="case__logo" />}
+              <span>{product.name}</span>
             </h2>
             <p className="case__tagline">{product.tagline}</p>
           </div>
@@ -94,6 +94,21 @@ function CaseStudy({ product, index }: { product: Product; index: number }) {
             ))}
           </div>
         </div>
+
+        {product.lists && product.lists.length > 0 && (
+          <div className="case__lists">
+            {product.lists.map((l) => (
+              <div key={l.heading} className="case__list">
+                <h3 className="case__features-title">{l.heading}</h3>
+                <ul>
+                  {l.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div className="case__features">
           <h3 className="case__features-title">
@@ -195,6 +210,17 @@ export default function Technology() {
             Digital products designed with an architect’s eye — clear structure, considered journeys and calm
             interfaces that help people get things done.
           </p>
+        </div>
+
+        <div className="container studio">
+          <Img image={studio.logo} sizes="120px" className="studio__logo" />
+          <div className="studio__text">
+            <p className="eyebrow">{studio.by}</p>
+            <p className="studio__name">
+              {studio.name} <em>— {studio.tagline.toLowerCase()}</em>
+            </p>
+          </div>
+          <Img image={studio.icons} sizes="(min-width: 900px) 360px, 80vw" className="studio__icons" />
         </div>
 
         <nav className="container product-index" aria-label="Products on this page">

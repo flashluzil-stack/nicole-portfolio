@@ -15,6 +15,8 @@ export interface MediaImage {
    * screens. `npm run images` produces both automatically (…-1600 / …-2800).
    */
   srcLarge?: string;
+  /** Pixel width of `srcLarge`. */
+  widthLarge?: number;
   alt: string;
   caption?: string;
   /** Intrinsic size — prevents layout shift. */
@@ -64,7 +66,7 @@ export interface ArchitectureProject {
   pdf?: { href: string; label: string };
 }
 
-export type ProductStatus = 'Live product' | 'In development' | 'Prototype' | 'Concept';
+export type ProductStatus = 'Launched' | 'In development' | 'Prototype' | 'Concept';
 
 export interface ProductFeature {
   title: string;
@@ -96,6 +98,8 @@ export interface Product {
    * Only chapters supported by source material should be added.
    */
   caseStudy: CaseStudyBlock[];
+  /** Bulleted chapters, e.g. "The problem" and "What makes it different". */
+  lists?: CaseStudyList[];
   features: ProductFeature[];
   /** Functionality described as planned or proposed — shown separately. */
   proposed?: ProductFeature[];
@@ -110,11 +114,18 @@ export interface ExperienceItem {
   organisation: string;
   period?: string;
   text?: string;
+  /** Responsibilities, worded as in the CV. */
+  bullets?: string[];
 }
 
 export interface EducationItem {
   programme: string;
-  institution: string;
+  institution?: string;
   period: string;
   note?: string;
+}
+
+export interface CaseStudyList {
+  heading: string;
+  items: string[];
 }

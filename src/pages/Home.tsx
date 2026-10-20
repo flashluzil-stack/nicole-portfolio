@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { disciplines, education, experience, profile, skills } from '../content/profile';
+import { disciplines, education, experience, languages, profile, skills } from '../content/profile';
 import { products } from '../content/products';
 import { architectureProjects } from '../content/architecture';
 import { ArchDrawing } from '../components/ArchDrawing';
@@ -64,6 +64,7 @@ export default function Home() {
                   screen={p.screens[0]}
                   className={`panel__device panel__device--${i}`}
                   priority={i === 0}
+                  showCaption={false}
                 />
               ))}
             </div>
@@ -97,6 +98,12 @@ export default function Home() {
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
+          <figure className="intro__portrait">
+            <Img image={profile.portrait} sizes="(min-width: 900px) 40vw, 100vw" />
+            <figcaption>
+              {profile.name} · {profile.location}
+            </figcaption>
+          </figure>
           <div className="intro__columns">
             {[disciplines.architecture, disciplines.technology].map((d) => (
               <div key={d.label} className="intro__column">
@@ -161,7 +168,7 @@ export default function Home() {
 
           <article className="feature-product">
             <div className="feature-product__visual">
-              <DeviceMockup product={lead} screen={lead.screens[0]} />
+              <DeviceMockup product={lead} screen={lead.screens[0]} showCaption={false} />
             </div>
             <div className="feature-product__body">
               <StatusBadge status={lead.status} />
@@ -182,14 +189,14 @@ export default function Home() {
               <article key={p.slug} className="product-tile">
                 <Link to={`/technology#${p.slug}`} className="product-tile__link">
                   <div className="product-tile__visual">
-                    <DeviceMockup product={p} screen={p.screens[0]} className="device--small" />
+                    <DeviceMockup product={p} screen={p.screens[0]} className="device--small" showCaption={false} />
                   </div>
                   <div className="product-tile__body">
                     <StatusBadge status={p.status} />
                     <h3 className="product-tile__name">{p.name}</h3>
                     <p>{p.tagline}</p>
                     <span className="product-tile__more">
-                      View concept <ArrowRight size={14} />
+                      {p.status === 'Concept' ? 'View concept' : 'View project'} <ArrowRight size={14} />
                     </span>
                   </div>
                 </Link>
@@ -229,13 +236,14 @@ export default function Home() {
               <h3 className="background__label">Education</h3>
               <ol className="timeline">
                 {education.map((e) => (
-                  <li key={e.institution}>
+                  <li key={e.programme}>
                     <span className="timeline__period">{e.period}</span>
                     <span className="timeline__role">{e.programme}</span>
-                    <span className="timeline__org">
-                      {e.institution}
-                      {e.note && <> · {e.note}</>}
-                    </span>
+                    {(e.institution || e.note) && (
+                      <span className="timeline__org">
+                        {[e.institution, e.note].filter(Boolean).join(' · ')}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ol>
@@ -245,6 +253,8 @@ export default function Home() {
                   <li key={s}>{s}</li>
                 ))}
               </ul>
+              <h3 className="background__label background__label--spaced">Languages</h3>
+              <p className="background__languages">{languages.join(' · ')}</p>
             </div>
           </div>
         </div>

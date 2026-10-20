@@ -35,6 +35,16 @@ npm run test:e2e   # every route at 3 widths: console errors, overflow, broken
                    # images, nav state, CTAs, LinkedIn URL, form, axe a11y scan
 ```
 
+## Content status
+
+| Source | Imported |
+| --- | --- |
+| CV (PDF) | Titles, dates, responsibilities, education, skills and languages, worded as in the CV (`profile.ts`) |
+| Flash.pdf | Flash by Nicole logo, app icons, Flash Luz / FlashTravel / Worldly logos, 10 app screenshots, two photos of Nicole, and all product copy (translated from Hebrew) |
+| Canva architecture portfolio | **Not imported yet.** The site couldn't be reached from the build environment. Until projects are added, the Architecture page links to the Canva portfolio |
+
+Product status labels: Flash Luz is labelled **Launched** because the CV says it was "built … from concept to launch". FlashTravel is labelled **Prototype** because it is shown through working app screens. Worldly is labelled **Concept** because only its idea and icon are documented.
+
 ## Content
 
 All copy and project data lives in `src/content/`. The page components only read from these files.

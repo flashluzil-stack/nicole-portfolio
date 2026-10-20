@@ -45,8 +45,26 @@ for (const vp of viewports) {
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     if (overflow > 0) fail(`${vp.name} ${route}: horizontal overflow of ${overflow}px`);
 
+    // Scroll through the page so lazy images load, then require every image to decode.
+    await page.evaluate(async () => {
+      const wait = () => new Promise((r) => setTimeout(r, 80));
+      for (let y = 0; y < document.body.scrollHeight; y += 600) {
+        window.scrollTo({ top: y, behavior: 'instant' });
+        await wait();
+      }
+      for (const row of document.querySelectorAll('.screen-row')) {
+        row.scrollIntoView({ behavior: 'instant' });
+        for (let x = 0; x <= row.scrollWidth; x += 300) {
+          row.scrollTo({ left: x, behavior: 'instant' });
+          await wait();
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(300);
     const broken = await page.$$eval('img', (imgs) =>
-      imgs.filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.src),
+      imgs.filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.currentSrc || i.src),
     );
     broken.forEach((src) => fail(`${vp.name} ${route}: broken image ${src}`));
 
@@ -163,6 +181,20 @@ for (const vp of viewports) {
     if (await page.locator('#nf-title').count()) fail(`internal link leads to 404: ${link}`);
   }
   console.log(`checked ${seen.size} internal link targets`);
+
+  // Product screen galleries open in the fullscreen viewer.
+  await page.goto(BASE + '/technology', { waitUntil: 'networkidle' });
+  const shots = page.locator('.screen-row__btn');
+  console.log(`product screens in galleries: ${await shots.count()}`);
+  if (await shots.count()) {
+    await shots.first().click();
+    if (!(await page.getByRole('dialog').isVisible())) fail('technology: screen viewer did not open');
+    const before = await page.locator('.lightbox__count').textContent();
+    await page.keyboard.press('ArrowRight');
+    if ((await page.locator('.lightbox__count').textContent()) === before) fail('technology: viewer did not advance');
+    await page.keyboard.press('Escape');
+    if (await page.getByRole('dialog').count()) fail('technology: viewer did not close');
+  }
 
   // Architecture project pages, lightbox and pager (when projects exist).
   await page.goto(BASE + '/architecture', { waitUntil: 'networkidle' });

@@ -6,6 +6,8 @@ interface DeviceMockupProps {
   screen?: MediaImage;
   className?: string;
   priority?: boolean;
+  /** Show the screen's caption under the device (off for decorative use). */
+  showCaption?: boolean;
 }
 
 /**
@@ -13,7 +15,7 @@ interface DeviceMockupProps {
  * interface; without one it shows a typographic title screen — never an
  * invented UI.
  */
-export function DeviceMockup({ product, screen, className = '', priority }: DeviceMockupProps) {
+export function DeviceMockup({ product, screen, className = '', priority, showCaption = true }: DeviceMockupProps) {
   return (
     <figure className={`device ${className}`} style={{ ['--device-accent' as string]: product.accent }}>
       <div className="device__frame">
@@ -34,7 +36,7 @@ export function DeviceMockup({ product, screen, className = '', priority }: Devi
         </div>
         <span className="device__notch" aria-hidden />
       </div>
-      {screen?.caption && <figcaption className="device__caption">{screen.caption}</figcaption>}
+      {showCaption && screen?.caption && <figcaption className="device__caption">{screen.caption}</figcaption>}
     </figure>
   );
 }

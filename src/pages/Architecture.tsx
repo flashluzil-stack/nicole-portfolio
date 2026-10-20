@@ -7,6 +7,7 @@ import { ProjectCard } from '../components/ProjectCard';
 import { PortfolioBridge } from '../components/PortfolioBridge';
 import { SectionHeading } from '../components/SectionHeading';
 import { Cta } from '../components/Cta';
+import { Img } from '../components/Img';
 
 /** Rhythm of card sizes for the asymmetric index grid. */
 const rhythm = ['large', 'small', 'small', 'wide', 'medium', 'medium'] as const;
@@ -32,7 +33,8 @@ export default function Architecture() {
 
   const studio = experience.find((e) => e.organisation === 'Place & Space Architecture');
   const studies = education[0];
-  const archTools = skills.filter((g) => g.group !== 'Digital products');
+  const archTools = skills.filter((g) => g.group === 'Architecture & visualization');
+  const course = education.find((e) => e.programme.startsWith('3Ds Max'));
 
   return (
     <>
@@ -46,7 +48,10 @@ export default function Architecture() {
               Space, drawn <em>with care.</em>
             </h1>
           </div>
-          <div className="page-hero__lede">
+          <div className="page-hero__lede arch-lede">
+            <figure className="arch-lede__photo">
+              <Img image={profile.atWork} sizes="(min-width: 1000px) 220px, 40vw" priority />
+            </figure>
             <p>
               Architecture is where my thinking begins: how a space is entered, crossed and lived in, how light and
               material shape it, and how it is communicated precisely — from the first sketch to the technical
@@ -146,7 +151,7 @@ export default function Architecture() {
                 <p className="practice__period">{studies.period}</p>
                 <h3>{studies.programme}</h3>
                 <p>
-                  {studies.institution} · {studies.note}
+                  {[studies.institution, studies.note].filter(Boolean).join(' · ')}
                 </p>
               </article>
             )}
@@ -155,6 +160,13 @@ export default function Architecture() {
                 <p className="practice__period">{studio.period}</p>
                 <h3>{studio.organisation}</h3>
                 <p>{studio.role}</p>
+                {studio.bullets && (
+                  <ul className="practice__bullets">
+                    {studio.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                )}
               </article>
             )}
             <article className="practice__item">
@@ -165,6 +177,11 @@ export default function Architecture() {
                   <li key={s}>{s}</li>
                 ))}
               </ul>
+              {course && (
+                <p>
+                  {course.programme}, {course.period}
+                </p>
+              )}
             </article>
           </div>
         </div>

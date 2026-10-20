@@ -46,6 +46,8 @@ for (const file of walk(SRC)) {
   const entry = { source: rel };
 
   for (const size of SIZES) {
+    // Only write the large rendition when the original is bigger than the base one.
+    if (size !== SIZES[0] && meta.width <= SIZES[0]) continue;
     const width = Math.min(size, meta.width);
     const target = join(outDir, `${stem}-${size}.webp`);
     const info = await sharp(file)
@@ -56,6 +58,7 @@ for (const file of walk(SRC)) {
     const key = size === SIZES[0] ? 'src' : 'srcLarge';
     entry[key] = '/' + relative('public', target).split('\\').join('/');
     if (key === 'src') Object.assign(entry, { width: info.width, height: info.height });
+    else entry.widthLarge = info.width;
   }
   manifest.push(entry);
   console.log(`✓ ${rel}`);
