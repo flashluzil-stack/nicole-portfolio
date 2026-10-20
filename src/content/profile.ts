@@ -20,6 +20,8 @@ export const profile = {
   ],
   location: 'Ra’anana, Israel',
   email: 'Gof.nicole@gmail.com',
+  phone: '054-790-9722',
+  phoneHref: 'tel:+972547909722',
   linkedin: 'https://il.linkedin.com/in/nicole-gofman-0b4968296',
   /** Nicole's own architecture portfolio, hosted on Canva. */
   architecturePortfolio: 'https://p-ng.my.canva.site/portfolio',
@@ -103,12 +105,29 @@ export const experience: ExperienceItem[] = [
 
 /**
  * Architecture offices, shown together on the Home page. Place & Space is
- * from the CV; FIKS Architecture was supplied by Nicole separately — its
- * title and dates are not in the CV, so they are left out until provided.
+ * from the CV; FIKS Architecture (period and responsibilities) was supplied
+ * by Nicole separately. No job title was given for FIKS, so none is shown.
  */
-export const architectureOffices: { id: string; organisation: string; role?: string; period?: string }[] = [
-  { id: 'place-space', organisation: 'Place & Space Architecture', role: 'Architect', period: '2025 – Present' },
-  { id: 'fiks', organisation: 'FIKS Architecture' },
+export const architectureOffices: {
+  id: string;
+  organisation: string;
+  role?: string;
+  period?: string;
+  bullets?: string[];
+}[] = [
+  {
+    id: 'place-space',
+    organisation: 'Place & Space Architecture',
+    role: 'Architect',
+    period: '2025 – Present',
+    bullets: experience.find((e) => e.id === 'place-space')?.bullets,
+  },
+  {
+    id: 'fiks',
+    organisation: 'FIKS Architecture',
+    period: '2025 – 2026',
+    bullets: ['Promoted zoning plans (TABA)', 'Project management', 'Prepared and submitted permit applications'],
+  },
 ];
 
 export const education: EducationItem[] = [

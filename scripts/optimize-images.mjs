@@ -46,8 +46,9 @@ for (const file of walk(SRC)) {
   const entry = { source: rel };
 
   for (const size of SIZES) {
-    // Only write the large rendition when the original is bigger than the base one.
-    if (size !== SIZES[0] && meta.width <= SIZES[0]) continue;
+    // Only write the large rendition when the original is clearly bigger
+    // than the base one; otherwise it would be a near-duplicate.
+    if (size !== SIZES[0] && meta.width <= SIZES[0] * 1.25) continue;
     const width = Math.min(size, meta.width);
     const target = join(outDir, `${stem}-${size}.webp`);
     const info = await sharp(file)

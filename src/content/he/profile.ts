@@ -105,7 +105,9 @@ export const skills: typeof en.skills = en.skills.map((g) => ({
 export const languages = ['עברית', 'אנגלית', 'רוסית'];
 
 export const architectureOffices: typeof en.architectureOffices = en.architectureOffices.map((o) =>
-  o.id === 'place-space' ? { ...o, role: 'אדריכלית', period: '2025 – היום' } : o,
+  o.id === 'place-space'
+    ? { ...o, role: 'אדריכלית', period: '2025 – היום', bullets: experienceHe['place-space'].bullets }
+    : { ...o, bullets: ['קידום תב״עות', 'ניהול פרויקטים', 'הכנה והגשה של בקשות להיתר'] },
 );
 
 export const disciplines: typeof en.disciplines = {

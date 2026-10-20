@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { useI18n, Emph } from '../i18n';
-import { ArrowUpRight, Copy, LinkedIn, Mail } from '../components/Icons';
+import { ArrowUpRight, Copy, LinkedIn, Mail, Phone } from '../components/Icons';
 
 interface FormState {
   name: string;
@@ -85,6 +85,13 @@ export default function Contact() {
               <button type="button" className="contact__copy" onClick={copyEmail}>
                 <Copy size={15} /> {t.contact.copy}
               </button>
+            </li>
+            <li>
+              <span className="contact__label">{t.contact.phone}</span>
+              <a className="contact__channel" href={profile.phoneHref}>
+                <Phone size={20} />
+                <span className="ltr">{profile.phone}</span>
+              </a>
             </li>
             <li>
               <span className="contact__label">{t.contact.basedIn}</span>

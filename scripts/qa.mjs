@@ -211,6 +211,7 @@ for (const vp of viewports) {
     const filters = page.locator('.filter');
     if ((await filters.count()) > 1) {
       await filters.nth(1).click();
+      await page.waitForTimeout(300);
       if (!(await filters.nth(1).getAttribute('aria-pressed'))?.includes('true')) fail('filter did not activate');
       await filters.first().click();
     }

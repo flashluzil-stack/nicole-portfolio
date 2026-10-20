@@ -66,7 +66,7 @@ export default function Architecture() {
             </ul>
           </div>
           <figure className="arch-hero__image">
-            <Img image={architectureProjects[0]?.cover ?? profile.atWork} sizes="(min-width: 1000px) 45vw, 100vw" priority />
+            <Img image={profile.atWork} sizes="(min-width: 1000px) 45vw, 100vw" priority />
             <figcaption>{t.home.imageCaption}</figcaption>
           </figure>
         </div>

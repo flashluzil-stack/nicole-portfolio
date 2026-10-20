@@ -42,9 +42,8 @@ npm run test:e2e   # every route at 3 widths, in English and Hebrew: console err
 | --- | --- |
 | CV (PDF) | Titles, dates, responsibilities, education, skills and languages, worded as in the CV (`profile.ts`) |
 | Flash.pdf | Flash by Nicole logo, app icons, Flash Luz / FlashTravel / Worldly logos, 10 app screenshots, two photos of Nicole, and all product copy (translated from Hebrew) |
-| Canva architecture portfolio | **Not imported yet.** The site couldn't be reached from the build environment. Until projects are added, the Architecture page links to the Canva portfolio |
-| Selected Architectural Work | The three projects Nicole named (Contemporary Villa, Interior Architecture, Echoes of Generations) are listed in `portfolioIndex` (`src/content/architecture.ts`) and link to the Canva portfolio. **Their images (Portfolio 2.pdf) still need to be imported.** Once projects are added to `architectureProjects`, the Home page shows them as an editorial spread with one featured project and two supporting ones |
-| FIKS Architecture | Supplied by Nicole, not in the CV. It is shown by name only; add its title and dates to `architectureOffices` in `profile.ts` |
+| Architecture projects | Contemporary Villa, Echoes of Generations and Interior Architecture, from six visualizations Nicole supplied (`src/content/architecture.ts`, Hebrew in `src/content/he/architecture.ts`). The project descriptions are short notes written from the renderings, at Nicole's request. The Canva portfolio could not be reached from the build environment |
+| FIKS Architecture | 2025 – 2026, with zoning plans, project management and permit applications (supplied by Nicole). No job title was given |
 | CV download | `public/docs/Nicole-Gofman-CV.pdf` (the supplied CV, which includes a phone number) |
 
 Product status labels: Flash Luz is labelled **Launched** because the CV says it was "built … from concept to launch". FlashTravel is labelled **Prototype** because it is shown through working app screens. Worldly is labelled **Concept** because only its idea and icon are documented.

@@ -13,11 +13,9 @@ import { ArrowRight } from '../components/Icons';
 
 export default function Home() {
   const { t, c } = useI18n();
-  const { profile, products, architectureProjects, architectureOffices, experience, education } = c;
+  const { profile, products, architectureProjects, architectureOffices, experience, education, homeHero } = c;
   useDocumentMeta('', t.meta.home, '/');
 
-  const heroImage = architectureProjects[0]?.cover ?? profile.atWork;
-  const placeSpace = experience.find((e) => e.id === 'place-space');
   const earlier = experience.filter((e) => !['place-space', 'flash-luz'].includes(e.id));
   const studies = education.find((e) => e.id === 'shenkar');
 
@@ -50,8 +48,10 @@ export default function Home() {
             </ul>
           </div>
           <figure className="home-hero__image">
-            <Img image={heroImage} priority sizes="(min-width: 1000px) 45vw, 100vw" />
-            <figcaption>{t.home.imageCaption}</figcaption>
+            <Link to={`/architecture/${homeHero.slug}`} className="home-hero__image-link">
+              <Img image={homeHero.image} priority sizes="(min-width: 1000px) 58vw, 100vw" />
+            </Link>
+            <figcaption>{homeHero.image.caption}</figcaption>
           </figure>
         </div>
       </section>
@@ -96,9 +96,9 @@ export default function Home() {
                     {o.period && <span className="office__period">{o.period}</span>}
                   </div>
                   {o.role && <p className="office__role">{o.role}</p>}
-                  {o.id === 'place-space' && placeSpace?.bullets && (
+                  {o.bullets && (
                     <ul className="office__bullets">
-                      {placeSpace.bullets.map((b) => (
+                      {o.bullets.map((b) => (
                         <li key={b}>{b}</li>
                       ))}
                     </ul>

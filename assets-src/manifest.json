@@ -12,6 +12,42 @@
     "height": 1613
   },
   {
+    "source": "architecture/contemporary-villa/pool-facade.png",
+    "src": "/images/architecture/contemporary-villa/pool-facade-1600.webp",
+    "width": 1600,
+    "height": 929
+  },
+  {
+    "source": "architecture/echoes-of-generations/garden-facade.png",
+    "src": "/images/architecture/echoes-of-generations/garden-facade-1600.webp",
+    "width": 1600,
+    "height": 900
+  },
+  {
+    "source": "architecture/echoes-of-generations/pool-terrace.png",
+    "src": "/images/architecture/echoes-of-generations/pool-terrace-1600.webp",
+    "width": 1600,
+    "height": 900
+  },
+  {
+    "source": "architecture/interior-architecture/balcony.png",
+    "src": "/images/architecture/interior-architecture/balcony-1600.webp",
+    "width": 838,
+    "height": 941
+  },
+  {
+    "source": "architecture/interior-architecture/kitchen.png",
+    "src": "/images/architecture/interior-architecture/kitchen-1600.webp",
+    "width": 1600,
+    "height": 900
+  },
+  {
+    "source": "architecture/interior-architecture/living-room.png",
+    "src": "/images/architecture/interior-architecture/living-room-1600.webp",
+    "width": 823,
+    "height": 941
+  },
+  {
     "source": "technology/brand/app-icons.png",
     "src": "/images/technology/brand/app-icons-1600.webp",
     "width": 719,

@@ -2158,3 +2158,50 @@
     aspect-ratio: 4 / 3.6;
   }
 }
+
+/* Home hero with a wide architectural rendering: text 5 columns, image 7. */
+@media (min-width: 1000px) {
+  .home-hero__text {
+    grid-column: 1 / span 5;
+  }
+  .home-hero__image {
+    grid-column: 6 / span 7;
+  }
+}
+
+.home-hero__image img {
+  height: clamp(340px, 62vh, 620px);
+  object-position: 50% 55%;
+}
+
+.home-hero__image-link {
+  display: block;
+  overflow: hidden;
+}
+
+.home-hero__image-link img {
+  transition: transform 1.2s var(--ease);
+}
+
+.home-hero__image-link:hover img {
+  transform: scale(1.02);
+}
+
+@media (max-width: 999px) {
+  .home-hero__image img {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+.facts__value {
+  font-size: clamp(1.1rem, 0.9rem + 0.6vw, 1.45rem);
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .facts li {
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;
+  }
+}
