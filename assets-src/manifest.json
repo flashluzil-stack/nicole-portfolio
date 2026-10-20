@@ -12,6 +12,18 @@
     "height": 1613
   },
   {
+    "source": "architecture/contemporary-villa/living-dining.png",
+    "src": "/images/architecture/contemporary-villa/living-dining-1600.webp",
+    "width": 1600,
+    "height": 900
+  },
+  {
+    "source": "architecture/contemporary-villa/music-room.png",
+    "src": "/images/architecture/contemporary-villa/music-room-1600.webp",
+    "width": 1600,
+    "height": 824
+  },
+  {
     "source": "architecture/contemporary-villa/pool-facade.png",
     "src": "/images/architecture/contemporary-villa/pool-facade-1600.webp",
     "width": 1600,
@@ -104,6 +116,18 @@
     "src": "/images/architecture/interior-architecture/floor-plan-3d-1600.webp",
     "width": 1535,
     "height": 1024
+  },
+  {
+    "source": "architecture/interior-architecture/kitchen-black-counter.png",
+    "src": "/images/architecture/interior-architecture/kitchen-black-counter-1600.webp",
+    "width": 1600,
+    "height": 900
+  },
+  {
+    "source": "architecture/interior-architecture/kitchen-black-island.png",
+    "src": "/images/architecture/interior-architecture/kitchen-black-island-1600.webp",
+    "width": 1600,
+    "height": 900
   },
   {
     "source": "architecture/interior-architecture/kitchen.png",

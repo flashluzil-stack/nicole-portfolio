@@ -31,21 +31,32 @@ const echoes = 'echoes-of-generations';
 /*
  * Visualizations, drawings and boards supplied by Nicole. Descriptions are
  * short project notes written from the material, at Nicole's request.
+ * Only the Urban Renewal Tower is a real office project; the others are
+ * Nicole's own design concepts and studio work and must never be described
+ * as built or existing buildings.
  */
 export const architectureProjects: ArchitectureProject[] = [
   {
     slug: 'contemporary-villa',
     title: 'Contemporary Villa',
     type: 'Residential',
-    context: 'Private villa',
+    context: 'Design concept · Visualization',
     summary:
-      'A two-storey family villa that opens completely onto its stone terrace and pool. Floor-to-ceiling glazing turns the ground floor into one continuous space for living, dining and music, while a timber-clad upper volume holds the private rooms beneath a deep, cantilevered roof.',
+      'A design concept for a two-storey family villa that opens completely onto a stone terrace and pool. Floor-to-ceiling glazing turns the ground floor into one continuous space for living, dining and music, while a timber-clad upper volume holds the private rooms beneath a deep, cantilevered roof.',
     cover: img('contemporary-villa', 'pool-facade', 1600, 929, 'Two-storey villa with full-height glazing beside a pool at sunset', 'Pool façade at sunset'),
     sections: [
       {
         kind: 'concept',
         text: 'The house is designed as two stacked layers: an open, transparent ground floor that belongs to the garden, and a more sheltered upper floor wrapped in timber and shaded by the roof overhang. Sliding glass walls and continuous stone paving blur the line between inside and outside.',
         images: [],
+      },
+      {
+        kind: 'interior',
+        text: 'Inside, a slender black frame marks out the music and dining area without closing it off. Oak wall panelling, timber fins around the stair and a long kitchen island with lit shelving keep the open plan warm and ordered.',
+        images: [
+          img('contemporary-villa', 'living-dining', 1600, 900, 'Open living room with a white sofa, glass-framed dining area with grand piano, kitchen and oak wall', 'Living and dining space facing the terrace'),
+          img('contemporary-villa', 'music-room', 1600, 824, 'Music corner with grand piano and lounge chairs beside timber fins, kitchen island and dining table', 'Music corner, kitchen and dining'),
+        ],
       },
     ],
   },
@@ -55,7 +66,7 @@ export const architectureProjects: ArchitectureProject[] = [
     type: 'Co-living housing',
     context: 'Washington Boulevard, Tel Aviv · Shenkar studio, lecturer Sharon Eshet',
     summary:
-      'Housing for several families on Washington Boulevard in Tel Aviv, built around the idea that neighbours can share more than a staircase. Private apartments sit beside rooms that belong to the whole building, so ordinary routines become moments of meeting — and every household still has a home it can close the door on.',
+      'A studio project for co-living housing on a site on Washington Boulevard in Tel Aviv, designed around the idea that neighbours can share more than a staircase. Private apartments sit beside rooms that belong to the whole building, so ordinary routines become moments of meeting — and every household still has a home it can close the door on.',
     cover: img(echoes, 'stair-garden', 1550, 1015, 'Glazed residential building with an external stair rising beside a green wall', 'The stair and green wall along the long façade'),
     pdf: { href: asset('/docs/architecture/echoes-of-generations-board.pdf'), label: 'Download presentation board (PDF)' },
     sections: [
@@ -66,7 +77,7 @@ export const architectureProjects: ArchitectureProject[] = [
       },
       {
         kind: 'site',
-        text: 'The plot sits mid-block between neighbouring residential buildings, alongside the green strip of the boulevard. A planted garden runs the length of the site and connects the street to the shared spaces at the back.',
+        text: 'The studio site sits mid-block between neighbouring residential buildings, alongside the green strip of the boulevard. The design runs a planted garden the length of the plot, connecting the street to the shared spaces at the back.',
         images: [img(echoes, 'roof-plan', 1600, 1184, 'Roof and site plan at 1:250 showing the building between neighbouring blocks', 'Roof plan 1:250', 'drawing')],
       },
       {
@@ -102,19 +113,22 @@ export const architectureProjects: ArchitectureProject[] = [
     slug: 'interior-architecture',
     title: 'Interior Architecture',
     type: 'Interior design',
-    context: 'Family home and city apartment',
+    context: 'Design concepts · Visualization',
     summary:
-      'Interior design for a family home and a city apartment: a warm kitchen of oak joinery with a stone island and integrated lighting, and a bright living room and balcony arranged around the view of the trees and skyline.',
+      'Interior design concepts for homes and apartments: kitchens in two moods — warm oak with a stone island, and dark lacquer with a butcher-block counter — and a bright living room and balcony arranged around a view of the trees and skyline.',
     cover: img('interior-architecture', 'kitchen', 1600, 900, 'Kitchen with oak cabinets, a stone waterfall island and bar stools in evening light', 'Kitchen with oak joinery and stone island'),
     sections: [
       {
         kind: 'materials',
-        text: 'A calm, natural palette runs through both spaces: oak, light stone and terrazzo, linen textiles and matt black details, with concealed lighting under the cabinets and counters to make the materials glow in the evening.',
-        images: [],
+        text: 'Each scheme is built from a small set of materials. The light kitchen pairs oak, light stone and terrazzo with matt black details; the dark kitchen sets gloss charcoal cabinets and textured stone fronts against warm butcher-block oak. In both, concealed lighting under the cabinets makes the materials glow in the evening.',
+        images: [
+          img('interior-architecture', 'kitchen-black-island', 1600, 900, 'Dark kitchen with gloss charcoal cabinets, lit open shelf and an oak butcher-block breakfast bar with stools', 'Dark kitchen with oak breakfast bar'),
+          img('interior-architecture', 'kitchen-black-counter', 1600, 900, 'Close view of an oak counter with black sink, lit shelf with glasses and a coffee machine', 'Oak counter and lit shelf'),
+        ],
       },
       {
         kind: 'plans',
-        text: 'The home is planned around one open space for living, dining and cooking, with the music room, study and bedroom suite set around it and a terrace off the living room.',
+        text: 'The apartment layout is planned around one open space for living, dining and cooking, with the music room, study and bedroom suite set around it and a terrace off the living room.',
         images: [img('interior-architecture', 'floor-plan-3d', 1535, 1024, 'Furnished 3D floor plan with living room, kitchen island, dining table, music room with piano, study and bedroom', '3D floor plan', 'drawing')],
       },
       {
@@ -164,9 +178,9 @@ export const architectureProjects: ArchitectureProject[] = [
     slug: 'mediterranean-villa',
     title: 'Mediterranean Villa',
     type: 'Residential',
-    context: 'Private house',
+    context: 'Design concept · Visualization',
     summary:
-      'Two traditional gabled volumes with clay-tile roofs are joined by a glazed atrium, so the familiar form of a village house meets an open, light-filled centre. Stone terraces, olive trees and a sunken fire-pit lounge beside the pool extend the house into the landscape.',
+      'A design concept in which two traditional gabled volumes with clay-tile roofs are joined by a glazed atrium, so the familiar form of a village house meets an open, light-filled centre. Stone terraces, olive trees and a sunken fire-pit lounge beside the pool extend the house into the landscape.',
     cover: img('mediterranean-villa', 'pool-terrace', 1600, 900, 'Tiled gable house with a glazed atrium, pool and sunken fire-pit lounge', 'Pool terrace and sunken lounge'),
     sections: [
       {
