@@ -1,252 +1,178 @@
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { useI18n, Emph } from '../i18n';
-import { ArchDrawing } from '../components/ArchDrawing';
+import { useI18n, Emph, Isolate } from '../i18n';
 import { DeviceMockup } from '../components/DeviceMockup';
 import { Cta } from '../components/Cta';
 import { Img } from '../components/Img';
 import { SectionHeading } from '../components/SectionHeading';
-import { ProjectCard } from '../components/ProjectCard';
-import { PortfolioBridge } from '../components/PortfolioBridge';
+import { WorkGrid } from '../components/WorkGrid';
+import { PortfolioIndex } from '../components/PortfolioIndex';
 import { StatusBadge } from '../components/StatusBadge';
+import { CvLink } from '../components/CvLink';
 import { ArrowRight } from '../components/Icons';
 
 export default function Home() {
   const { t, c } = useI18n();
-  const { profile, products, architectureProjects, disciplines, experience, education, skills, languages } = c;
+  const { profile, products, architectureProjects, architectureOffices, experience, education } = c;
   useDocumentMeta('', t.meta.home, '/');
-  const heroProject = architectureProjects[0];
-  const [lead, ...others] = products;
-  const cardSizes = ['large', 'small', 'wide'] as const;
+
+  const heroImage = architectureProjects[0]?.cover ?? profile.atWork;
+  const placeSpace = experience.find((e) => e.id === 'place-space');
+  const earlier = experience.filter((e) => !['place-space', 'flash-luz'].includes(e.id));
+  const studies = education.find((e) => e.id === 'shenkar');
 
   return (
     <>
-      {/* ——— Hero ——— */}
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="hero__intro">
-          <p className="eyebrow hero__eyebrow">
-            <span>{profile.name}</span>
-            <span aria-hidden className="hero__eyebrow-rule" />
-            <span>{profile.identity}</span>
-          </p>
-          <h1 id="hero-title" className="hero__title">
-            <span className="hero__line">{profile.headline[0]}</span>
-            <span className="hero__line hero__line--italic">{profile.headline[1]}</span>
-          </h1>
-          <p className="hero__lede">{profile.intro}</p>
-        </div>
-
-        <div className="hero__diptych">
-          <Link to="/architecture" className="panel panel--arch">
-            <div className="panel__visual">
-              {heroProject ? (
-                <Img image={heroProject.cover} priority sizes="(min-width: 900px) 50vw, 100vw" />
-              ) : (
-                <ArchDrawing className="panel__drawing" />
-              )}
+      {/* ——— Hero: who, what, where to look ——— */}
+      <section className="home-hero" aria-labelledby="hero-title">
+        <div className="container home-hero__grid">
+          <div className="home-hero__text">
+            <p className="eyebrow">
+              <Isolate text={t.home.heroEyebrow} />
+            </p>
+            <h1 id="hero-title" className="home-hero__title">
+              <Emph parts={t.home.heroTitle} />
+            </h1>
+            <p className="home-hero__lede">{t.home.heroLede}</p>
+            <div className="home-hero__actions">
+              <Cta to="/architecture#projects" variant="solid">
+                {t.home.exploreArchitecture}
+              </Cta>
+              <CvLink />
             </div>
-            <div className="panel__caption">
-              <span className="panel__index">01</span>
-              <span className="panel__label">{t.nav.architecture}</span>
-              <span className="panel__keywords">{t.home.archKeywords}</span>
-              <span className="panel__cta">
-                {t.home.exploreArchitecture} <ArrowRight size={16} />
-              </span>
-            </div>
-          </Link>
-
-          <Link to="/technology" className="panel panel--tech">
-            <div className="panel__visual panel__visual--devices">
-              {products.slice(0, 2).map((p, i) => (
-                <DeviceMockup
-                  key={p.slug}
-                  product={p}
-                  screen={p.screens[0]}
-                  className={`panel__device panel__device--${i}`}
-                  priority={i === 0}
-                  showCaption={false}
-                />
+            <ul className="facts">
+              {t.home.facts.map((f) => (
+                <li key={f.label}>
+                  <span className="facts__value ltr">{f.value}</span>
+                  <span className="facts__label">{f.label}</span>
+                </li>
               ))}
-            </div>
-            <div className="panel__caption">
-              <span className="panel__index">02</span>
-              <span className="panel__label">{t.nav.technology}</span>
-              <span className="panel__keywords">{t.home.techKeywords}</span>
-              <span className="panel__cta">
-                {t.home.exploreTechnology} <ArrowRight size={16} />
-              </span>
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      {/* ——— Introduction ——— */}
-      <section className="section intro" aria-labelledby="intro-title">
-        <div className="container intro__grid">
-          <SectionHeading
-            index="00"
-            eyebrow={t.home.introEyebrow}
-            id="intro-title"
-            title={<Emph parts={t.home.introTitle} />}
-          />
-          <div className="intro__body">
-            {profile.about.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
+            </ul>
           </div>
-          <figure className="intro__portrait">
-            <Img image={profile.portrait} sizes="(min-width: 900px) 40vw, 100vw" />
-            <figcaption>
-              {profile.name} · {profile.location}
-            </figcaption>
+          <figure className="home-hero__image">
+            <Img image={heroImage} priority sizes="(min-width: 1000px) 45vw, 100vw" />
+            <figcaption>{t.home.imageCaption}</figcaption>
           </figure>
-          <div className="intro__columns">
-            {[disciplines.architecture, disciplines.technology].map((d) => (
-              <div key={d.label} className="intro__column">
-                <h3 className="intro__column-title">{d.label}</h3>
-                <ul className="keyword-list">
-                  {d.keywords.map((k) => (
-                    <li key={k}>{k}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ——— Selected architecture ——— */}
-      <section className="section section--stone" aria-labelledby="home-arch-title">
+      {/* ——— Selected architectural work ——— */}
+      <section id="work" className="section section--stone work" aria-labelledby="work-title">
         <div className="container">
-          <SectionHeading
-            index="01"
-            eyebrow={t.home.archEyebrow}
-            id="home-arch-title"
-            title={<Emph parts={t.home.archTitle} />}
-          >
-            <Cta to="/architecture" variant="text">
+          <SectionHeading eyebrow={t.home.workEyebrow} id="work-title" title={<Emph parts={t.home.workTitle} />}>
+            <Cta to="/architecture#projects" variant="text">
               {t.home.allArchitecture}
             </Cta>
           </SectionHeading>
-          {architectureProjects.length > 0 ? (
-            <div className="project-grid project-grid--home">
-              {architectureProjects.slice(0, 3).map((p, i) => (
-                <ProjectCard key={p.slug} project={p} index={i} size={cardSizes[i]} />
-              ))}
-            </div>
-          ) : (
-            <PortfolioBridge compact />
-          )}
+          <p className="section-lede">{t.home.workLede}</p>
+          {architectureProjects.length > 0 ? <WorkGrid projects={architectureProjects.slice(0, 3)} /> : <PortfolioIndex />}
         </div>
       </section>
 
-      {/* ——— Selected products ——— */}
-      <section className="section section--warm" aria-labelledby="home-tech-title">
+      {/* ——— Professional experience ——— */}
+      <section className="section experience" aria-labelledby="exp-title">
+        <div className="container experience__grid">
+          <div className="experience__intro">
+            <SectionHeading eyebrow={t.home.expEyebrow} id="exp-title" title={<Emph parts={t.home.expTitle} />} />
+            <p className="experience__summary">
+              <Isolate text={t.home.expSummary} />
+            </p>
+            <div className="experience__actions">
+              <CvLink variant="solid" />
+              <Cta to="/contact">{t.home.contactMe}</Cta>
+            </div>
+            <p className="experience__note">{t.home.recruiters}</p>
+          </div>
+
+          <div className="experience__body">
+            <h3 className="experience__label">{t.home.architectureOffices}</h3>
+            <ul className="offices">
+              {architectureOffices.map((o) => (
+                <li key={o.id} className="office">
+                  <div className="office__head">
+                    <span className="office__name" lang="en">
+                      {o.organisation}
+                    </span>
+                    {o.period && <span className="office__period">{o.period}</span>}
+                  </div>
+                  {o.role && <p className="office__role">{o.role}</p>}
+                  {o.id === 'place-space' && placeSpace?.bullets && (
+                    <ul className="office__bullets">
+                      {placeSpace.bullets.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <div className="experience__more">
+              <div>
+                <h3 className="experience__label">{t.home.earlierExperience}</h3>
+                <ul className="compact-list">
+                  {earlier.map((e) => (
+                    <li key={e.id}>
+                      <span className="compact-list__main">
+                        <bdi>{e.role}</bdi>
+                      </span>
+                      <span className="compact-list__meta">
+                        <bdi>{e.organisation}</bdi> · <span className="ltr">{e.period}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {studies && (
+                <div>
+                  <h3 className="experience__label">{t.home.education}</h3>
+                  <ul className="compact-list">
+                    <li>
+                      <span className="compact-list__main">{studies.programme}</span>
+                      <span className="compact-list__meta">
+                        {studies.institution} · <span className="ltr">{studies.period}</span>
+                      </span>
+                      {studies.note && <span className="compact-list__meta">{studies.note}</span>}
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ——— Technology, compact ——— */}
+      <section className="section section--warm tech-strip" aria-labelledby="home-tech-title">
         <div className="container">
-          <SectionHeading
-            index="02"
-            eyebrow={t.home.techEyebrow}
-            id="home-tech-title"
-            title={<Emph parts={t.home.techTitle} />}
-          >
+          <SectionHeading eyebrow={t.home.techEyebrow} id="home-tech-title" title={<Emph parts={t.home.techTitle} />}>
             <Cta to="/technology" variant="text">
               {t.home.allProducts}
             </Cta>
           </SectionHeading>
-
-          <article className="feature-product">
-            <div className="feature-product__visual">
-              <DeviceMockup product={lead} screen={lead.screens[0]} showCaption={false} />
-            </div>
-            <div className="feature-product__body">
-              <StatusBadge status={lead.status} />
-              <h3 className="feature-product__name">{lead.name}</h3>
-              <p className="feature-product__tagline">{lead.tagline}</p>
-              <p>{lead.overview}</p>
-              {lead.role && (
-                <p className="meta-line">
-                  {lead.role} · {lead.period}
-                </p>
-              )}
-              <Cta to={`/technology#${lead.slug}`}>{t.home.readCase}</Cta>
-            </div>
-          </article>
-
-          <div className="product-pair">
-            {others.map((p) => (
-              <article key={p.slug} className="product-tile">
-                <Link to={`/technology#${p.slug}`} className="product-tile__link">
-                  <div className="product-tile__visual">
-                    <DeviceMockup product={p} screen={p.screens[0]} className="device--small" showCaption={false} />
+          <p className="section-lede">{t.home.techLede}</p>
+          <ul className="tech-strip__list">
+            {products.map((p) => (
+              <li key={p.slug}>
+                <Link to={`/technology#${p.slug}`} className="tech-card">
+                  <div className="tech-card__visual">
+                    <DeviceMockup product={p} screen={p.screens[0]} className="device--mini" showCaption={false} />
                   </div>
-                  <div className="product-tile__body">
+                  <div className="tech-card__body">
+                    <div className="tech-card__head">
+                      {p.logo && <Img image={p.logo} sizes="40px" className="tech-card__logo" />}
+                      <h3 className="tech-card__name">{p.name}</h3>
+                    </div>
                     <StatusBadge status={p.status} />
-                    <h3 className="product-tile__name">{p.name}</h3>
-                    <p>{p.tagline}</p>
-                    <span className="product-tile__more">
+                    <p className="tech-card__tagline">{p.tagline}</p>
+                    <span className="tech-card__more">
                       {p.status === 'Concept' ? t.home.viewConcept : t.home.viewProject} <ArrowRight size={14} />
                     </span>
                   </div>
                 </Link>
-              </article>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ——— Background ——— */}
-      <section className="section" aria-labelledby="home-bg-title">
-        <div className="container background">
-          <SectionHeading
-            index="03"
-            eyebrow={t.home.bgEyebrow}
-            id="home-bg-title"
-            title={<Emph parts={t.home.bgTitle} />}
-          />
-          <div className="background__cols">
-            <div>
-              <h3 className="background__label">{t.home.experience}</h3>
-              <ol className="timeline">
-                {experience.map((e) => (
-                  <li key={e.id}>
-                    <span className="timeline__period">{e.period ?? t.home.earlier}</span>
-                    <span className="timeline__role">
-                      <bdi>{e.role}</bdi>
-                    </span>
-                    <span className="timeline__org">
-                      <bdi>{e.organisation}</bdi>
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <div>
-              <h3 className="background__label">{t.home.education}</h3>
-              <ol className="timeline">
-                {education.map((e) => (
-                  <li key={e.id}>
-                    <span className="timeline__period">{e.period}</span>
-                    <span className="timeline__role">
-                      <bdi>{e.programme}</bdi>
-                    </span>
-                    {(e.institution || e.note) && (
-                      <span className="timeline__org">
-                        <bdi>{[e.institution, e.note].filter(Boolean).join(' · ')}</bdi>
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ol>
-              <h3 className="background__label background__label--spaced">{t.home.tools}</h3>
-              <ul className="tool-list">
-                {skills.flatMap((g) => g.items).map((s) => (
-                  <li key={s} dir="auto">{s}</li>
-                ))}
-              </ul>
-              <h3 className="background__label background__label--spaced">{t.home.languages}</h3>
-              <p className="background__languages">{languages.join(' · ')}</p>
-            </div>
-          </div>
+          </ul>
         </div>
       </section>
 

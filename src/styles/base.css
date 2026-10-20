@@ -672,3 +672,7 @@ main:focus {
 .panel__visual--devices {
   direction: ltr;
 }
+
+.nowrap {
+  white-space: nowrap;
+}

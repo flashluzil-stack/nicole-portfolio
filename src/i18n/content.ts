@@ -15,10 +15,12 @@ const build = (
   education: profile.education,
   skills: profile.skills,
   languages: profile.languages,
+  architectureOffices: profile.architectureOffices,
   disciplines: profile.disciplines,
   products: products.products,
   studio: products.studio,
   architectureProjects: architecture.architectureProjects,
+  portfolioIndex: architecture.portfolioIndex,
 });
 
 /** All long-form content, per language, with identical structure. */

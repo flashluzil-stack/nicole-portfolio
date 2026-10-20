@@ -23,6 +23,8 @@ export const profile = {
   linkedin: 'https://il.linkedin.com/in/nicole-gofman-0b4968296',
   /** Nicole's own architecture portfolio, hosted on Canva. */
   architecturePortfolio: 'https://p-ng.my.canva.site/portfolio',
+  /** The CV as supplied by Nicole (PDF). */
+  cv: asset('/docs/Nicole-Gofman-CV.pdf'),
   contactInvitation:
     'Have a project, an idea, or an opportunity to discuss? I’d love to connect.',
   portrait: {
@@ -97,6 +99,16 @@ export const experience: ExperienceItem[] = [
     period: '2022–2023',
     bullets: ['Oversaw administrative operations, scheduling, and coordination'],
   },
+];
+
+/**
+ * Architecture offices, shown together on the Home page. Place & Space is
+ * from the CV; FIKS Architecture was supplied by Nicole separately — its
+ * title and dates are not in the CV, so they are left out until provided.
+ */
+export const architectureOffices: { id: string; organisation: string; role?: string; period?: string }[] = [
+  { id: 'place-space', organisation: 'Place & Space Architecture', role: 'Architect', period: '2025 – Present' },
+  { id: 'fiks', organisation: 'FIKS Architecture' },
 ];
 
 export const education: EducationItem[] = [

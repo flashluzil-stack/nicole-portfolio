@@ -14,5 +14,16 @@ import type { ArchitectureProject } from './types';
  */
 export const architectureProjects: ArchitectureProject[] = [];
 
+/**
+ * The projects Nicole named for the "Selected Architectural Work" section.
+ * Until their images are imported (see above), they are listed by name and
+ * link to the full portfolio. Titles are project names and stay in English.
+ */
+export const portfolioIndex: { title: string }[] = [
+  { title: 'Contemporary Villa' },
+  { title: 'Interior Architecture' },
+  { title: 'Echoes of Generations' },
+];
+
 export const getArchitectureProject = (slug: string) =>
   architectureProjects.find((p) => p.slug === slug);

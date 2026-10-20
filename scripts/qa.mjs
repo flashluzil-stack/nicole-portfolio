@@ -100,6 +100,9 @@ for (const vp of viewports) {
     if (vp.width <= 820) {
       await page.getByRole('button', { name: 'Open menu' }).click();
       await page.locator('#mobile-menu').getByRole('link', { name: label }).click();
+    } else if (label === 'Contact') {
+      // Contact is the button at the right of the header bar.
+      await page.locator('.site-header__tools').getByRole('link', { name: 'Contact' }).click();
     } else {
       await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: label }).click();
     }
@@ -125,17 +128,20 @@ for (const vp of viewports) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
   const page = await ctx.newPage();
 
-  // Hero CTAs.
+  // Hero CTAs: Explore Architecture lands on the project section; the CV downloads.
   await page.goto(BASE + '/', { waitUntil: 'networkidle' });
   await page.getByRole('link', { name: /Explore Architecture/ }).click();
-  await page.waitForURL(BASE + '/architecture');
+  await page.waitForURL(BASE + '/architecture#projects');
+  await page.waitForTimeout(800);
+  const projTop = await page.locator('#projects').evaluate((el) => el.getBoundingClientRect().top);
+  if (Math.abs(projTop) > 140) fail(`anchor #projects not in view (top=${projTop})`);
   await page.goto(BASE + '/', { waitUntil: 'networkidle' });
-  await page.getByRole('link', { name: /Explore Technology/ }).click();
-  await page.waitForURL(BASE + '/technology');
+  const cvHref = await page.locator('.home-hero a[download]').getAttribute('href');
+  const cvRes = await page.request.get(BASE + cvHref);
+  if (cvRes.status() !== 200 || !(cvRes.headers()['content-type'] ?? '').includes('pdf')) fail(`CV download broken (${cvHref} → ${cvRes.status()})`);
 
-  // Case-study anchors from Home land on the right section.
-  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
-  await page.getByRole('link', { name: 'Read the case study' }).click();
+  // Technology cards on Home land on the right case study.
+  await page.locator('.tech-card').first().click();
   await page.waitForURL(BASE + '/technology#flash-luz');
   await page.waitForTimeout(800);
   const top = await page.locator('#flash-luz').evaluate((el) => el.getBoundingClientRect().top);
@@ -173,7 +179,7 @@ for (const vp of viewports) {
   const seen = new Set();
   for (const route of ['/', '/technology', '/architecture', '/contact']) {
     await page.goto(BASE + route, { waitUntil: 'networkidle' });
-    const links = await page.$$eval('a[href^="/"]', (as) => as.map((a) => a.getAttribute('href')));
+    const links = await page.$$eval('a[href^="/"]:not([download])', (as) => as.map((a) => a.getAttribute('href')));
     links.forEach((l) => seen.add(l.split('#')[0] || '/'));
   }
   for (const link of seen) {
@@ -240,7 +246,7 @@ const LATIN_OK = new Set(
   `Flash Luz FlashLuz Flashluz FlashTravel Worldly Apps by BY Nicole NICOLE Base44 Revit AutoCAD SketchUp DS MAX 3DS
   Enscape Twinmotion SAP Canva Microsoft Office Word Excel PowerPoint Outlook Place Space Architecture Abre Israeli
   Building Center Group Gil Hirschman Co LinkedIn Gof nicole gmail com UX UI No Code AI Uber InDrive Ray V-Ray Trip
-  Builder FlashLive Smart Pins FlashSplit Social Matching Sharing EN PDF BIM No-Code Ds Max`.split(/\s+/),
+  Builder FlashLive Smart Pins FlashSplit Social Matching Sharing EN PDF BIM No-Code Ds Max FIKS`.split(/\s+/),
 );
 
 {
@@ -295,6 +301,12 @@ const LATIN_OK = new Set(
       }
       errors.forEach((e) => fail(`he ${vp.name} ${route}: console — ${e}`));
     }
+
+    // The brand stays "Nicole Gofman", at the left edge, in Hebrew too.
+    const brand = await page.locator('.brand__name').evaluate((el) => [el.textContent, Math.round(el.getBoundingClientRect().left)]);
+    if (brand[0] !== 'Nicole Gofman' || brand[1] > 60) fail(`he ${vp.name}: brand moved or translated (${brand})`);
+    const sw = await page.locator('.lang-switch').evaluate((el) => Math.round(window.innerWidth - el.getBoundingClientRect().right));
+    if (sw > 120) fail(`he ${vp.name}: language switcher not at the right (${sw}px from edge)`);
 
     // Switcher: keeps the route (and anchor), toggles direction both ways.
     await page.goto(`${BASE}/technology?lang=en#worldly`, { waitUntil: 'networkidle' });

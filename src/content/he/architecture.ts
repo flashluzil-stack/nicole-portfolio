@@ -13,6 +13,8 @@ type ProjectText = Partial<Pick<ArchitectureProject, 'title' | 'type' | 'context
 
 const text: Record<string, ProjectText> = {};
 
+export const portfolioIndex = en.portfolioIndex;
+
 export const architectureProjects: ArchitectureProject[] = en.architectureProjects.map((p) => {
   const t = text[p.slug];
   if (!t) return p;

@@ -182,7 +182,7 @@ export default function Technology() {
         <div className="container page-hero__grid">
           <div>
             <p className="eyebrow">
-              <span className="eyebrow__index">01</span>
+              <span className="eyebrow__index">02</span>
               {t.technology.eyebrow}
             </p>
             <h1 id="tech-title" className="page-hero__title">

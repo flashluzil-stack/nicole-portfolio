@@ -9,7 +9,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const { t, c } = useI18n();
+  const { t, c, lang } = useI18n();
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -55,17 +55,22 @@ export function Header() {
     };
   }, [open]);
 
+  const primary = navigation.filter((item) => item.key !== 'contact');
+
   return (
     <header className={`site-header${scrolled ? ' is-scrolled' : ''}${open ? ' is-open' : ''}`}>
-      <div className="site-header__inner">
-        <Link to="/" className="brand" aria-label={t.nav.brandHome(c.profile.name)}>
-          <span className="brand__name">{c.profile.name}</span>
-          <span className="brand__role">{t.nav.brandRole}</span>
+      {/* The header bar is always laid out left-to-right: the brand stays on
+          the left and the tools on the right in both languages. Only the
+          navigation labels follow the reading direction. */}
+      <div className="site-header__inner" dir="ltr">
+        <Link to="/" className="brand" lang="en" aria-label={t.nav.brandHome('Nicole Gofman')}>
+          <span className="brand__name">Nicole Gofman</span>
+          <span className="brand__role">Architecture &amp; Technology</span>
         </Link>
 
-        <nav className="site-nav" aria-label={t.nav.primary}>
+        <nav className="site-nav" aria-label={t.nav.primary} dir={lang === 'he' ? 'rtl' : 'ltr'}>
           <ul>
-            {navigation.map((item) => (
+            {primary.map((item) => (
               <li key={item.to}>
                 <NavLink to={item.to} end={item.to === '/'} className="site-nav__link">
                   {t.nav[item.key]}
@@ -76,24 +81,27 @@ export function Header() {
         </nav>
 
         <div className="site-header__tools">
+          <NavLink to="/contact" className="header-contact">
+            {t.nav.contact}
+          </NavLink>
           <LanguageSwitcher />
           <button
-          ref={toggleRef}
-          type="button"
-          className="menu-toggle"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="visually-hidden">{open ? t.nav.closeMenu : t.nav.openMenu}</span>
-          {open ? (
-            <Close size={22} />
-          ) : (
-            <span className="menu-toggle__bars" aria-hidden>
-              <span />
-              <span />
-            </span>
-          )}
+            ref={toggleRef}
+            type="button"
+            className="menu-toggle"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="visually-hidden">{open ? t.nav.closeMenu : t.nav.openMenu}</span>
+            {open ? (
+              <Close size={22} />
+            ) : (
+              <span className="menu-toggle__bars" aria-hidden>
+                <span />
+                <span />
+              </span>
+            )}
           </button>
         </div>
       </div>

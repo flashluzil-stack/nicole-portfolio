@@ -99,3 +99,14 @@ export function Emph({ parts }: { parts: string[] }) {
     </>
   );
 }
+
+/**
+ * Wraps runs of Latin text (company and product names) inside Hebrew text in
+ * <bdi>, so punctuation and word order stay correct in right-to-left layouts.
+ */
+export function Isolate({ text }: { text: string }) {
+  const { dir } = useI18n();
+  if (dir === 'ltr') return <>{text}</>;
+  const parts = text.split(/([A-Za-z][A-Za-z0-9&.'’\- ]*[A-Za-z0-9])/);
+  return <span>{parts.map((part, i) => (i % 2 ? <bdi key={i} className="nowrap">{part}</bdi> : part))}</span>;
+}

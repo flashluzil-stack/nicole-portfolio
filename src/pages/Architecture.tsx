@@ -3,7 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { useI18n, Emph } from '../i18n';
 import { ProjectCard } from '../components/ProjectCard';
-import { PortfolioBridge } from '../components/PortfolioBridge';
+import { PortfolioIndex } from '../components/PortfolioIndex';
+import { CvLink } from '../components/CvLink';
+import { ArrowDown } from '../components/Icons';
 import { SectionHeading } from '../components/SectionHeading';
 import { Cta } from '../components/Cta';
 import { Img } from '../components/Img';
@@ -39,34 +41,38 @@ export default function Architecture() {
 
   return (
     <>
-      <section className="page-hero page-hero--arch" aria-labelledby="arch-title">
-        <div className="container page-hero__grid">
-          <div>
+      <section className="arch-hero" aria-labelledby="arch-title">
+        <div className="container arch-hero__grid">
+          <div className="arch-hero__text">
             <p className="eyebrow">
-              <span className="eyebrow__index">02</span>
+              <span className="eyebrow__index">01</span>
               {t.architecture.eyebrow}
             </p>
-            <h1 id="arch-title" className="page-hero__title">
+            <h1 id="arch-title" className="arch-hero__title">
               <Emph parts={t.architecture.title} />
             </h1>
+            <p className="arch-hero__lede">{t.architecture.lede}</p>
+            <div className="home-hero__actions">
+              <a className="cta cta--solid" href="#projects">
+                <span>{t.architecture.viewProjects}</span>
+                <ArrowDown size={16} />
+              </a>
+              <CvLink />
+            </div>
+            <ul className="arch-hero__keywords">
+              {disciplines.architecture.keywords.map((k) => (
+                <li key={k}>{k}</li>
+              ))}
+            </ul>
           </div>
-          <div className="page-hero__lede arch-lede">
-            <figure className="arch-lede__photo">
-              <Img image={profile.atWork} sizes="(min-width: 1000px) 220px, 40vw" priority />
-            </figure>
-            <p>{t.architecture.lede}</p>
-          </div>
-        </div>
-        <div className="container arch-keywords">
-          <ul className="keyword-list keyword-list--inline">
-            {disciplines.architecture.keywords.map((k) => (
-              <li key={k}>{k}</li>
-            ))}
-          </ul>
+          <figure className="arch-hero__image">
+            <Img image={architectureProjects[0]?.cover ?? profile.atWork} sizes="(min-width: 1000px) 45vw, 100vw" priority />
+            <figcaption>{t.home.imageCaption}</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section className="section section--stone" aria-labelledby="arch-index-title">
+      <section id="projects" className="section section--stone" aria-labelledby="arch-index-title">
         <div className="container">
           <SectionHeading
             eyebrow={t.architecture.indexEyebrow}
@@ -75,7 +81,7 @@ export default function Architecture() {
           />
 
           {architectureProjects.length === 0 ? (
-            <PortfolioBridge />
+            <PortfolioIndex />
           ) : (
             <>
               {types.length > 1 && (
