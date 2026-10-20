@@ -104,3 +104,5 @@ The site is a static single-page app. Every host needs to serve `index.html` for
 - **GitHub Pages / any static host**: run `npm run build` and upload `dist/`. `dist/404.html` serves deep links.
 
 Set `VITE_SITE_URL` (in `.env` or in the host's environment settings) to the final domain, for example `https://nicolegofman.com`. The Open Graph image and canonical URLs then become absolute, which link previews need.
+
+The site is live at https://nicole-portfolio-six.vercel.app (Vercel, deploying from `claude/nicole-gofman-portfolio-uglqv1`).
