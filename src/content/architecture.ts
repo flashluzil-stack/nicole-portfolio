@@ -113,11 +113,50 @@ export const architectureProjects: ArchitectureProject[] = [
         images: [],
       },
       {
+        kind: 'plans',
+        text: 'The home is planned around one open space for living, dining and cooking, with the music room, study and bedroom suite set around it and a terrace off the living room.',
+        images: [img('interior-architecture', 'floor-plan-3d', 1535, 1024, 'Furnished 3D floor plan with living room, kitchen island, dining table, music room with piano, study and bedroom', '3D floor plan', 'drawing')],
+      },
+      {
         kind: 'interior',
         images: [
           img('interior-architecture', 'living-room', 823, 941, 'Living room with a white sectional sofa facing a large window and city view', 'Living room facing the view'),
           img('interior-architecture', 'balcony', 838, 941, 'Covered balcony with a grill, lounge seating and a view of trees and towers', 'Balcony lounge and outdoor kitchen'),
         ],
+      },
+    ],
+  },
+  {
+    slug: 'urban-renewal-tower',
+    title: 'Urban Renewal Tower',
+    type: 'Urban renewal',
+    context: 'Yaakov Boulevard, Rishon LeZion · Place & Space Architecture',
+    summary:
+      'An urban renewal project on Yaakov Boulevard in Rishon LeZion: a residential tower set in a landscaped garden, above two levels of underground parking. The drawings shown are the building appendix to the zoning plan — the documents that fix the building’s footprint, height and layout for the planning authorities.',
+    cover: img('urban-renewal-tower', 'plan-ground', 1600, 1683, 'Ground floor plan at 1:250 with the tower footprint, gardens, driveway and parking', 'Ground floor plan 1:250', 'drawing', 2699),
+    sections: [
+      {
+        kind: 'site',
+        text: 'Plot 427 sits on Yaakov Boulevard, among the residential plots of the neighbourhood.',
+        images: [img('urban-renewal-tower', 'location', 1200, 1040, 'Location map at 1:2500 with plot 427 outlined in red on Yaakov Boulevard', 'Location map 1:2500', 'drawing')],
+      },
+      {
+        kind: 'plans',
+        text: 'At ground level the tower stands in a garden, with a curved driveway and parking along the boulevard edge. The typical floor and the penthouse floor show how the apartments are arranged around the central core.',
+        images: [
+          img('urban-renewal-tower', 'plan-typical', 1600, 1687, 'Typical floor plan at 1:250', 'Typical floor plan 1:250', 'drawing', 2693),
+          img('urban-renewal-tower', 'plan-penthouse', 1600, 1687, 'Penthouse floor plan at 1:250', 'Penthouse floor plan 1:250', 'drawing', 2693),
+        ],
+      },
+      {
+        kind: 'sections',
+        images: [img('urban-renewal-tower', 'section-aa', 1600, 2188, 'Section A-A at 1:250 through the tower and two basement parking levels', 'Section A-A 1:250', 'drawing', 2359)],
+      },
+      {
+        kind: 'technical',
+        title: 'Building appendix',
+        text: 'Building appendix to plan no. 431-1167873 (version 1, 29.04.2026), prepared by architect Ayelet Malis Cohen. The drawings were produced at Place & Space Architecture, where Nicole works on residential towers and zoning submissions.',
+        images: [],
       },
     ],
   },

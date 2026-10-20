@@ -2216,12 +2216,19 @@
 
 /* Floor plans of the same building sit two per row on wide screens. */
 @media (min-width: 1100px) {
-  .project-section[aria-label='Plans'] .plate--drawing:not(:first-child),
-  .project-section[aria-label='תוכניות'] .plate--drawing:not(:first-child) {
+  .project-section[aria-label='Plans'] .plate--drawing:not(:only-child),
+  .project-section[aria-label='תוכניות'] .plate--drawing:not(:only-child) {
     grid-column: auto;
   }
 }
 
 .project-section__images > li:only-child {
   grid-column: 1 / -1;
+}
+
+/* With an odd number of plans, the first (usually the ground floor) spans the row. */
+@media (min-width: 1100px) {
+  .project-section .plate--drawing:first-child:nth-last-child(odd):not(:only-child) {
+    grid-column: 1 / -1;
+  }
 }

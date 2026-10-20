@@ -100,6 +100,12 @@
     "height": 941
   },
   {
+    "source": "architecture/interior-architecture/floor-plan-3d.png",
+    "src": "/images/architecture/interior-architecture/floor-plan-3d-1600.webp",
+    "width": 1535,
+    "height": 1024
+  },
+  {
     "source": "architecture/interior-architecture/kitchen.png",
     "src": "/images/architecture/interior-architecture/kitchen-1600.webp",
     "width": 1600,
@@ -122,6 +128,44 @@
     "src": "/images/architecture/mediterranean-villa/pool-terrace-1600.webp",
     "width": 1600,
     "height": 900
+  },
+  {
+    "source": "architecture/urban-renewal-tower/location.png",
+    "src": "/images/architecture/urban-renewal-tower/location-1600.webp",
+    "width": 1200,
+    "height": 1040
+  },
+  {
+    "source": "architecture/urban-renewal-tower/plan-ground.png",
+    "src": "/images/architecture/urban-renewal-tower/plan-ground-1600.webp",
+    "width": 1600,
+    "height": 1683,
+    "srcLarge": "/images/architecture/urban-renewal-tower/plan-ground-2800.webp",
+    "widthLarge": 2699
+  },
+  {
+    "source": "architecture/urban-renewal-tower/plan-penthouse.png",
+    "src": "/images/architecture/urban-renewal-tower/plan-penthouse-1600.webp",
+    "width": 1600,
+    "height": 1687,
+    "srcLarge": "/images/architecture/urban-renewal-tower/plan-penthouse-2800.webp",
+    "widthLarge": 2693
+  },
+  {
+    "source": "architecture/urban-renewal-tower/plan-typical.png",
+    "src": "/images/architecture/urban-renewal-tower/plan-typical-1600.webp",
+    "width": 1600,
+    "height": 1687,
+    "srcLarge": "/images/architecture/urban-renewal-tower/plan-typical-2800.webp",
+    "widthLarge": 2693
+  },
+  {
+    "source": "architecture/urban-renewal-tower/section-aa.png",
+    "src": "/images/architecture/urban-renewal-tower/section-aa-1600.webp",
+    "width": 1600,
+    "height": 2188,
+    "srcLarge": "/images/architecture/urban-renewal-tower/section-aa-2800.webp",
+    "widthLarge": 2359
   },
   {
     "source": "technology/brand/app-icons.png",
