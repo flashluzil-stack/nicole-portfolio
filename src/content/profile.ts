@@ -19,7 +19,7 @@ export const profile = {
     'Before that I worked across real estate, finance and administration. What connects it all: I love making things work better.',
   ],
   location: 'Ra’anana, Israel',
-  email: 'Gof.nicole@gmail.com',
+  email: 'gof.nicole@gmail.com',
   phone: '054-790-9722',
   phoneHref: 'tel:+972547909722',
   linkedin: 'https://il.linkedin.com/in/nicole-gofman-0b4968296',

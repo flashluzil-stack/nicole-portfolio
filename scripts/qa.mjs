@@ -27,7 +27,9 @@ const browser = await chromium.launch(
 );
 
 for (const vp of viewports) {
-  const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+  // Reduced motion: the checks below look at the settled page (no opening
+  // screen, no half-faded reveals). Motion has its own check at the end.
+  const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
   const errors = [];
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
@@ -125,7 +127,9 @@ for (const vp of viewports) {
 
 // Interaction checks on desktop.
 {
+  // Full motion here, so the carousel advances on its own; skip the opening screen.
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
+  await ctx.addInitScript(() => sessionStorage.setItem('ng-intro', '1'));
   const page = await ctx.newPage();
 
   // Hero CTAs: Explore Architecture lands on the project section; the CV downloads.
@@ -185,7 +189,7 @@ for (const vp of viewports) {
   ]);
   const status = await page.locator('[role="status"]').textContent();
   if (!status?.includes('email app')) fail('contact: success status not announced');
-  if (req && !req.url().startsWith('mailto:Gof.nicole@gmail.com?subject=')) fail(`contact: bad mailto ${req.url()}`);
+  if (req && !req.url().startsWith('mailto:gof.nicole@gmail.com?subject=')) fail(`contact: bad mailto ${req.url()}`);
 
   // Every internal link resolves to a rendered page (not the 404 view).
   const seen = new Set();
@@ -264,7 +268,7 @@ const LATIN_OK = new Set(
 
 {
   for (const vp of [viewports[0], viewports[2]]) {
-    const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+    const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, reducedMotion: 'reduce' });
     const page = await ctx.newPage();
     const errors = [];
     page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
@@ -373,7 +377,7 @@ const LATIN_OK = new Set(
   }
 
   // Hebrew screen viewer: ← advances in RTL.
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 }, reducedMotion: 'reduce' });
   const page = await ctx.newPage();
   await page.goto(`${BASE}/technology?lang=he`, { waitUntil: 'networkidle' });
   await page.locator('.screen-row__btn').first().click();
@@ -382,6 +386,35 @@ const LATIN_OK = new Set(
   await page.keyboard.press('ArrowLeft');
   if ((await page.locator('.lightbox__count').textContent())?.trim() !== '2 / 5') fail('he: ArrowLeft did not advance in RTL');
   await page.keyboard.press('Escape');
+  await ctx.close();
+}
+
+// ——— Motion: opening screen, scroll reveals, drawing strip ———
+console.log('[motion]');
+for (const lang of ['en', 'he']) {
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
+  const page = await ctx.newPage();
+  page.on('pageerror', (e) => fail(`motion ${lang}: ${e.message}`));
+  await page.goto(`${BASE}/${lang === 'he' ? '?lang=he' : ''}`, { waitUntil: 'networkidle' });
+  if (!(await page.locator('.intro').count())) fail(`motion ${lang}: opening screen did not show`);
+  await page.waitForTimeout(4000);
+  if (await page.locator('.intro').count()) fail(`motion ${lang}: opening screen did not leave`);
+  for (const route of ['/', '/architecture', '/architecture/gymnasium', '/technology', '/contact']) {
+    await page.goto(`${BASE}${route}${lang === 'he' ? '?lang=he' : ''}`, { waitUntil: 'networkidle' });
+    if (await page.locator('.intro').count()) fail(`motion ${lang} ${route}: opening screen played again`);
+    const height = await page.evaluate(() => document.body.scrollHeight);
+    for (let y = 0; y < height; y += 500) {
+      await page.evaluate((top) => window.scrollTo(0, top), y);
+      await page.waitForTimeout(120);
+    }
+    await page.waitForTimeout(800);
+    const hidden = await page.evaluate(() => document.querySelectorAll('[data-fx]:not(.is-in)').length);
+    if (hidden) fail(`motion ${lang} ${route}: ${hidden} element(s) never revealed`);
+    const blank = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-fx] img')].filter((i) => !i.complete || i.naturalWidth === 0).length,
+    );
+    if (blank) fail(`motion ${lang} ${route}: ${blank} revealed image(s) not loaded`);
+  }
   await ctx.close();
 }
 

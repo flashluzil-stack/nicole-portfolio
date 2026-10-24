@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import type { MediaImage } from '../content/types';
-import { useI18n } from '../i18n';
+import { useI18n, Emph } from '../i18n';
 import { Img } from '../components/Img';
 import { Lightbox } from '../components/Lightbox';
 import { ArrowLeft, ArrowRight, Download } from '../components/Icons';
@@ -50,7 +50,7 @@ export default function ArchitectureProject() {
             {project.type}
           </p>
           <h1 id="project-title" className="project__title">
-            {project.title}
+            <Emph parts={[project.title]} />
           </h1>
           <dl className="project__facts">
             {project.year && (

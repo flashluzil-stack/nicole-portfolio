@@ -6,10 +6,12 @@ interface ImgProps {
   className?: string;
   /** Load immediately — use for above-the-fold imagery only. */
   priority?: boolean;
+  /** Load without waiting for the image to near the viewport (e.g. in a moving strip). */
+  eager?: boolean;
 }
 
 /** Responsive image with intrinsic size (no layout shift) and lazy loading. */
-export function Img({ image, sizes = '100vw', className, priority }: ImgProps) {
+export function Img({ image, sizes = '100vw', className, priority, eager }: ImgProps) {
   const srcSet = image.srcLarge
     ? `${image.src} ${image.width}w, ${image.srcLarge} ${image.widthLarge ?? image.width * 1.75}w`
     : undefined;
@@ -22,7 +24,7 @@ export function Img({ image, sizes = '100vw', className, priority }: ImgProps) {
       width={image.width}
       height={image.height}
       alt={image.alt}
-      loading={priority ? 'eager' : 'lazy'}
+      loading={priority || eager ? 'eager' : 'lazy'}
       decoding="async"
       // @ts-expect-error — fetchpriority is valid HTML, not yet in React 18 types
       fetchpriority={priority ? 'high' : undefined}

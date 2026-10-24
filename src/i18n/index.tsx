@@ -1,4 +1,14 @@
-import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionaries, type Dictionary } from './ui';
 import { content, type Content } from './content';
@@ -88,14 +98,32 @@ export function useI18n(): I18n {
   return ctx;
 }
 
-/** Renders a [before, emphasised, after] title triple from the dictionary. */
+/**
+ * Renders a [before, emphasised, after] title triple from the dictionary.
+ * Each word is wrapped in a masked span (`.w`), so headings can rise into
+ * place word by word (see useReveal). The spaces stay as plain text, so
+ * lines still wrap and read normally.
+ */
 export function Emph({ parts }: { parts: string[] }) {
   const [before, em, after] = parts;
+  let n = 0;
+  const words = (text?: string) =>
+    text
+      ? text.split(/(\s+)/).map((w, i) =>
+          !w || /^\s+$/.test(w) ? (
+            w
+          ) : (
+            <span key={i} className="w" style={{ '--w': n++ } as CSSProperties}>
+              <span>{w}</span>
+            </span>
+          ),
+        )
+      : null;
   return (
     <>
-      {before}
-      {em && <em>{em}</em>}
-      {after}
+      {words(before)}
+      {em && <em>{words(em)}</em>}
+      {words(after)}
     </>
   );
 }

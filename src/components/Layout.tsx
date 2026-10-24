@@ -2,13 +2,19 @@ import { Suspense, useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { Intro } from './Intro';
+import { Dock } from './Dock';
 import { useI18n } from '../i18n';
+import { useReveal, useScrollProgress } from '../hooks/useReveal';
 
 export function Layout() {
   const { pathname, hash } = useLocation();
   const { t } = useI18n();
   const mainRef = useRef<HTMLElement>(null);
   const first = useRef(true);
+  const progressRef = useRef<HTMLDivElement>(null);
+  useReveal(pathname);
+  useScrollProgress(progressRef);
 
   // On navigation: jump to the anchor if there is one (waiting briefly for a
   // lazily loaded page to render it), otherwise to the top, and move focus to
@@ -61,16 +67,21 @@ export function Layout() {
 
   return (
     <>
+      <Intro />
       <a className="skip-link" href="#main">
         {t.nav.skip}
       </a>
       <Header />
+      <div className="scroll-progress" ref={progressRef} aria-hidden />
+      {/* A drafting line sweeps across the page on every navigation. */}
+      <div className="route-sweep" key={`sweep-${pathname}`} aria-hidden />
       <main id="main" ref={mainRef} tabIndex={-1} className="page-enter" key={pathname}>
         <Suspense fallback={<div className="route-loading" role="status" aria-label={t.common.loading} />}>
           <Outlet />
         </Suspense>
       </main>
       <Footer />
+      <Dock />
     </>
   );
 }

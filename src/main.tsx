@@ -14,6 +14,7 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';
 import './styles/pages.css';
+import './styles/motion.css';
 import App from './App';
 import { LanguageProvider } from './i18n';
 

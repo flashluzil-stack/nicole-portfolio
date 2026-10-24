@@ -158,7 +158,7 @@ export default function Architecture() {
               </ul>
               {course && (
                 <p>
-                  {course.programme}, {course.period}
+                  <bdi>{course.programme}</bdi> · <bdi>{course.period}</bdi>
                 </p>
               )}
             </article>
