@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { useI18n, Emph, Isolate } from '../i18n';
@@ -9,14 +10,14 @@ import { WorkGrid } from '../components/WorkGrid';
 import { StatusBadge } from '../components/StatusBadge';
 import { CvLink } from '../components/CvLink';
 import { HeroCarousel } from '../components/HeroCarousel';
+import { DrawingStrip } from '../components/DrawingStrip';
 import { ArrowRight } from '../components/Icons';
 
 export default function Home() {
   const { t, c } = useI18n();
-  const { profile, products, architectureProjects, architectureOffices, education, homeSlides } = c;
+  const { profile, products, architectureProjects, homeSlides } = c;
   useDocumentMeta('', t.meta.home, '/');
 
-  const studies = education.find((e) => e.id === 'shenkar');
 
   return (
     <>
@@ -64,60 +65,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ——— Professional experience ——— */}
+      {/* ——— Drawings: the technical side, shown rather than described ——— */}
+      <section className="section drawings" aria-labelledby="drawings-title">
+        <div className="container">
+          <SectionHeading eyebrow={t.home.drawingsEyebrow} id="drawings-title" title={<Emph parts={t.home.drawingsTitle} />} />
+        </div>
+        <DrawingStrip projects={architectureProjects} />
+      </section>
+
+      {/* ——— Professional experience, as a timeline ——— */}
       <section className="section experience" aria-labelledby="exp-title">
-        <div className="container experience__grid">
-          <div className="experience__intro">
-            <SectionHeading eyebrow={t.home.expEyebrow} id="exp-title" title={<Emph parts={t.home.expTitle} />} />
-            <p className="experience__summary">
-              <Isolate text={t.home.expSummary} />
-            </p>
+        <div className="container">
+          <SectionHeading eyebrow={t.home.expEyebrow} id="exp-title" title={<Emph parts={t.home.expTitle} />}>
             <div className="experience__actions">
               <CvLink variant="solid" />
               <Cta to="/contact">{t.home.contactMe}</Cta>
             </div>
-          </div>
-
-          <div className="experience__body">
-            <h3 className="experience__label">{t.home.architectureOffices}</h3>
-            <ul className="offices">
-              {architectureOffices.map((o) => (
-                <li key={o.id} className="office">
-                  <div className="office__head">
-                    <span className="office__name" lang="en">
-                      {o.organisation}
-                    </span>
-                    {o.period && <span className="office__period">{o.period}</span>}
-                  </div>
-                  {o.role && <p className="office__role">{o.role}</p>}
-                  {o.bullets && (
-                    <ul className="office__bullets">
-                      {o.bullets.slice(0, 3).map((b) => (
-                        <li key={b}>{b}</li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-
-            <div className="experience__more">
-              {studies && (
-                <div>
-                  <h3 className="experience__label">{t.home.education}</h3>
-                  <ul className="compact-list">
-                    <li>
-                      <span className="compact-list__main">{studies.programme}</span>
-                      <span className="compact-list__meta">
-                        {studies.institution} · <span className="ltr">{studies.period}</span>
-                      </span>
-                      {studies.note && <span className="compact-list__meta">{studies.note}</span>}
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
+          </SectionHeading>
+          <ol className="timeline" aria-label={t.home.timelineLabel}>
+            {t.home.timeline.map((item, i) => (
+              <li key={i} className="timeline__item" style={{ '--i': i } as CSSProperties}>
+                <span className="timeline__year">{item.year}</span>
+                <span className="timeline__title">
+                  <bdi>{item.title}</bdi>
+                </span>
+                <span className="timeline__text">{item.text}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -142,7 +117,6 @@ export default function Home() {
                       <h3 className="tech-card__name">{p.name}</h3>
                     </div>
                     <StatusBadge status={p.status} />
-                    <p className="tech-card__tagline">{p.tagline}</p>
                     <span className="tech-card__more">
                       {p.status === 'Concept' ? t.home.viewConcept : t.home.viewProject} <ArrowRight size={14} />
                     </span>

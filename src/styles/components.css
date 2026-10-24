@@ -272,38 +272,6 @@
   letter-spacing: 0.04em;
 }
 
-/* ——— Timeline ——— */
-
-.timeline li {
-  display: grid;
-  gap: 0.15rem;
-  padding-block: 1.25rem;
-  border-top: 1px solid var(--line);
-}
-
-.timeline li:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.timeline__period {
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--camel-deep);
-  font-variant-numeric: tabular-nums;
-}
-
-.timeline__role {
-  font-family: var(--font-display);
-  font-size: var(--step-2);
-  line-height: 1.15;
-}
-
-.timeline__org {
-  color: var(--ink-soft);
-}
-
 /* ——— Project card ——— */
 
 .project-grid {
