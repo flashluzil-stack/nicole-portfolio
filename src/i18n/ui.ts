@@ -18,6 +18,8 @@ const en = {
     architectureTitle: 'Architecture',
     architecture: 'Architectural projects by Nicole Gofman — spatial design, technical documentation and visualization.',
     contactTitle: 'Contact',
+    aboutTitle: 'About',
+    about: 'About Nicole Gofman — architect and entrepreneur: experience in architecture, real estate and digital products, education, skills, CV and LinkedIn.',
     notFoundTitle: 'Page not found',
     notFound: 'The page you were looking for could not be found.',
     projectNotFound: 'This project could not be found.',
@@ -25,6 +27,7 @@ const en = {
   },
   nav: {
     home: 'Home',
+    about: 'About',
     technology: 'Technology',
     architecture: 'Architecture',
     contact: 'Contact',
@@ -60,7 +63,7 @@ const en = {
   },
   home: {
     heroEyebrow: 'Architect · Entrepreneur',
-    heroTitle: ['Architect & entrepreneur. ', 'Making things work better', ' — from buildings to businesses.'],
+    heroTitle: ['Architect & entrepreneur, ', 'making things work better.', ''],
     heroLede:
       'I design residential buildings and high-rise towers at Place & Space, built a real estate company from scratch, and founded Flash Luz.',
     facts: [
@@ -188,6 +191,15 @@ const en = {
     previous: 'Previous image',
     next: 'Next image',
   },
+  about: {
+    eyebrow: 'About',
+    title: ['Architect, entrepreneur, ', 'builder', '.'],
+    experience: 'Experience',
+    education: 'Education',
+    skills: 'Skills & tools',
+    languages: 'Languages',
+    linkedin: 'LinkedIn profile',
+  },
   contact: {
     eyebrow: 'Contact',
     title: ['Let’s ', 'connect.', ''],
@@ -234,6 +246,8 @@ const he: Dictionary = {
     architectureTitle: 'אדריכלות',
     architecture: 'פרויקטים אדריכליים מאת ניקול גופמן — תכנון מרחבי, תיעוד טכני והדמיה.',
     contactTitle: 'יצירת קשר',
+    aboutTitle: 'מי אני',
+    about: 'ניקול גופמן — אדריכלית ויזמית: ניסיון באדריכלות, בנדל״ן ובמוצרים דיגיטליים, השכלה, כישורים, קורות חיים ולינקדאין.',
     notFoundTitle: 'הדף לא נמצא',
     notFound: 'הדף שחיפשת לא נמצא.',
     projectNotFound: 'הפרויקט לא נמצא.',
@@ -241,6 +255,7 @@ const he: Dictionary = {
   },
   nav: {
     home: 'בית',
+    about: 'מי אני',
     technology: 'טכנולוגיה',
     architecture: 'אדריכלות',
     contact: 'יצירת קשר',
@@ -276,7 +291,7 @@ const he: Dictionary = {
   },
   home: {
     heroEyebrow: 'אדריכלית · יזמית',
-    heroTitle: ['אדריכלית ויזמית. ', 'משפרת כל מה שאני בונה', ' — מבניינים ועד עסקים.'],
+    heroTitle: ['אדריכלית ויזמית ', 'שמשפרת כל מה שהיא בונה.', ''],
     heroLede:
       'מתכננת מגורים ומגדלים ב-Place & Space, הקמתי מאפס חברת נדל״ן, ויסדתי את Flash Luz.',
     facts: [
@@ -403,6 +418,15 @@ const he: Dictionary = {
     close: 'סגירת המציג',
     previous: 'התמונה הקודמת',
     next: 'התמונה הבאה',
+  },
+  about: {
+    eyebrow: 'מי אני',
+    title: ['אדריכלית, יזמית, ', 'בונה', '.'],
+    experience: 'ניסיון',
+    education: 'השכלה',
+    skills: 'כישורים וכלים',
+    languages: 'שפות',
+    linkedin: 'פרופיל לינקדאין',
   },
   contact: {
     eyebrow: 'יצירת קשר',

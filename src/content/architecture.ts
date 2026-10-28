@@ -222,16 +222,6 @@ export const architectureProjects: ArchitectureProject[] = [
 /** Home page carousel: one strong image per project, each linking to it. */
 export const homeSlides: { slug: string; image: MediaImage }[] = [
   { slug: 'gymnasium', image: img('gymnasium', 'exterior', 1236, 645, 'Community sports centre with a sloping concrete roof and stepped plaza', '') },
-  {
-    slug: 'gymnasium',
-    image: {
-      src: asset('/images/about/nicole-at-work-1600.webp'),
-      width: 642,
-      height: 930,
-      alt: 'Nicole Gofman pinning up her presentation board beside the project models',
-      kind: 'photo',
-    },
-  },
   { slug: 'mediterranean-villa', image: img('mediterranean-villa', 'garden-facade', 1600, 900, 'Tiled gable house with a glazed atrium and lit stone steps at dusk', '') },
   { slug: 'contemporary-villa', image: img('contemporary-villa', 'pool-facade', 1600, 929, 'Two-storey villa with full-height glazing beside a pool at sunset', '') },
   { slug: 'echoes-of-generations', image: img('echoes-of-generations', 'stair-garden', 1550, 1015, 'Glazed residential building with an external stair beside a green wall', '') },

@@ -8,7 +8,7 @@ import { mkdirSync } from 'node:fs';
 
 const BASE = process.env.QA_BASE ?? 'http://localhost:4173';
 const OUT = 'qa-output';
-const routes = ['/', '/technology', '/architecture', '/contact', '/does-not-exist'];
+const routes = ['/', '/about', '/technology', '/architecture', '/contact', '/does-not-exist'];
 const viewports = [
   { name: 'desktop', width: 1440, height: 900 },
   { name: 'tablet', width: 834, height: 1112 },
