@@ -76,24 +76,14 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    id: 'amikam-berger',
-    role: 'Founding team & Business Development',
-    organisation: 'Amikam Berger – Ir HaNadlan',
-    period: '2025',
-    bullets: [
-      'Built the company from scratch',
-      'Worked with real estate developers',
-      'Created connections and business partnerships with companies across the industry',
-    ],
-  },
-  {
     id: 'abre',
     role: 'CEO’s Personal Assistant',
-    organisation: 'Abre',
+    organisation: 'Abre (Amikam Berger)',
     period: '2024–2025',
     bullets: [
-      'Supported real estate projects and administrative operations',
-      'Managed client communication and documentation',
+      'Built the company from scratch',
+      'Promoted land and zoning plans (TABA) and handled authority approvals',
+      'Supported real estate projects, client communication and documentation',
     ],
   },
   {
@@ -101,7 +91,10 @@ export const experience: ExperienceItem[] = [
     role: 'Finance Assistant',
     organisation: 'Israeli Building Center Group',
     period: '2024',
-    bullets: ['Managed SAP processes, payments, and supplier coordination'],
+    bullets: [
+      'Managed SAP processes, payments, and supplier coordination',
+      'Ir HaNadlan (2025): worked with real estate developers and built business connections with companies',
+    ],
   },
   {
     id: 'hirschman',
@@ -147,7 +140,7 @@ export const architectureOffices: {
 ];
 
 /** Real estate roles, shown together on the Home page. */
-export const realEstate = experience.filter((e) => e.id === 'amikam-berger' || e.id === 'abre');
+export const realEstate = experience.filter((e) => e.id === 'abre' || e.id === 'ibc');
 
 export const education: EducationItem[] = [
   {

@@ -48,27 +48,24 @@ const experienceHe: Record<string, Omit<ExperienceItem, 'id'>> = {
       'פיתוח פלטפורמה לניהול עסקי ביוטי',
     ],
   },
-  'amikam-berger': {
-    role: 'הקמת החברה ופיתוח עסקי',
-    organisation: 'עמיקם ברגר – עיר הנדל״ן',
-    period: '2025',
-    bullets: [
-      'הקמת החברה מאפס',
-      'עבודה מול יזמי נדל״ן',
-      'יצירת קשרים ושיתופי פעולה עסקיים עם חברות בתחום',
-    ],
-  },
   abre: {
     role: 'עוזרת אישית למנכ״ל',
-    organisation: 'Abre',
+    organisation: 'Abre (עמיקם ברגר)',
     period: '2024–2025',
-    bullets: ['תמיכה בפרויקטי נדל״ן ובתפעול המנהלי', 'ניהול התקשורת עם לקוחות והתיעוד'],
+    bullets: [
+      'הקמת החברה מאפס',
+      'קידום קרקעות ותב״עות וטיפול מול רשויות',
+      'ליווי פרויקטי נדל״ן, קשרי לקוחות ותיעוד',
+    ],
   },
   ibc: {
     role: 'עוזרת כספים',
     organisation: 'Israeli Building Center Group',
     period: '2024',
-    bullets: ['ניהול תהליכי SAP, תשלומים ותיאום מול ספקים'],
+    bullets: [
+      'ניהול תהליכי SAP, תשלומים ותיאום מול ספקים',
+      'עיר הנדל״ן (2025): עבודה מול יזמים ויצירת קשרים עסקיים עם חברות',
+    ],
   },
   hirschman: {
     role: 'עוזרת מנהלית',
@@ -86,7 +83,7 @@ const experienceHe: Record<string, Omit<ExperienceItem, 'id'>> = {
 
 export const experience: ExperienceItem[] = en.experience.map((item) => ({ id: item.id, ...experienceHe[item.id] }));
 
-export const realEstate: typeof en.realEstate = experience.filter((e) => e.id === 'amikam-berger' || e.id === 'abre');
+export const realEstate: typeof en.realEstate = experience.filter((e) => e.id === 'abre' || e.id === 'ibc');
 
 const educationHe: Record<string, Omit<EducationItem, 'id'>> = {
   shenkar: {
