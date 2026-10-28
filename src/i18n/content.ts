@@ -16,6 +16,7 @@ const build = (
   skills: profile.skills,
   languages: profile.languages,
   architectureOffices: profile.architectureOffices,
+  realEstate: profile.realEstate,
   disciplines: profile.disciplines,
   products: products.products,
   studio: products.studio,

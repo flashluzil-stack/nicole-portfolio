@@ -34,6 +34,13 @@ export const profile = {
     alt: 'Portrait of Nicole Gofman',
     kind: 'photo',
   } satisfies MediaImage,
+  avatar: {
+    src: asset('/images/about/nicole-avatar-320.webp'),
+    width: 320,
+    height: 320,
+    alt: 'Nicole Gofman',
+    kind: 'photo',
+  } satisfies MediaImage,
   atWork: {
     src: asset('/images/about/nicole-at-work-1600.webp'),
     width: 642,
@@ -66,6 +73,17 @@ export const experience: ExperienceItem[] = [
       'Built a no-code app from concept to launch',
       'Designed product architecture, UX/UI, and user flows',
       'Developed a platform for beauty business management',
+    ],
+  },
+  {
+    id: 'amikam-berger',
+    role: 'Founding team & Business Development',
+    organisation: 'Amikam Berger – Ir HaNadlan',
+    period: '2025',
+    bullets: [
+      'Built the company from scratch',
+      'Worked with real estate developers',
+      'Created connections and business partnerships with companies across the industry',
     ],
   },
   {
@@ -127,6 +145,9 @@ export const architectureOffices: {
     bullets: ['Promoted zoning plans (TABA)', 'Project management', 'Prepared and submitted permit applications'],
   },
 ];
+
+/** Real estate roles, shown together on the Home page. */
+export const realEstate = experience.filter((e) => e.id === 'amikam-berger' || e.id === 'abre');
 
 export const education: EducationItem[] = [
   {

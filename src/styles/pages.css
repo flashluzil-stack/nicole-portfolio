@@ -1578,6 +1578,27 @@
   }
 }
 
+/* Portrait + name at the top of the home hero */
+.home-hero__me {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.home-hero__portrait {
+  width: clamp(72px, 60px + 2vw, 96px);
+  height: clamp(72px, 60px + 2vw, 96px);
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px var(--line, rgba(0, 0, 0, 0.12));
+}
+
+.home-hero__name {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  color: var(--ink);
+}
+
 /* Key facts under the hero text */
 .facts {
   display: grid;

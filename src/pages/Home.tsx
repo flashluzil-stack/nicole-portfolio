@@ -13,7 +13,7 @@ import { ArrowRight } from '../components/Icons';
 
 export default function Home() {
   const { t, c } = useI18n();
-  const { profile, products, architectureProjects, architectureOffices, education, homeSlides } = c;
+  const { profile, products, architectureProjects, architectureOffices, realEstate, education, homeSlides } = c;
   useDocumentMeta('', t.meta.home, '/');
 
   const studies = education.find((e) => e.id === 'shenkar');
@@ -24,6 +24,10 @@ export default function Home() {
       <section className="home-hero" aria-labelledby="hero-title">
         <div className="container home-hero__grid">
           <div className="home-hero__text">
+            <div className="home-hero__me">
+              <Img image={profile.avatar} sizes="88px" className="home-hero__portrait" priority />
+              <span className="home-hero__name">{profile.name}</span>
+            </div>
             <p className="eyebrow">
               <Isolate text={t.home.heroEyebrow} />
             </p>
@@ -87,6 +91,26 @@ export default function Home() {
                     <span className="office__name" lang="en">
                       {o.organisation}
                     </span>
+                    {o.period && <span className="office__period">{o.period}</span>}
+                  </div>
+                  {o.role && <p className="office__role">{o.role}</p>}
+                  {o.bullets && (
+                    <ul className="office__bullets">
+                      {o.bullets.slice(0, 3).map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="experience__label">{t.home.realEstate}</h3>
+            <ul className="offices">
+              {realEstate.map((o) => (
+                <li key={o.id} className="office">
+                  <div className="office__head">
+                    <span className="office__name">{o.organisation}</span>
                     {o.period && <span className="office__period">{o.period}</span>}
                   </div>
                   {o.role && <p className="office__role">{o.role}</p>}

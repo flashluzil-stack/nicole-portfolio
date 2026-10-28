@@ -21,6 +21,7 @@ export const profile: typeof en.profile = {
   location: 'רעננה, ישראל',
   contactInvitation: 'יש לך פרויקט, רעיון או הזדמנות שכדאי שנדבר עליהם? אשמח להכיר.',
   portrait: { ...en.profile.portrait, alt: 'דיוקן של ניקול גופמן' },
+  avatar: { ...en.profile.avatar, alt: 'ניקול גופמן' },
   atWork: { ...en.profile.atWork, alt: 'ניקול גופמן משרטטת על לוח הצגה' },
 };
 
@@ -45,6 +46,16 @@ const experienceHe: Record<string, Omit<ExperienceItem, 'id'>> = {
       'בניית אפליקציית No-Code מהרעיון ועד ההשקה',
       'תכנון ארכיטקטורת המוצר, UX/UI ותהליכי משתמש',
       'פיתוח פלטפורמה לניהול עסקי ביוטי',
+    ],
+  },
+  'amikam-berger': {
+    role: 'הקמת החברה ופיתוח עסקי',
+    organisation: 'עמיקם ברגר – עיר הנדל״ן',
+    period: '2025',
+    bullets: [
+      'הקמת החברה מאפס',
+      'עבודה מול יזמי נדל״ן',
+      'יצירת קשרים ושיתופי פעולה עסקיים עם חברות בתחום',
     ],
   },
   abre: {
@@ -74,6 +85,8 @@ const experienceHe: Record<string, Omit<ExperienceItem, 'id'>> = {
 };
 
 export const experience: ExperienceItem[] = en.experience.map((item) => ({ id: item.id, ...experienceHe[item.id] }));
+
+export const realEstate: typeof en.realEstate = experience.filter((e) => e.id === 'amikam-berger' || e.id === 'abre');
 
 const educationHe: Record<string, Omit<EducationItem, 'id'>> = {
   shenkar: {
