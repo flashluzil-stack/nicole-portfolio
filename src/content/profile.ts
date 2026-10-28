@@ -14,7 +14,7 @@ export const profile = {
   intro:
     'I’m Nicole Gofman — an architectural designer and digital product builder exploring the intersection of space, technology, and human experience.',
   about: [
-    'I work as an architect at Place & Space Architecture on residential buildings and high-rise towers, and studied Architecture & Interior Design at Shenkar (2023 – 2026).',
+    'I worked as an architect at Place & Space Architecture on residential buildings and high-rise towers, and studied Architecture & Interior Design at Shenkar (2023 – 2026).',
     'Alongside architecture, I create and develop apps with Base44. I founded Flash Luz, a platform for beauty business management, and built it as a no-code app from concept to launch — designing its product architecture, UX/UI and user flows.',
     'Before that I worked across real estate, finance and administration. What connects it all: I love making things work better.',
   ],
@@ -55,7 +55,7 @@ export const experience: ExperienceItem[] = [
     id: 'place-space',
     role: 'Architect',
     organisation: 'Place & Space Architecture',
-    period: '2025 – Present',
+    period: '2025 – 2026',
     bullets: [
       'Led planning and design of residential buildings and high-rise towers',
       'Prepared architectural drawings, layouts, and detailed plans',
@@ -81,7 +81,7 @@ export const experience: ExperienceItem[] = [
     organisation: 'Abre (Amikam Berger)',
     period: '2024–2025',
     bullets: [
-      'Built the company from scratch',
+      'Worked alongside the CEO to build the company from the ground up',
       'Promoted land and zoning plans (TABA) and handled authority approvals',
       'Supported real estate projects, client communication and documentation',
     ],
@@ -128,7 +128,7 @@ export const architectureOffices: {
     id: 'place-space',
     organisation: 'Place & Space Architecture',
     role: 'Architect',
-    period: '2025 – Present',
+    period: '2025 – 2026',
     bullets: experience.find((e) => e.id === 'place-space')?.bullets,
   },
   {

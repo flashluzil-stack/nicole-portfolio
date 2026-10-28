@@ -65,7 +65,7 @@ const en = {
     heroEyebrow: 'Architect · Entrepreneur',
     heroTitle: ['Architect & entrepreneur, ', 'making things work better.', ''],
     heroLede:
-      'I design residential buildings and high-rise towers at Place & Space, built a real estate company from scratch, and founded Flash Luz.',
+      'Architect with experience in residential buildings and high-rise towers, in real estate development alongside a CEO, and in taking Flash Luz from idea to launch.',
     facts: [
       { value: '≈1.5', label: 'years in architecture offices' },
       { value: 'Revit · AutoCAD', label: 'drawings, plans and permit sets' },
@@ -79,7 +79,7 @@ const en = {
     openProject: 'Open project',
     expEyebrow: 'Experience',
     expTitle: ['Professional ', 'Experience', ''],
-    expSummary: 'Architecture offices, real estate development and entrepreneurship — from permit sets to building a company from scratch.',
+    expSummary: 'Architecture offices, real estate development and entrepreneurship — from permit sets to building a company alongside its CEO.',
     architectureOffices: 'Architecture offices',
     realEstate: 'Real estate',
     contactMe: 'Contact me',
@@ -93,7 +93,7 @@ const en = {
     archTitle: ['Selected ', 'architectural', ' work'],
     allArchitecture: 'All architecture',
     techEyebrow: 'Technology',
-    techTitle: ['Selected ', 'digital', ' products'],
+    techTitle: ['Selected ', 'Technology', ''],
     allProducts: 'All products',
     readCase: 'Read the case study',
     viewConcept: 'View concept',
@@ -293,7 +293,7 @@ const he: Dictionary = {
     heroEyebrow: 'אדריכלית · יזמית',
     heroTitle: ['אדריכלית ויזמית ', 'שמשפרת כל מה שהיא בונה.', ''],
     heroLede:
-      'מתכננת מגורים ומגדלים ב-Place & Space, הקמתי מאפס חברת נדל״ן, ויסדתי את Flash Luz.',
+      'אדריכלית עם ניסיון בתכנון מגורים ומגדלים, בפיתוח נדל״ן לצד מנכ״ל, ובהקמת Flash Luz מהרעיון ועד ההשקה.',
     facts: [
       { value: '≈1.5', label: 'שנות ניסיון במשרדי אדריכלות' },
       { value: 'Revit · AutoCAD', label: 'תוכניות, פרטים ותיקי היתר' },
@@ -307,7 +307,7 @@ const he: Dictionary = {
     openProject: 'לפרויקט',
     expEyebrow: 'ניסיון',
     expTitle: ['ניסיון ', 'מקצועי', ''],
-    expSummary: 'משרדי אדריכלות, נדל״ן ויזמות — מתיקי היתר ועד הקמת חברה מאפס.',
+    expSummary: 'משרדי אדריכלות, נדל״ן ויזמות — מתיקי היתר ועד הקמת חברה לצד המנכ״ל.',
     architectureOffices: 'משרדי אדריכלות',
     realEstate: 'נדל״ן',
     contactMe: 'ליצירת קשר',
@@ -321,7 +321,7 @@ const he: Dictionary = {
     archTitle: ['עבודות ', 'אדריכלות', ' נבחרות'],
     allArchitecture: 'כל עבודות האדריכלות',
     techEyebrow: 'טכנולוגיה',
-    techTitle: ['מוצרים ', 'דיגיטליים', ' נבחרים'],
+    techTitle: ['טכנולוגיה ', 'נבחרת', ''],
     allProducts: 'כל המוצרים',
     readCase: 'לקריאת המקרה המלא',
     viewConcept: 'לצפייה בקונספט',

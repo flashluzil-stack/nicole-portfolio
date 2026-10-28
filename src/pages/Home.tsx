@@ -44,18 +44,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ——— Selected architectural work ——— */}
-      <section id="work" className="section section--stone work" aria-labelledby="work-title">
-        <div className="container">
-          <SectionHeading eyebrow={t.home.workEyebrow} id="work-title" title={<Emph parts={t.home.workTitle} />}>
-            <Cta to="/architecture#projects" variant="text">
-              {t.home.allArchitecture}
-            </Cta>
-          </SectionHeading>
-          <WorkGrid projects={architectureProjects.slice(0, 3)} />
-        </div>
-      </section>
-
       {/* ——— Professional experience ——— */}
       <section className="section experience" aria-labelledby="exp-title">
         <div className="container experience__grid">
@@ -142,7 +130,7 @@ export default function Home() {
             </Cta>
           </SectionHeading>
           <ul className="tech-strip__list">
-            {products.map((p) => (
+            {products.filter((p) => p.slug === 'flash-luz').map((p) => (
               <li key={p.slug}>
                 <Link to={`/technology#${p.slug}`} className="tech-card">
                   <div className="tech-card__visual">
@@ -163,6 +151,18 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* ——— Selected architectural work ——— */}
+      <section id="work" className="section section--stone work" aria-labelledby="work-title">
+        <div className="container">
+          <SectionHeading eyebrow={t.home.workEyebrow} id="work-title" title={<Emph parts={t.home.workTitle} />}>
+            <Cta to="/architecture#projects" variant="text">
+              {t.home.allArchitecture}
+            </Cta>
+          </SectionHeading>
+          <WorkGrid projects={architectureProjects.slice(0, 3)} />
         </div>
       </section>
 

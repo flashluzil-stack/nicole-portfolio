@@ -14,7 +14,7 @@ export const profile: typeof en.profile = {
   intro:
     'אני ניקול גופמן — מעצבת אדריכלית ובונת מוצרים דיגיטליים, שפועלת במפגש שבין מרחב, טכנולוגיה וחוויה אנושית.',
   about: [
-    'אני עובדת כאדריכלית במשרד Place & Space Architecture על מבני מגורים ומגדלים, ולמדתי אדריכלות ועיצוב פנים בשנקר (2023 – 2026).',
+    'עבדתי כאדריכלית במשרד Place & Space Architecture על מבני מגורים ומגדלים, ולמדתי אדריכלות ועיצוב פנים בשנקר (2023 – 2026).',
     'לצד האדריכלות אני יוצרת ומפתחת אפליקציות ב-Base44. הקמתי את Flash Luz, פלטפורמה לניהול עסקי ביוטי, ובניתי אותה כאפליקציית No-Code מהרעיון ועד ההשקה — כולל ארכיטקטורת המוצר, ה-UX/UI ותהליכי המשתמש.',
     'לפני כן עבדתי בתחומי הנדל״ן, הכספים והמנהלה. מה שמחבר את הכול: אני אוהבת לייעל דברים.',
   ],
@@ -29,7 +29,7 @@ const experienceHe: Record<string, Omit<ExperienceItem, 'id'>> = {
   'place-space': {
     role: 'אדריכלית',
     organisation: 'Place & Space Architecture',
-    period: '2025 – היום',
+    period: '2025 – 2026',
     bullets: [
       'הובלת תכנון ועיצוב של מבני מגורים ומגדלים',
       'הכנת תוכניות אדריכליות, פריסות ותוכניות מפורטות',
@@ -53,7 +53,7 @@ const experienceHe: Record<string, Omit<ExperienceItem, 'id'>> = {
     organisation: 'Abre (עמיקם ברגר)',
     period: '2024–2025',
     bullets: [
-      'הקמת החברה מאפס',
+      'ליווי המנכ״ל בהקמת החברה מהיסוד',
       'קידום קרקעות ותב״עות וטיפול מול רשויות',
       'ליווי פרויקטי נדל״ן, קשרי לקוחות ותיעוד',
     ],
@@ -116,7 +116,7 @@ export const languages = ['עברית', 'אנגלית', 'רוסית'];
 
 export const architectureOffices: typeof en.architectureOffices = en.architectureOffices.map((o) =>
   o.id === 'place-space'
-    ? { ...o, role: 'אדריכלית', period: '2025 – היום', bullets: experienceHe['place-space'].bullets }
+    ? { ...o, role: 'אדריכלית', period: '2025 – 2026', bullets: experienceHe['place-space'].bullets }
     : { ...o, bullets: ['קידום תב״עות', 'ניהול פרויקטים', 'הכנה והגשה של בקשות להיתר'] },
 );
 
