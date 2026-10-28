@@ -39,8 +39,8 @@ const experienceHe: Record<string, Omit<ExperienceItem, 'id'>> = {
     ],
   },
   'flash-luz': {
-    role: 'בונת מוצר',
-    organisation: 'מייסדת – Flash Luz',
+    role: 'מייסדת ויזמית',
+    organisation: 'Flash Luz',
     period: '2026 – היום',
     bullets: [
       'בניית אפליקציית No-Code מהרעיון ועד ההשקה',
@@ -82,6 +82,8 @@ const experienceHe: Record<string, Omit<ExperienceItem, 'id'>> = {
 };
 
 export const experience: ExperienceItem[] = en.experience.map((item) => ({ id: item.id, ...experienceHe[item.id] }));
+
+export const ventures: typeof en.ventures = experience.filter((e) => e.id === 'flash-luz');
 
 export const realEstate: typeof en.realEstate = experience.filter((e) => e.id === 'abre' || e.id === 'ibc');
 

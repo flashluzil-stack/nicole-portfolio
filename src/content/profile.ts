@@ -66,8 +66,8 @@ export const experience: ExperienceItem[] = [
   },
   {
     id: 'flash-luz',
-    role: 'Product Builder',
-    organisation: 'Founder – Flash Luz',
+    role: 'Founder & Entrepreneur',
+    organisation: 'Flash Luz',
     period: '2026 – Present',
     bullets: [
       'Built a no-code app from concept to launch',
@@ -140,6 +140,9 @@ export const architectureOffices: {
 ];
 
 /** Real estate roles, shown together on the Home page. */
+/** Entrepreneurship, shown first in the Home experience section. */
+export const ventures = experience.filter((e) => e.id === 'flash-luz');
+
 export const realEstate = experience.filter((e) => e.id === 'abre' || e.id === 'ibc');
 
 export const education: EducationItem[] = [
