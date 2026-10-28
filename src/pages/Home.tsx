@@ -37,14 +37,6 @@ export default function Home() {
               </Cta>
               <CvLink />
             </div>
-            <ul className="facts">
-              {t.home.facts.map((f) => (
-                <li key={f.label}>
-                  <span className="facts__value ltr">{f.value}</span>
-                  <span className="facts__label">{f.label}</span>
-                </li>
-              ))}
-            </ul>
           </div>
           <div className="home-hero__image">
             <HeroCarousel slides={homeSlides} />
