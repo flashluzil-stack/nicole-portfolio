@@ -2300,3 +2300,13 @@
 .skill-groups__items {
   color: var(--ink-soft);
 }
+
+/* Home: a thin line between each section, and between the experience groups */
+.home-hero ~ section {
+  border-top: 1px solid var(--line);
+}
+.experience__body > .experience__label:not(:first-child) {
+  margin-top: var(--space-l);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--line);
+}
