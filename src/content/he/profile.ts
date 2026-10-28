@@ -1,3 +1,4 @@
+import { asset } from '../../lib/asset';
 import type { EducationItem, ExperienceItem } from '../types';
 import * as en from '../profile';
 
@@ -19,6 +20,7 @@ export const profile: typeof en.profile = {
     'לפני כן עבדתי בתחומי הנדל״ן, הכספים והמנהלה. מה שמחבר את הכול: אני אוהבת לייעל דברים.',
   ],
   location: 'רעננה, ישראל',
+  cv: asset('/docs/Nicole-Gofman-CV-he.pdf'),
   contactInvitation: 'יש לך פרויקט, רעיון או הזדמנות שכדאי שנדבר עליהם? אשמח להכיר.',
   portrait: { ...en.profile.portrait, alt: 'דיוקן של ניקול גופמן' },
   avatar: { ...en.profile.avatar, alt: 'ניקול גופמן' },
