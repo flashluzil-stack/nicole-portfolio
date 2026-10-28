@@ -8,15 +8,6 @@ export type Lang = 'en' | 'he';
 const STORAGE_KEY = 'ng-lang';
 const isLang = (v: unknown): v is Lang => v === 'en' || v === 'he';
 
-function storedLang(): Lang | null {
-  try {
-    const v = window.localStorage.getItem(STORAGE_KEY);
-    return isLang(v) ? v : null;
-  } catch {
-    return null;
-  }
-}
-
 interface I18n {
   lang: Lang;
   dir: 'ltr' | 'rtl';
@@ -31,7 +22,7 @@ const I18nContext = createContext<I18n | null>(null);
 
 /**
  * Language state for the whole site.
- * Priority: `?lang=` in the URL, then the visitor's saved choice, then English.
+ * Priority: `?lang=` in the URL, otherwise English — the site always opens in English.
  * Hebrew pages carry `?lang=he` so every Hebrew page has its own shareable,
  * indexable URL; English (the default) carries no parameter.
  */
@@ -40,7 +31,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const urlLang = new URLSearchParams(location.search).get('lang');
 
-  const [lang, setLangState] = useState<Lang>(() => (isLang(urlLang) ? urlLang : storedLang() ?? 'en'));
+  const [lang, setLangState] = useState<Lang>(() => (isLang(urlLang) ? urlLang : 'en'));
 
   // Follow an explicit ?lang= in the URL (e.g. a shared Hebrew link).
   useEffect(() => {

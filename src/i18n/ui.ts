@@ -60,7 +60,7 @@ const en = {
   },
   home: {
     heroEyebrow: 'Architect · Entrepreneur',
-    heroTitle: ['Architect and entrepreneur, ', 'here to change and improve', ' every field I take on.'],
+    heroTitle: ['Architect & entrepreneur. ', 'Making things work better', ' — from buildings to businesses.'],
     heroLede:
       'I design residential buildings and high-rise towers at Place & Space, built a real estate company from scratch, and founded Flash Luz.',
     facts: [
@@ -276,7 +276,7 @@ const he: Dictionary = {
   },
   home: {
     heroEyebrow: 'אדריכלית · יזמית',
-    heroTitle: ['אדריכלית ויזמית ', 'שבאה לשנות ולשפר', ' כל תחום שאני נוגעת בו.'],
+    heroTitle: ['אדריכלית ויזמית. ', 'משפרת כל מה שאני בונה', ' — מבניינים ועד עסקים.'],
     heroLede:
       'מתכננת מגורים ומגדלים ב-Place & Space, הקמתי מאפס חברת נדל״ן, ויסדתי את Flash Luz.',
     facts: [

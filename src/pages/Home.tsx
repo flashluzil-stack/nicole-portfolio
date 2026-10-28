@@ -24,10 +24,6 @@ export default function Home() {
       <section className="home-hero" aria-labelledby="hero-title">
         <div className="container home-hero__grid">
           <div className="home-hero__text">
-            <div className="home-hero__me">
-              <Img image={profile.avatar} sizes="88px" className="home-hero__portrait" priority />
-              <span className="home-hero__name">{profile.name}</span>
-            </div>
             <p className="eyebrow">
               <Isolate text={t.home.heroEyebrow} />
             </p>
