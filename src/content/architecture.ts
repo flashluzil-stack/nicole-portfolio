@@ -41,13 +41,33 @@ export const architectureProjects: ArchitectureProject[] = [
     title: 'The Gymnasium',
     type: 'Public building',
     context: 'Final project · Shenkar · Herzl Street, Florentin, Tel Aviv · Supervisor: Moshe Alfasi',
-    summary: 'A community sports centre in Florentin — a sloping concrete roof over glazed halls and a stepped public plaza.',
-    cover: img('gymnasium', 'exterior', 1236, 645, 'Community sports centre with a sloping concrete roof, glazed halls and stepped plaza', 'View from the street'),
+    summary:
+      'A national centre for sports culture in Florentin, Tel Aviv: lectures and sports broadcasts, a rehabilitation and physiotherapy centre, a café and an interactive centre on the history of sport in Israel. Two buildings are joined by a glass bridge that both connects and separates their functions.',
+    cover: img('gymnasium', 'render-facade', 1572, 1001, 'Two-storey building with a folded light roof, a round skylight and a glazed façade over a colonnade along the street', 'Street façade'),
     sections: [
       {
         kind: 'concept',
-        title: 'Identity',
-        images: [img('gymnasium', 'identity', 1254, 1254, 'Project identity: line drawing of the building with the name הגמנסיון — sport, community, inspiration', 'Project identity', 'drawing')],
+        title: 'Concept — The Starting Line',
+        text:
+          'Like the starting line on a track, the Gymnasium marks a point of departure: every visit begins with movement. Lines of wood are the language of the project. Vertical timber ribs start at the reception desk, continue along the stair railing and landing as one continuous piece, and return through the space as a rhythm of lines, like running lanes marked on the ground. The reception building (café and administration, with the physiotherapy centre above) and the museum building (the sports museum, with the conference hall above) are joined by a glass bridge. A perimeter walking path surrounds the site and links Herzl, Frankel and HaShuk streets, with stepped seating for sitting, watching and gathering along the way.',
+        images: [
+          img('gymnasium', 'concept-board', 1600, 1000, 'Concept board: the Starting Line text, programme diagram and site circulation diagram with the perimeter walking path', 'Concept board — programme and circulation on the site', 'drawing', 2800),
+        ],
+      },
+      {
+        kind: 'exterior',
+        images: [
+          img('gymnasium', 'render-aerial', 1580, 996, 'Aerial view at dusk of two glazed buildings with light folded roofs joined by a glass bridge, with planted strips and a walking path along the street', 'Aerial view — two buildings joined by a glass bridge'),
+          img('gymnasium', 'render-entrance-cafe', 1600, 924, 'Entrance under a cantilevered upper floor, with café tables outside and the wooden stair visible through the glass', 'Entrance and café'),
+        ],
+      },
+      {
+        kind: 'interior',
+        text: 'The reception desk and the stair are designed as one piece of furniture: vertical wood ribs wrap the desk and rise with the stair to the upper floor, under a round skylight.',
+        images: [
+          img('gymnasium', 'render-stair-desk', 1384, 1136, 'Double-height lobby with a curved reception desk wrapped in vertical wood ribs that continue up the stair railing, under a round skylight', 'Lobby — reception desk and stair'),
+          img('gymnasium', 'render-stair-ascent', 1205, 1306, 'Stone treads with lit edges rising between walls of vertical wood ribs toward the upper floor', 'The stair to the upper floor'),
+        ],
       },
       {
         kind: 'plans',
@@ -221,12 +241,13 @@ export const architectureProjects: ArchitectureProject[] = [
 
 /** Home page carousel: one strong image per project, each linking to it. */
 export const homeSlides: { slug: string; image: MediaImage }[] = [
-  { slug: 'gymnasium', image: img('gymnasium', 'exterior', 1236, 645, 'Community sports centre with a sloping concrete roof and stepped plaza', '') },
+  { slug: 'gymnasium', image: img('gymnasium', 'render-aerial', 1580, 996, 'Two glazed buildings with light folded roofs joined by a glass bridge, at dusk', '') },
   { slug: 'mediterranean-villa', image: img('mediterranean-villa', 'garden-facade', 1600, 900, 'Tiled gable house with a glazed atrium and lit stone steps at dusk', '') },
   { slug: 'contemporary-villa', image: img('contemporary-villa', 'pool-facade', 1600, 929, 'Two-storey villa with full-height glazing beside a pool at sunset', '') },
   { slug: 'echoes-of-generations', image: img('echoes-of-generations', 'stair-garden', 1550, 1015, 'Glazed residential building with an external stair beside a green wall', '') },
   { slug: 'interior-architecture', image: img('interior-architecture', 'kitchen', 1600, 900, 'Kitchen with oak cabinets and a stone island in evening light', '') },
   { slug: 'contemporary-villa', image: img('contemporary-villa', 'living-dining', 1600, 900, 'Open living and dining space with a grand piano and oak wall', '') },
+  { slug: 'gymnasium', image: img('gymnasium', 'render-stair-desk', 1384, 1136, 'Lobby with a reception desk and stair wrapped in vertical wood ribs', '') },
 ];
 
 export const getArchitectureProject = (slug: string) =>
