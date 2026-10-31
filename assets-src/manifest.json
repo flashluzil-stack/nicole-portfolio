@@ -106,6 +106,14 @@
     "height": 1015
   },
   {
+    "source": "architecture/gymnasium/concept-board.png",
+    "src": "/images/architecture/gymnasium/concept-board-1600.webp",
+    "width": 1600,
+    "height": 1000,
+    "srcLarge": "/images/architecture/gymnasium/concept-board-2800.webp",
+    "widthLarge": 2800
+  },
+  {
     "source": "architecture/gymnasium/details.png",
     "src": "/images/architecture/gymnasium/details-1600.webp",
     "width": 1600,
@@ -140,6 +148,36 @@
     "src": "/images/architecture/gymnasium/identity-1600.webp",
     "width": 1254,
     "height": 1254
+  },
+  {
+    "source": "architecture/gymnasium/render-aerial.png",
+    "src": "/images/architecture/gymnasium/render-aerial-1600.webp",
+    "width": 1580,
+    "height": 996
+  },
+  {
+    "source": "architecture/gymnasium/render-entrance-cafe.png",
+    "src": "/images/architecture/gymnasium/render-entrance-cafe-1600.webp",
+    "width": 1600,
+    "height": 924
+  },
+  {
+    "source": "architecture/gymnasium/render-facade.png",
+    "src": "/images/architecture/gymnasium/render-facade-1600.webp",
+    "width": 1572,
+    "height": 1001
+  },
+  {
+    "source": "architecture/gymnasium/render-stair-ascent.png",
+    "src": "/images/architecture/gymnasium/render-stair-ascent-1600.webp",
+    "width": 1205,
+    "height": 1306
+  },
+  {
+    "source": "architecture/gymnasium/render-stair-desk.png",
+    "src": "/images/architecture/gymnasium/render-stair-desk-1600.webp",
+    "width": 1384,
+    "height": 1136
   },
   {
     "source": "architecture/gymnasium/sections.png",
