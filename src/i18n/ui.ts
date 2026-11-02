@@ -14,7 +14,7 @@ const en = {
     home: 'Nicole Gofman is an architectural designer and digital product builder exploring the intersection of space, technology, and human experience.',
     technologyTitle: 'Technology',
     technology:
-      'Digital products by Nicole Gofman — Flash Luz, FlashTravel and Worldly: product strategy, user journeys and interface design.',
+      'Digital products by Nicole Gofman — Flash Luz, Flash Design, FlashTravel and Worldly: product strategy, user journeys and interface design.',
     architectureTitle: 'Architecture',
     architecture: 'Architectural projects by Nicole Gofman — spatial design, technical documentation and visualization.',
     contactTitle: 'Contact',
@@ -245,7 +245,7 @@ const he: Dictionary = {
     home: 'ניקול גופמן היא מעצבת אדריכלית ובונת מוצרים דיגיטליים, הפועלת במפגש שבין מרחב, טכנולוגיה וחוויה אנושית.',
     technologyTitle: 'טכנולוגיה',
     technology:
-      'מוצרים דיגיטליים מאת ניקול גופמן — Flash Luz,‏ FlashTravel ו-Worldly: אסטרטגיית מוצר, מסעות משתמש ועיצוב ממשק.',
+      'מוצרים דיגיטליים מאת ניקול גופמן — Flash Luz,‏ Flash Design,‏ FlashTravel ו-Worldly: אסטרטגיית מוצר, מסעות משתמש ועיצוב ממשק.',
     architectureTitle: 'אדריכלות',
     architecture: 'פרויקטים אדריכליים מאת ניקול גופמן — תכנון מרחבי, תיעוד טכני והדמיה.',
     contactTitle: 'יצירת קשר',

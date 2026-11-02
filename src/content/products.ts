@@ -109,6 +109,53 @@ export const products: Product[] = [
     accent: '#B08D63',
   },
   {
+    slug: 'flash-design',
+    name: 'Flash Design',
+    tagline: 'One platform that runs every design project — with the designer and for the designer.',
+    status: 'In development',
+    role: 'Founder · Product Builder',
+    period: '2026 – Present',
+    screens: [
+      screen('flash-design/app-wall', 860, 1150, 'Client questionnaire screen with drawn options and a “Nicole recommends” tag', 'AI-tailored client questionnaire'),
+      screen('flash-design/app-lighting', 860, 1150, 'Questionnaire screen comparing a large ceiling light with a track of spotlights', 'Every option drawn, the designer’s pick marked'),
+      screen('flash-design/app-plan', 860, 1180, 'Shared project page with renderings of the shelf wall and the balcony wall', 'The shared project page and action plan'),
+    ],
+    boards: [],
+    overview:
+      'An AI-powered work platform for interior designers and architects. It manages each project with the designer and for them: from the first details, through a client questionnaire and design updates, to a detailed action plan and a finished space.',
+    caseStudy: [
+      {
+        heading: 'Who it is for',
+        text: 'Interior designers and architects who run residential projects with private clients, and want one place for the brief, the design decisions, the shopping and the budget.',
+      },
+      {
+        heading: 'Tested on a real project',
+        text: 'The platform was first used on a real living room redesign, shown in full in the Architecture section under “Flash Design”.',
+      },
+    ],
+    lists: [
+      {
+        heading: 'How it works',
+        items: [
+          'Upload the project: photos, a sketch, dimensions and notes.',
+          'Send the client an AI-tailored questionnaire that fills in what is missing: budget, preferences, wishes and constraints.',
+          'Update the design from the answers, with AI renderings of the client’s own space.',
+          'Get a detailed action plan: tasks, items to buy with linked shopping, price comparisons and totals, and budget planning.',
+          'Track the project task by task until the space is finished.',
+        ],
+      },
+    ],
+    features: [
+      { title: 'AI client questionnaire', text: 'Built for each project; every option drawn, the designer’s recommendation marked.' },
+      { title: 'AI renderings', text: 'The client sees the design in their own space.' },
+      { title: 'Shopping & price comparison', text: 'Items with purchase links, compared prices and a running total.' },
+      { title: 'Budget planning', text: 'Plan and track the budget against the choices made.' },
+      { title: 'Tasks & tracking', text: 'A shared task list from the first decision to a finished space.' },
+      { title: 'One shared link', text: 'Client and designer work on the same page instead of PDFs and message threads.' },
+    ],
+    accent: '#8A6A4F',
+  },
+  {
     slug: 'flashtravel',
     name: 'FlashTravel',
     tagline: 'All in one place — you no longer need eight apps to enjoy a trip.',
