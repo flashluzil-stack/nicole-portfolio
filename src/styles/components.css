@@ -889,6 +889,35 @@
   }
 }
 
+.carousel__track {
+  touch-action: pan-y;
+}
+
+/* Previous / next arrows over the image, so it is clear the images can be changed */
+.carousel__arrow {
+  position: absolute;
+  top: calc(50% - 1.6rem);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgb(255 253 249 / 0.85);
+  color: var(--ink);
+  box-shadow: 0 1px 6px rgb(0 0 0 / 0.12);
+  transition: background-color var(--dur) var(--ease);
+}
+.carousel__arrow:hover {
+  background: #fff;
+}
+.carousel__arrow--prev {
+  inset-inline-start: 0.6rem;
+}
+.carousel__arrow--next {
+  inset-inline-end: 0.6rem;
+}
+
 .carousel__slide:focus-visible {
   outline-offset: -4px;
 }

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import type { MediaImage } from '../content/types';
 import { useI18n } from '../i18n';
@@ -7,6 +7,9 @@ import { Img } from '../components/Img';
 import { Lightbox } from '../components/Lightbox';
 import { ArrowLeft, ArrowRight, Download } from '../components/Icons';
 import NotFound from './NotFound';
+
+/** Old project addresses that now live under a new slug. */
+const renamed: Record<string, string> = { 'shahar-apartment': 'flash-design' };
 
 export default function ArchitectureProject() {
   const { slug = '' } = useParams();
@@ -27,6 +30,7 @@ export default function ArchitectureProject() {
     [project],
   );
 
+  if (renamed[slug]) return <Navigate to={`/architecture/${renamed[slug]}${window.location.search}`} replace />;
   if (!project) return <NotFound />;
 
   const i = architectureProjects.indexOf(project);

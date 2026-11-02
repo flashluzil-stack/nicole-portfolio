@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, type TouchEvent } from 'react';
 import { Link } from 'react-router-dom';
 import type { MediaImage } from '../content/types';
 import { useI18n } from '../i18n';
 import { Img } from './Img';
+import { ArrowLeft, ArrowRight } from './Icons';
 
 interface Slide {
   slug: string;
@@ -17,7 +18,31 @@ const INTERVAL = 5000;
  * prefers reduced motion. Each slide links to its project.
  */
 export function HeroCarousel({ slides }: { slides: Slide[] }) {
-  const { t, c } = useI18n();
+  const { t, c, dir } = useI18n();
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  const swiped = useRef(false);
+  const go = (step: number) => setIndex((i) => (i + step + slides.length) % slides.length);
+
+  // Swipe between images on touch screens. In Hebrew the order runs right to left.
+  const onTouchStart = (e: TouchEvent) => {
+    const p = e.touches[0];
+    touch.current = { x: p.clientX, y: p.clientY };
+    swiped.current = false;
+    setPaused(true);
+  };
+  const onTouchEnd = (e: TouchEvent) => {
+    const start = touch.current;
+    touch.current = null;
+    setPaused(false);
+    if (!start) return;
+    const p = e.changedTouches[0];
+    const dx = p.clientX - start.x;
+    const dy = p.clientY - start.y;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    swiped.current = true;
+    const forward = dir === 'rtl' ? dx > 0 : dx < 0;
+    go(forward ? 1 : -1);
+  };
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
@@ -49,7 +74,17 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div className="carousel__track">
+      <div
+        className="carousel__track"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        onClickCapture={(e) => {
+          if (swiped.current) {
+            e.preventDefault();
+            swiped.current = false;
+          }
+        }}
+      >
         {slides.map((s, i) => (
           <Link
             key={s.image.src}
@@ -63,6 +98,16 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
           </Link>
         ))}
       </div>
+      {slides.length > 1 && (
+        <>
+          <button type="button" className="carousel__arrow carousel__arrow--prev" aria-label={t.home.carouselPrev} onClick={() => go(-1)}>
+            {dir === 'rtl' ? <ArrowRight size={18} /> : <ArrowLeft size={18} />}
+          </button>
+          <button type="button" className="carousel__arrow carousel__arrow--next" aria-label={t.home.carouselNext} onClick={() => go(1)}>
+            {dir === 'rtl' ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
+          </button>
+        </>
+      )}
       <div className="carousel__dots" role="group" aria-label={t.home.carouselLabel}>
         {slides.map((s, i) => (
           <button

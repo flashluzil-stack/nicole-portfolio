@@ -90,8 +90,8 @@ export const architectureProjects: ArchitectureProject[] = [
     ],
   },
   {
-    slug: 'shahar-apartment',
-    title: 'Shahar’s Apartment',
+    slug: 'flash-design',
+    title: 'Flash Design',
     year: '2026',
     type: 'Interior design · AI',
     context: 'Living room redesign · Client project',
@@ -107,7 +107,7 @@ export const architectureProjects: ArchitectureProject[] = [
         images: [
           img('shahar-apartment', 'app-wall', 860, 1150, 'Questionnaire screen asking what replaces the desk, with drawn options and a “Nicole recommends” tag', 'The visual brief: options drawn as diagrams'),
           img('shahar-apartment', 'app-lighting', 860, 1150, 'Questionnaire screen about lighting, comparing a large ceiling fixture with a track of spotlights', 'Lighting choices, with my recommendation'),
-          img('shahar-apartment', 'app-plan', 860, 1180, 'Project page titled “Shahar’s living room: what we’re doing”, with renderings of the shelf wall and balcony wall', 'The shared project page'),
+          img('shahar-apartment', 'app-plan', 860, 1180, 'Shared project page with renderings of the shelf wall and the balcony wall', 'The shared project page'),
         ],
       },
       {
