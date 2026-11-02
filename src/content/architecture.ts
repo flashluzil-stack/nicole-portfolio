@@ -112,9 +112,8 @@ export const architectureProjects: ArchitectureProject[] = [
       },
       {
         kind: 'plans',
-        text: 'From a hand sketch drawn on site to a furnished plan with dimensions, finishes and a lighting plan.',
+        text: 'A furnished plan with dimensions, finishes and a lighting plan.',
         images: [
-          img('shahar-apartment', 'sketch', 675, 900, 'Hand-drawn sketch of the living room layout on paper', 'Site sketch', 'drawing'),
           img('shahar-apartment', 'plan', 290, 800, 'Furnished plan of the living room with dimensions, a palette of finishes and lighting notes', 'Furnished plan, finishes and lighting', 'drawing'),
         ],
       },
@@ -122,7 +121,6 @@ export const architectureProjects: ArchitectureProject[] = [
         kind: 'renderings',
         text: 'The chosen direction: warm and modern. A sheer curtain hung from the ceiling hides the shutter box and rails, floating shelves with plants replace the desk, and soft central lighting warms the whole room. Most of it can be done without contractors.',
         images: [
-          img('shahar-apartment', 'living', 773, 800, 'Living room with a beige sectional sofa, arc lamp, round wooden coffee table and a small dining corner', 'Living room and dining corner'),
           img('shahar-apartment', 'v1', 675, 900, 'Corner with floating lit shelves, plants, a wooden chair and a framed coastal print above the sofa', 'Floating shelves in place of the desk'),
           img('shahar-apartment', 'v2', 675, 900, 'View toward the balcony with a sheer ceiling-hung curtain and a large round ceiling light', 'Balcony wall and central light'),
           img('shahar-apartment', 'r3', 675, 900, 'Sheer curtain in front of the balcony door with a wood-slat wall and warm cove lighting', 'Curtain and wood slats'),
