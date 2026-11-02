@@ -93,33 +93,41 @@ export const architectureProjects: ArchitectureProject[] = [
     slug: 'flash-design',
     title: 'Flash Design',
     year: '2026',
-    type: 'Interior design · AI',
-    context: 'Living room redesign · Client project',
+    type: 'Platform · AI',
+    context: 'A work platform for interior designers and architects',
     summary:
-      'A living room redesign for a client, run through an AI-assisted design process I built: a visual brief, AI renderings of his own room, and one shared project page.',
+      'An AI-powered platform for interior designers and architects that runs the project with them and for them, from the first brief to a finished space. Shown here on a real living room project.',
     cover: img('shahar-apartment', 'combo', 600, 550, 'Warm living room with a sheer ceiling-hung curtain, wood-slat wall, arc floor lamp and a round wooden coffee table', 'The balcony wall: sheer curtain, wood and warm light'),
     sections: [
       {
         kind: 'concept',
-        title: 'Architecture meets AI',
-        text:
-          'A real living room redesign for a client, carried out through an AI-assisted process I designed. Instead of a PDF and a long chain of messages, the client gets one link. First comes a short visual questionnaire: budget, how to carry out the work, what replaces the desk, how to hide the shutter box and cables on the balcony wall, and lighting. Each option is drawn as a simple diagram, with my recommendation marked. His answers come straight back to me, and the design develops from them in AI renderings of his own room. The same page then becomes the project plan: the decisions, the renderings, a shopping list with prices and a task list to tick off.',
+        title: 'How the platform works',
+        text: 'Flash Design is not a single design project: it is the platform that manages the work for designers and architects and together with them. Every project goes through five steps:',
+        steps: [
+          { title: 'Upload the project', text: 'Add what is already known: photos, a sketch, dimensions and notes.' },
+          { title: 'An AI-tailored client questionnaire', text: 'The client gets a questionnaire built for their project that fills in everything still missing: budget, preferences, wishes and constraints. Every option is drawn, with the designer’s recommendation marked.' },
+          { title: 'Design update', text: 'The design is updated from the answers, with AI renderings of the client’s own space.' },
+          { title: 'A detailed action plan', text: 'Tasks, items to buy with linked shopping, price comparisons and totals, and budget planning.' },
+          { title: 'Tracking to completion', text: 'Progress is tracked task by task until the space is finished.' },
+        ],
         images: [
           img('shahar-apartment', 'app-wall', 860, 1150, 'Questionnaire screen asking what replaces the desk, with drawn options and a “Nicole recommends” tag', 'The visual brief: options drawn as diagrams'),
-          img('shahar-apartment', 'app-lighting', 860, 1150, 'Questionnaire screen about lighting, comparing a large ceiling fixture with a track of spotlights', 'Lighting choices, with my recommendation'),
+          img('shahar-apartment', 'app-lighting', 860, 1150, 'Questionnaire screen about lighting, comparing a large ceiling fixture with a track of spotlights', 'Lighting choices, with the designer’s recommendation'),
           img('shahar-apartment', 'app-plan', 860, 1180, 'Shared project page with renderings of the shelf wall and the balcony wall', 'The shared project page'),
         ],
       },
       {
         kind: 'plans',
-        text: 'A furnished plan with dimensions, finishes and a lighting plan.',
+        title: 'Example project: the plan',
+        text: 'A real living room redesign run on the platform: the furnished plan with dimensions, finishes and lighting.',
         images: [
           img('shahar-apartment', 'plan', 290, 800, 'Furnished plan of the living room with dimensions, a palette of finishes and lighting notes', 'Furnished plan, finishes and lighting', 'drawing'),
         ],
       },
       {
         kind: 'renderings',
-        text: 'The chosen direction: warm and modern. A sheer curtain hung from the ceiling hides the shutter box and rails, floating shelves with plants replace the desk, and soft central lighting warms the whole room. Most of it can be done without contractors.',
+        title: 'Example project: the renderings',
+        text: 'Renderings of the direction the client chose in the questionnaire: a sheer curtain hung from the ceiling hides the shutter box and rails, floating shelves with plants replace the desk, and soft central lighting warms the room.',
         images: [
           img('shahar-apartment', 'v1', 675, 900, 'Corner with floating lit shelves, plants, a wooden chair and a framed coastal print above the sofa', 'Floating shelves in place of the desk'),
           img('shahar-apartment', 'v2', 675, 900, 'View toward the balcony with a sheer ceiling-hung curtain and a large round ceiling light', 'Balcony wall and central light'),

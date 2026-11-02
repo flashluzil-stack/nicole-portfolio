@@ -47,6 +47,8 @@ export interface ArchitectureSection {
   /** Optional override of the default heading for this kind. */
   title?: string;
   text?: string;
+  /** Optional numbered steps shown under the text (e.g. a process). */
+  steps?: { title: string; text: string }[];
   images: MediaImage[];
 }
 

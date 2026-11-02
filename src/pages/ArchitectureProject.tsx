@@ -97,6 +97,16 @@ export default function ArchitectureProject() {
               <div className="project-section__head">
                 <h2>{section.title ?? t.project.sections[section.kind]}</h2>
                 {section.text && <p>{section.text}</p>}
+                {section.steps && (
+                  <ol className="project-steps">
+                    {section.steps.map((st) => (
+                      <li key={st.title}>
+                        <strong>{st.title}</strong>
+                        <span>{st.text}</span>
+                      </li>
+                    ))}
+                  </ol>
+                )}
               </div>
               {section.images.length > 0 && (
                 <ul className="project-section__images">

@@ -2310,3 +2310,42 @@
   padding-top: var(--space-m);
   border-top: 1px solid var(--line);
 }
+
+/* Numbered process steps inside a project section */
+.project-steps {
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  gap: var(--space-s);
+  margin: var(--space-m) 0 0;
+  padding: 0;
+}
+.project-steps li {
+  counter-increment: step;
+  position: relative;
+  display: grid;
+  gap: 0.2rem;
+  padding-inline-start: 2.6rem;
+  line-height: 1.6;
+}
+.project-steps li::before {
+  content: counter(step);
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.05rem;
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  font-size: var(--step--1);
+  color: var(--ink);
+}
+.project-steps strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.project-steps span {
+  color: var(--ink-soft);
+}
